@@ -13,20 +13,21 @@
         <h1>Register</h1>
         <form id="register-form">
             <label for="username">Username:</label>
-            <input type="text" name="username" id="username" placeholder="Username" aria-label="username">
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email-register" placeholder="Email" aria-label="email">
-            <label for="password">Password:
-                <span class="eye-container" id="show-password-register">
-                    <i class="fa-solid fa-eye-slash"></i>
-                    <i class="fa-solid fa-eye hide"></i>
-                </span>
-            </label>
-            <input type="password" name="password" id="password-register" placeholder="Password" aria-label="password">
+            <input type="text" id="username" placeholder="Username" required>
+            <label for="register-email">Email:</label>
+            <input type="email" id="register-email" placeholder="Email" required>
+            <label for="register-password">Password:</label>
+            <input type="password" id="register-password" placeholder="Password" required>
+            <span class="eye-container show-password">
+                <i class="fa-solid fa-eye-slash"></i>
+                <i class="fa-solid fa-eye hide"></i>
+            </span>
+            <p id="error-message"></p>
+            <p id="success-message"></p>
             <button type="submit" id="register-btn">Register</button>
         </form>
-        <p id="register-error"></p>
-        <p id="register-success"></p>
+        <p id="error-message"></p>
+        <p id="success-message"></p>
         <a href="login.html">Login</a>
     </div>
 </body>
