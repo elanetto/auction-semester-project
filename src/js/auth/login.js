@@ -3,40 +3,34 @@ import { API_AUTH_LOGIN } from '../constants.js';
 import { getLoginFormElements } from '../auth/formElements.js';
 
 export function login() {
-    // Get form elements after the DOM is loaded
     const { email, password, showPasswordBtn, errorMessage, loginBtn } = getLoginFormElements();
 
-    // Ensure all required elements are found
     if (!email || !loginBtn || !errorMessage || !password || !showPasswordBtn) {
-        console.error('One or more required elements are missing.');
+        console.error('Disregard this if you are not on the login-page: One or more required elements are missing.');
         return;
     }
 
-    // Set initial state for show password icons
     const eyeSlashIcon = showPasswordBtn.querySelector('.fa-eye-slash');
     const eyeIcon = showPasswordBtn.querySelector('.fa-eye');
 
-    // Ensure the icons are set correctly
     if (!eyeSlashIcon || !eyeIcon) {
         console.error('Eye icons are not found.');
         return;
     }
 
-    // Set initial state based on the password input type
     function setInitialIconState() {
         if (password.type === "password") {
-            eyeSlashIcon.classList.add('hide'); // Hide eye-slash icon
-            eyeIcon.classList.remove('hide'); // Show eye icon
+            eyeSlashIcon.classList.add('hide');
+            eyeIcon.classList.remove('hide');
         } else {
-            eyeSlashIcon.classList.remove('hide'); // Show eye-slash icon
-            eyeIcon.classList.add('hide'); // Hide eye icon
+            eyeSlashIcon.classList.remove('hide');
+            eyeIcon.classList.add('hide');
         }
     }
-    setInitialIconState(); // Call the function to set the initial state
+    setInitialIconState();
 
-    // Remove any existing event listeners to prevent duplicates
     showPasswordBtn.removeEventListener("click", showPassword);
-    showPasswordBtn.addEventListener("click", showPassword); // Call the showPassword function directly
+    showPasswordBtn.addEventListener("click", showPassword);
 
     loginBtn.addEventListener('click', async function(event) {
         event.preventDefault();
@@ -72,16 +66,22 @@ export function login() {
                 body: JSON.stringify(user)
             });
 
+            console.log('Response Status:', response.status);
             const data = await response.json();
-            console.log(data); // Log response for debugging
+            console.log('Response Data:', data);
 
             if (response.ok) {
-                // Handle successful login
-                // Redirect to myaccount.html
-                window.location.href = 'myaccount.html'; // Redirect to myaccount page
+                localStorage.setItem('username', data.data.name);
+                localStorage.setItem('email', data.data.email);
+                localStorage.setItem('avatar', data.data.avatar.url);
+                localStorage.setItem('banner', data.data.banner.url);
+                
+                window.location.href = 'myaccount.html';
+
             } else {
-                errorMessage.textContent = data.errors[0]?.message || 'Wrong username or password';
-                console.log('Wrong username or password');
+                const errorMessageText = data.errors?.[0]?.message || 'An error occurred during login.';
+                console.error('Login error:', errorMessageText);
+                errorMessage.textContent = errorMessageText;
                 errorMessage.style.display = 'block';
             }
         } catch (error) {
