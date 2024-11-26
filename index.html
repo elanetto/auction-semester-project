@@ -1,13 +1,19 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/main.js"></script>
-  </body>
+    <script type="module" src="src/js/auth.js" defer></script>
+    <link rel="stylesheet" href="src/css/logged-in.css">
+    <title>Auction Site</title>
+</head>
+<body>
+    <h1>Auction site</h1>
+    <p class="logged-in-username"></p>
+    <a href="site/login.html">login</a>
+    <a href="site/register.html">register</a>
+    <a href="site/myaccount.html" class="visible-if-logged-in">My Account</a>
+    <button id="logout-button" class="visible-if-logged-in">logout</button>
+</body>
 </html>

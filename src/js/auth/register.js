@@ -101,7 +101,7 @@ export function register() {
                 localStorage.setItem('avatar', data.avatar.url);
                 localStorage.setItem('banner', data.banner.url);
                 successMessage.style.display = 'block';
-                console.log('User  registered successfully.');
+                console.log('User registered successfully.');
 
                 // Redirect to login page after 3 seconds
                 setTimeout(() => {
