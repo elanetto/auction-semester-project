@@ -1,10 +1,8 @@
-import { logoutBtn } from "./logout";
+import { changeProfilePicture } from "../../js/utils/avatarEdit.js";
 
 export const myAccountPage = () => {
 
-    // logout function
-    logoutBtn.addEventListener("click", logoutBtn);
-
-
+    // change profile picture function
+    changeProfilePicture();
 
 };

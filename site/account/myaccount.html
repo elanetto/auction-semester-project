@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="../../src/js/auth.js" defer></script>
+    <link rel="stylesheet" href="../../src/css/main.css">
+    <title>My Account</title>
+</head>
+<body>
+    <div class="banner-from-local-storage"></div>
+    <h1>My Account</h1>
+    <p class="logged-in-username"></p>
+    <div>
+        <h2>Account Information</h2>
+        <p>Email: <span class="email-from-local-storage"></span></p>
+        <p>Username: <span class="username-from-local-storage"></span></p>
+        <button class="logout-button">Logout</button>
+    </div>
+    <div class="avatar-from-local-storage"></div>
+    <div>
+        <h2>Change Avatar and Banner picture</h2>
+        <input type="text" id="avatar-input" accept="link" placeholder="paste url to uploaded image" aria-label="Change your profile picture with a link to your uploaded picture">
+        <button id="change-avatar-button">Update Avatar</button>
+
+        <input type="text" id="banner-input" accept="link" aria-label="Change your profile banner with a link to your uploaded picture">
+        <button id="change-banner-button">Upload Banner</button>
+    </div>
+    
+</body>
+</html>
