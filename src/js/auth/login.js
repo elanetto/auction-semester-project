@@ -71,10 +71,14 @@ export function login() {
             console.log('Response Data:', data);
 
             if (response.ok) {
+
+                console.log('API Response:', data);
+
                 localStorage.setItem('username', data.data.name);
                 localStorage.setItem('email', data.data.email);
                 localStorage.setItem('avatar', data.data.avatar.url);
                 localStorage.setItem('banner', data.data.banner.url);
+                localStorage.setItem('token', data.data.accessToken);
                 
                 window.location.href = 'myaccount.html';
 
