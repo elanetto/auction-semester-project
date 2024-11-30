@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="../../src/js/main.js" defer></script>
+    <title>Create New Listing</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul><a href="../../index.html">Home</a></ul>
+            <ul><a href="../account/myaccount.html">My account</a></ul>
+        </nav>
+    </header>
+    <h1>Create New Listing</h1>
+    <form id="new-listing-form">
+        <label for="title">Title</label>
+        <input type="text" id="new-listing-title" name="title" required placeholder="Title" aria-label="Add a title for your listing">
+        <label for="description">Description</label>
+        <textarea id="new-listing-description" name="description" required placeholder="Description"></textarea>
+        <label for="price">Price</label>
+        <input type="number" id="new-listing-price" name="price" required placeholder="price" aria-label="Add a price to your new listing">
+        <label for="category">Category</label>
+        <input type="text" id="new-listing-category" name="category" required aria-label="Write at least one category, add commas in between if you add multiple">
+        </input>
+        <label for="image">Image</label>
+        <input type="text" id="new-listing-image" name="image-url" required aria-label="Paste uploaded image url here" placeholder="image url">
+        <label for="end-date">Ends At</label>
+        <input type="date" id="new-listing-ends-at" name="end-date" required aria-label="Select the end date for your listing" placeholder="Category">
+        <button type="submit" id="new-listing-button">Create Listing</button>
+    </form>
+</body>
+</html>

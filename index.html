@@ -4,16 +4,24 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" src="src/js/auth.js" defer></script>
     <link rel="stylesheet" href="src/css/logged-in.css">
+    <script type="module" src="src/js/auth.js" defer></script>
+    <script type="module" src="src/js/main.js" defer></script>
     <title>Auction Site</title>
 </head>
 <body>
+    <header>
+        <nav class="visible-if-logged-in">
+            <ul><a href="site/account/myaccount.html">My account</a></ul>
+            <ul><a href="site/listing/new-listing.html">New Listing</a></ul>
+        </nav>
+    </header>
     <h1>Auction site</h1>
     <p class="logged-in-username"></p>
     <a href="site/account/login.html">login</a>
     <a href="site/account/register.html">register</a>
-    <a href="site/account/myaccount.html" class="visible-if-logged-in">My Account</a>
-    <button id="logout-button" class="visible-if-logged-in">logout</button>
+    <div>
+        <button id="logout-button">logout</button>
+    </div>
 </body>
 </html>
