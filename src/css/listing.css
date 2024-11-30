@@ -1,0 +1,6 @@
+.listing-image {
+    width: 300px;  /* Make sure it's the full width of the parent */
+    height: 200px;  /* Set a fixed height for visibility */
+    background-size: cover;  /* Ensure the image covers the area */
+    background-position: center;  /* Center the image */
+}
