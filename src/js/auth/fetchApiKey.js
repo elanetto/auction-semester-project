@@ -1,4 +1,3 @@
-// Function to create an API key using a bearer token
 export function fetchApiKey() {
 
     const token = localStorage.getItem('token');
@@ -28,9 +27,7 @@ export function fetchApiKey() {
             return response.json(); // Assuming the response is JSON
         })
         .then((result) => {
-            console.log('API Key Response:', result); // Log the full response for debugging
 
-            // Assuming the API key is at `result.data.key`
             const apiKey = result?.data?.key;
             if (!apiKey) {
                 throw new Error('API key not found in response');
@@ -38,7 +35,6 @@ export function fetchApiKey() {
 
             // Save the API key to localStorage
             localStorage.setItem('api_key', apiKey);
-            console.log('API Key saved to localStorage:', apiKey);
             return apiKey;
         })
         .catch((error) => {

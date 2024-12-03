@@ -1,5 +1,8 @@
 export async function createNewListing() {
-    console.log("createNewListing function is loaded.");
+    // Check if the current page is the Create Listing page
+    if (!document.body.classList.contains("create-listing-page")) {
+        return;
+    }
 
     const token = localStorage.getItem("token");
     const apiKey = localStorage.getItem("api_key");
@@ -14,13 +17,22 @@ export async function createNewListing() {
     const newListingEndsAt = document.getElementById("new-listing-ends-at");
     const newListingButton = document.getElementById("new-listing-button");
 
-    if (!newListingForm || !newListingTitle || !newListingDescription || !newListingPrice || !newListingCategory || !newListingImage || !newListingButton || !newListingEndsAt) {
+    // Validate that all required elements exist
+    if (
+        !newListingForm ||
+        !newListingTitle ||
+        !newListingDescription ||
+        !newListingPrice ||
+        !newListingCategory ||
+        !newListingImage ||
+        !newListingButton ||
+        !newListingEndsAt
+    ) {
         console.error("Required input or button elements are missing.");
         return;
     }
 
-    console.log("New listing form and inputs found:", newListingForm);
-
+    // Add event listener to the button
     newListingButton.addEventListener("click", async (event) => {
         console.log("New listing button clicked.");
         event.preventDefault();

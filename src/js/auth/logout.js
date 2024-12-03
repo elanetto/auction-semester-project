@@ -1,6 +1,7 @@
 export const logoutButtonFunction = () => {
-    console.log('logout.js is loaded');
+    
     const logoutBtn = document.getElementById('logout-button');
+    
     if (logoutBtn) {
         logoutBtn.addEventListener('click', function () {
             console.log('Logout button clicked');
