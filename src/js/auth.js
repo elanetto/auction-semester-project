@@ -5,6 +5,7 @@ import { fetchLocalData } from './utils/fetchLocalData.js';
 import { myAccountPage } from './auth/myaccount.js';
 import { fetchToken } from './auth/fetchToken.js';
 import { myListings } from '../js/profile/view-my-listings.js'
+import { fetchApiKey } from './auth/fetchApiKey.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     // Fetch form elements for login
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // My account page
     myAccountPage();
     myListings();
+    fetchApiKey();
 
     // Fetch form elements for registration if the register form exists
     const registerElements = document.getElementById('register-form') ? getRegisterFormElements() : null;
@@ -26,14 +28,24 @@ document.addEventListener('DOMContentLoaded', function () {
     // fetch username from local storage when logged in
     const username = localStorage.getItem('username');
 
-    if (username) {
-        const tidyName = username.replace(/['"]+/g, '');
-        document.querySelector('.logged-in-username').textContent = 'Hello, ' + tidyName + '! ' + 'You are currently logged in.';
-        
-        // Show elements that should be visible when logged in
-        const visibleElements = document.querySelectorAll('.visible-if-logged-in');
-        visibleElements.forEach(element => {
-            element.style.display = 'block';
-        });
+    // Exit early if the user is not logged in
+    if (!username) {
+        return;
     }
+
+    // Clean up the username and ensure the DOM element exists
+    const tidyName = username.replace(/['"]+/g, '');
+    const loggedInUsernameElement = document.querySelector('.logged-in-username');
+
+    if (loggedInUsernameElement) {
+        loggedInUsernameElement.textContent = `Hello, ${tidyName}! You are currently logged in.`;
+    }
+
+    // Show elements that should be visible when the user is logged in
+    const visibleElements = document.querySelectorAll('.visible-if-logged-in');
+    visibleElements.forEach(element => {
+        if (element) {
+            element.style.display = 'block';
+        }
+    });
 });

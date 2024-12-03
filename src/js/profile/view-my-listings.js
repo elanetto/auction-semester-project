@@ -1,5 +1,9 @@
 export function myListings() {
-    console.log("view-my-listings.js is loaded");
+
+    // Check if the current page is the My Account page
+    if (!document.body.classList.contains("my-account-page")) {
+        return;
+    }
 
     // Fetch token
     const token = localStorage.getItem('token');
@@ -24,15 +28,12 @@ export function myListings() {
         throw new Error('Failed to fetch listings');
     })
     .then(data => {
-        console.log('API Data:', data); // Log entire response to check structure
 
         // Ensure data.data exists and is an array
         const listings = (data && Array.isArray(data.data)) ? data.data : [];
-        console.log('Listings:', listings);
 
         // Check if listings is an array and has items
         if (!Array.isArray(listings) || listings.length === 0) {
-            console.log('No valid listings found');
             return;
         }
 
@@ -51,8 +52,6 @@ export function myListings() {
             const mediaUrl = listing.media && listing.media[0] && listing.media[0].url
             ? listing.media[0].url
             : 'default-image.jpg'; // Fallback image if none exists
-            console.log('Media URL:', mediaUrl); // Log to check URL
-
 
             // Ensure the price is available
             const price = listing.price || 'N/A'; // Default price if not set

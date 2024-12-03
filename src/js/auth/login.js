@@ -6,7 +6,6 @@ export function login() {
     const { email, password, showPasswordBtn, errorMessage, loginBtn } = getLoginFormElements();
 
     if (!email || !loginBtn || !errorMessage || !password || !showPasswordBtn) {
-        console.error('Disregard this if you are not on the login-page: One or more required elements are missing.');
         return;
     }
 
@@ -14,7 +13,6 @@ export function login() {
     const eyeIcon = showPasswordBtn.querySelector('.fa-eye');
 
     if (!eyeSlashIcon || !eyeIcon) {
-        console.error('Eye icons are not found.');
         return;
     }
 
@@ -41,14 +39,12 @@ export function login() {
         if (!validateEmail(emailTrim)) {
             errorMessage.textContent = 'Email not valid';
             errorMessage.style.display = 'block';
-            console.log('The email is not valid');
             return;
         }
 
         if (passwordTrim.length === 0) {
             errorMessage.textContent = 'Please enter a password';
             errorMessage.style.display = 'block';
-            console.log('Please enter a password');
             return;
         }
 
@@ -66,13 +62,9 @@ export function login() {
                 body: JSON.stringify(user)
             });
 
-            console.log('Response Status:', response.status);
             const data = await response.json();
-            console.log('Response Data:', data);
 
             if (response.ok) {
-
-                console.log('API Response:', data);
 
                 localStorage.setItem('username', data.data.name);
                 localStorage.setItem('email', data.data.email);
@@ -84,12 +76,10 @@ export function login() {
 
             } else {
                 const errorMessageText = data.errors?.[0]?.message || 'An error occurred during login.';
-                console.error('Login error:', errorMessageText);
                 errorMessage.textContent = errorMessageText;
                 errorMessage.style.display = 'block';
             }
         } catch (error) {
-            console.error('An error occurred with your login request.', error);
             errorMessage.textContent = 'An error occurred with your login request.';
             errorMessage.style.display = 'block';
         }

@@ -1,11 +1,13 @@
 import { logoutButtonFunction } from './auth/logout.js';
 import { createNewListing } from '../../src/js/listing/create-new-listing.js';
 import { myListings } from '../js/profile/view-my-listings.js';
+import { displayListing } from '../js/listing/displayListing.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     logoutButtonFunction();
     createNewListing();
     myListings();
+    displayListing();
 
     // fetch username from local storage when logged in
     const username = localStorage.getItem('username');
