@@ -72,7 +72,7 @@ export function login() {
                 localStorage.setItem('banner', data.data.banner.url);
                 localStorage.setItem('token', data.data.accessToken);
                 
-                window.location.href = 'myaccount.html';
+                window.location.href = '../../account/myaccount/';
 
             } else {
                 const errorMessageText = data.errors?.[0]?.message || 'An error occurred during login.';
