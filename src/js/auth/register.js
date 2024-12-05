@@ -105,7 +105,7 @@ export function register() {
 
                 // Redirect to login page after 3 seconds
                 setTimeout(() => {
-                    window.location.href = '../../site/login.html';
+                    window.location.href = 'account/login/';
                 }, 3000);
             }
 

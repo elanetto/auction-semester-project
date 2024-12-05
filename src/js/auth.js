@@ -4,7 +4,6 @@ import { getLoginFormElements, getRegisterFormElements } from './auth/formElemen
 import { fetchLocalData } from './utils/fetchLocalData.js';
 import { myAccountPage } from './auth/myaccount.js';
 import { fetchToken } from './auth/fetchToken.js';
-import { myListings } from '../js/profile/view-my-listings.js'
 import { fetchApiKey } from './auth/fetchApiKey.js';
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -16,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // My account page
     myAccountPage();
-    myListings();
     fetchApiKey();
 
     // Fetch form elements for registration if the register form exists

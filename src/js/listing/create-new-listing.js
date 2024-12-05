@@ -85,7 +85,7 @@ export async function createNewListing() {
 
             // Optional: Reset form or navigate
             // newListingForm.reset();
-            // window.location.href = "../../site/myaccount.html"; // Adjust path if necessary
+            // window.location.href = "account/myaccount/"; // Adjust path if necessary
         } catch (error) {
             console.error("Error creating new listing:", error.message);
             alert("Failed to create new listing.");
