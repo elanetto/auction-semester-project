@@ -11,7 +11,6 @@ export async function createNewListing() {
     const newListingForm = document.getElementById("new-listing-form");
     const newListingTitle = document.getElementById("new-listing-title");
     const newListingDescription = document.getElementById("new-listing-description");
-    const newListingPrice = document.getElementById("new-listing-price");
     const newListingCategory = document.getElementById("new-listing-category");
     const newListingImage = document.getElementById("new-listing-image");
     const newListingEndsAt = document.getElementById("new-listing-ends-at");
@@ -22,7 +21,6 @@ export async function createNewListing() {
         !newListingForm ||
         !newListingTitle ||
         !newListingDescription ||
-        !newListingPrice ||
         !newListingCategory ||
         !newListingImage ||
         !newListingButton ||
@@ -40,12 +38,11 @@ export async function createNewListing() {
         // Get and validate input values
         const title = newListingTitle.value.trim();
         const description = newListingDescription.value.trim();
-        const price = parseFloat(newListingPrice.value.trim()); // Ensure price is a number
         const tags = newListingCategory.value.trim();
         const image = newListingImage.value.trim();
         const endsAt = newListingEndsAt.value.trim();
 
-        if (!title || !description || isNaN(price) || !tags || !image || !endsAt) {
+        if (!title || !description || !tags || !image || !endsAt) {
             alert("Please fill in all fields correctly.");
             console.error("One or more fields are empty or invalid.");
             return;
@@ -61,7 +58,6 @@ export async function createNewListing() {
             const raw = JSON.stringify({
                 title,
                 description,
-                price,
                 tags,
                 media: [{ url: image, alt: title }], 
                 endsAt,

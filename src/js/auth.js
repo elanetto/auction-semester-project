@@ -5,6 +5,7 @@ import { fetchLocalData } from './utils/fetchLocalData.js';
 import { myAccountPage } from './auth/myaccount.js';
 import { fetchToken } from './auth/fetchToken.js';
 import { fetchApiKey } from './auth/fetchApiKey.js';
+import { myListings } from './listing/view-my-listings.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     // Fetch form elements for login
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // My account page
     myAccountPage();
     fetchApiKey();
+    myListings();
 
     // Fetch form elements for registration if the register form exists
     const registerElements = document.getElementById('register-form') ? getRegisterFormElements() : null;
