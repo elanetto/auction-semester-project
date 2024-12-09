@@ -13,63 +13,83 @@
     <link rel="manifest" href="/assets/site-BwHFeIBa.webmanifest">
     <!-- CSS & JS -->
     <title>Auction House</title>
-  <script type="module" crossorigin src="/assets/modulepreload-polyfill-B5Qt9EMX.js"></script>
+  <script type="module" crossorigin src="/assets/main-Cns5slFx.js"></script>
   <script type="module" crossorigin src="/assets/auth-B38r5Qi5.js"></script>
-  <script type="module" crossorigin src="/assets/main-DLvw_CYo.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-DX1Kg7Zv.css">
+  <link rel="stylesheet" crossorigin href="/assets/main-BnNKa6Y2.css">
 </head>
 <body class="homepage m-0 h-screen">
     <!-- header -->
-    <header class="bg-orange p-4 flex sticky top-0 justify-between">
-        <div class="max-h-6">
-            <img src="/assets/liggende-logo-auction-house--SJuZxw8.svg" alt="Logo for Auction House">
+    <header class="bg-orange px-6 py-3 sm:px-8 sm:py-4 md:px-12 md:py-6 flex sticky top-0">
+        <!-- Large Screen Header (visible on medium and larger screens) -->
+        <div class="hidden w-full sm:flex sm:justify-between items-center">
+            <!-- LOGO -->
+            <div class="flex justify-start">
+                <a href="index.html" aria-label="The logo links to the homepage">
+                    <img src="/assets/liggende-logo-auction-house--SJuZxw8.svg" alt="Logo for Auction House" class="max-w-60 h-8">
+                </a>
+            </div>
+
+            <!-- SEARCH -->
+            <div class="mt-4 w-full flex justify-center">
+                <input type="text" placeholder="Search" class="search-input rounded-lg text-sm px-5 py-2.5 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl" aria-label="search">
+            </div>
+            
+            <!-- NAV -->
+            <nav class="flex justify-end">
+                <div class="relative inline-block text-left">
+                    <button id="dropdownButton" class="text-3xl text-solid-white focus:outline-none">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-solid-white animate-fadeIn" id="dropdownMenuBottom">
+                        <a href="account/myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">My account</a>
+                        <a href="listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Create new listing</a>
+                        <a href="account/login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Login</a>
+                        <a href="account/register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Register</a>
+                    </div>
+                </div>
+            </nav>
         </div>
-        <div>
-            <input type="text" placeholder="Search" class="search-input rounded-lg text-sm px-5 py-2.5 me-2 mb-2" aria-label="search">
-        </div>
-        <!-- nav -->
-        <nav class="flex mx-2">
-            <!-- Dropdown to the Bottom -->
-            <div class="relative inline-block text-left"> 
-                <button id="dropdownButton" class="px-4 py-2 text-2xl text-solid-white focus:outline-none">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <div class="hidden origin-top-right absolute 
-                    right-0 mt-2 w-56 rounded-md 
-                    shadow-lg bg-solid-white
-                    animate-fadeIn"
-                    id="dropdownMenuBottom">
-                    <a href="account/myaccount/" class="block px-4 py-2 text-sm 
-                                    text-gray-700 
-                                    hover:bg-orange
-                                    hover:text-solid-white
-                                    visible-when-logged-in">
-                    My account
-                    </a>
-                    <a href="listing/create/" class="block px-4 py-2 text-sm 
-                                    text-gray-700 
-                                    hover:bg-orange
-                                    hover:text-solid-white
-                                    visible-when-logged-in">
-                    Create new listing
-                    </a>
-                    <a href="account/login/" class="block px-4 py-2 text-sm
-                                    text-gray-700 
-                                    hover:bg-orange
-                                    hover:text-solid-white">
-                    Login
-                    </a>
-                    <a href="account/register/" class="block px-4 py-2 text-sm
-                                    text-gray-700 
-                                    hover:bg-orange
-                                    hover:text-solid-white">
-                    Register
+    
+        <!-- Small Screen Header (visible on small screens) -->
+        <div class="sm:hidden w-full flex flex-col items-center">
+            <!-- Logo + nav on the same level -->
+            <div class="flex justify-between items-center w-full max-w-80">
+                <!-- LOGO -->
+                <div class="flex justify-start">
+                    <a href="index.html" aria-label="The logo links to the homepage">
+                        <img src="/assets/white_logo_auction_house-CvfPHKlL.svg" alt="Logo for Auction House" class="max-w-20 h-8">
                     </a>
                 </div>
+                
+                <!-- NAV -->
+                <nav class="flex justify-end mt-4">
+                    <div class="relative inline-block text-left">
+                        <button id="dropdownButton" class="h-9 text-3xl text-solid-white focus:outline-none">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                        <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-solid-white animate-fadeIn" id="dropdownMenuBottom">
+                            <a href="account/myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">My account</a>
+                            <a href="listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Create new listing</a>
+                            <a href="account/login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Login</a>
+                            <a href="account/register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Register</a>
+                        </div>
+                    </div>
+                </nav>
             </div>
-        </nav>
-        <!-- end: nav -->
+    
+            <!-- SEARCH (Positioned under logo and nav on small screens) -->
+            <div class="mt-4 w-full flex justify-center">
+                <input type="text" placeholder="Search" class="search-input rounded-lg text-sm px-5 py-2.5 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl" aria-label="search">
+            </div>
+        </div>
     </header>
+
+    <!-- currency -->
+    <div class="bg-dark-blue text-solid-white py-2 px-4 text-center top-0">
+        Hello, [name!]. Your currency is 1000 🌕
+    </div>
+    
+    
     <!-- main -->
     <main>
         <h1 class="text-3xl font-bold underline">Auction site</h1>
@@ -79,11 +99,13 @@
         <div class="listings-container"></div>
     </main>
     <!-- footer -->
-    <footer class="bg-orange p-4 text-white flex justify-center bottom-0">
-        <p>&copy; 2024 Auction Site</p>
+    <footer class="bg-orange p-4 text-solid-white flex justify-center items-center bottom-0 flex-col">
+        <div class="p-4">
+            <img src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20id='Layer_2'%20data-name='Layer%202'%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20109.52%2089.06'%3e%3cdefs%3e%3cstyle%3e%20.cls-1%20{%20fill:%20%23fff;%20}%20%3c/style%3e%3c/defs%3e%3cg%20id='Layer_1-2'%20data-name='Layer%201'%3e%3cg%3e%3cpolygon%20class='cls-1'%20points='54.76%2030.78%2099.49%2075.5%20109.52%2065.47%2054.76%2010.71%200%2065.47%2010.03%2075.5%2054.76%2030.78'/%3e%3cg%3e%3cpolygon%20class='cls-1'%20points='92.54%2039.36%2092.54%200%2075.64%200%2075.64%2022.46%2092.54%2039.36'/%3e%3cpolygon%20class='cls-1'%20points='33.88%2024.23%2033.88%200%2016.98%200%2016.98%2041.13%2033.88%2024.23'/%3e%3cpolygon%20class='cls-1'%20points='75.64%2059.03%2075.64%2089.06%2092.54%2089.06%2092.54%2075.92%2075.64%2059.03'/%3e%3cpolygon%20class='cls-1'%20points='16.98%2077.7%2016.98%2089.06%2033.88%2089.06%2033.88%2060.8%2016.98%2077.7'/%3e%3c/g%3e%3c/g%3e%3c/g%3e%3c/svg%3e" alt="Emblem from the Auction House logo" class="max-w-60 h-8">
+        </div>
+        <div class="p-2">
+            <p>&copy; 2024 Auction House</p>
+        </div>
     </footer>
-    <!-- <script type="module" src="/node_modules/@material-tailwind/html/scripts/popover.js"></script> -->
 </body>
 </html>
-
-<!-- Followed drop down menu from https://www.material-tailwind.com/docs/html/menu -->
