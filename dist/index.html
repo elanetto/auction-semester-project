@@ -4,26 +4,86 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Auction Site</title>
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/cfcc846d5b.js" crossorigin="anonymous"></script>
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon-sm9KJHkb.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32-DxvmC6tE.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16-Bs-OiQGM.png">
+    <link rel="manifest" href="/assets/site-BwHFeIBa.webmanifest">
+    <!-- CSS & JS -->
+    <title>Auction House</title>
   <script type="module" crossorigin src="/assets/modulepreload-polyfill-B5Qt9EMX.js"></script>
   <script type="module" crossorigin src="/assets/auth-B38r5Qi5.js"></script>
-  <script type="module" crossorigin src="/assets/main-CrMTKzoj.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-ByFUlva0.css">
+  <script type="module" crossorigin src="/assets/main-DLvw_CYo.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DX1Kg7Zv.css">
 </head>
-<body class="homepage">
-    <header>
-        <nav class="visible-if-logged-in">
-            <ul><a href="account/myaccount/">My account</a></ul>
-            <ul><a href="listing/create/">New Listing</a></ul>
+<body class="homepage m-0 h-screen">
+    <!-- header -->
+    <header class="bg-orange p-4 flex sticky top-0 justify-between">
+        <div class="max-h-6">
+            <img src="/assets/liggende-logo-auction-house--SJuZxw8.svg" alt="Logo for Auction House">
+        </div>
+        <div>
+            <input type="text" placeholder="Search" class="search-input rounded-lg text-sm px-5 py-2.5 me-2 mb-2" aria-label="search">
+        </div>
+        <!-- nav -->
+        <nav class="flex mx-2">
+            <!-- Dropdown to the Bottom -->
+            <div class="relative inline-block text-left"> 
+                <button id="dropdownButton" class="px-4 py-2 text-2xl text-solid-white focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="hidden origin-top-right absolute 
+                    right-0 mt-2 w-56 rounded-md 
+                    shadow-lg bg-solid-white
+                    animate-fadeIn"
+                    id="dropdownMenuBottom">
+                    <a href="account/myaccount/" class="block px-4 py-2 text-sm 
+                                    text-gray-700 
+                                    hover:bg-orange
+                                    hover:text-solid-white
+                                    visible-when-logged-in">
+                    My account
+                    </a>
+                    <a href="listing/create/" class="block px-4 py-2 text-sm 
+                                    text-gray-700 
+                                    hover:bg-orange
+                                    hover:text-solid-white
+                                    visible-when-logged-in">
+                    Create new listing
+                    </a>
+                    <a href="account/login/" class="block px-4 py-2 text-sm
+                                    text-gray-700 
+                                    hover:bg-orange
+                                    hover:text-solid-white">
+                    Login
+                    </a>
+                    <a href="account/register/" class="block px-4 py-2 text-sm
+                                    text-gray-700 
+                                    hover:bg-orange
+                                    hover:text-solid-white">
+                    Register
+                    </a>
+                </div>
+            </div>
         </nav>
+        <!-- end: nav -->
     </header>
-    <h1>Auction site</h1>
-    <p class="logged-in-username"></p>
-    <a href="account/login/">login</a>
-    <a href="account/register/">register</a>
-    <div>
-        <button id="logout-button">logout</button>
-    </div>
-    <div class="listings-container"></div>
+    <!-- main -->
+    <main>
+        <h1 class="text-3xl font-bold underline">Auction site</h1>
+        <p class="logged-in-username"></p>
+        <div class="card">Test</div>
+        <button id="logout-button" class="visible-if-logged-in py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">logout</button>
+        <div class="listings-container"></div>
+    </main>
+    <!-- footer -->
+    <footer class="bg-orange p-4 text-white flex justify-center bottom-0">
+        <p>&copy; 2024 Auction Site</p>
+    </footer>
+    <!-- <script type="module" src="/node_modules/@material-tailwind/html/scripts/popover.js"></script> -->
 </body>
 </html>
+
+<!-- Followed drop down menu from https://www.material-tailwind.com/docs/html/menu -->
