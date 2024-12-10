@@ -46,30 +46,46 @@ export function myListings() {
         // Loop through the listings and display them
         listings.forEach(listing => {
             const listingCard = document.createElement('div');
-            listingCard.classList.add('listing-card');
+            listingCard.classList.add('flex', 'flex-col', 'p-4', 'bg-white', 'w-[350px]', 'rounded', 'shadow-md');
 
             // Attempt to fetch the media URL
             const mediaUrl = listing.media && listing.media[0] && listing.media[0].url
-            ? listing.media[0].url
-            : 'default-image.jpg'; // Fallback image if none exists
+                ? listing.media[0].url
+                : 'default-image.jpg'; // Fallback image if none exists
 
-            // Ensure the price is available
-            const price = listing.price || 'N/A'; // Default price if not set
+            const tags = listing.tags || [];
+
+            const lastBidAmount = listing.bids?.length
+            ? listing.bids[listing.bids.length - 1].amount
+            : "0";
 
             // Create the HTML for the listing card
             listingCard.innerHTML = `
-                <div class="listing-image" style="background-image: url('${mediaUrl}')"></div>
-                <div class="listing-details">
-                    <h3>${listing.title}</h3>
-                    <p>${listing.description}</p>
-                    <p>Price: $${price}</p>
-                    <p>Ends at: ${listing.endsAt}</p>
+                <img src="${mediaUrl}" alt="${listing.title}" class="mb-4 rounded">
+                <h3 class="text-blue-950 font-bold text-lg">${listing.title}</h3>
+                <div>
+                    <span class="text-blue-950 font-bold">Current Bid:</span>
+                    <span>${lastBidAmount} 🌕</span>
                 </div>
-                <div class="listing-actions">
-                    <button class="edit-listing" data-id="${listing.id}">Edit</button>
-                    <button class="delete-listing" data-id="${listing.id}">Delete</button>
+                <div>
+                    <span class="text-blue-950 font-bold">Description:</span>
+                    <span class="italic">${listing.description}</span>
+                </div>
+                <div>
+                    <span class="text-blue-950 font-bold">Category:</span>
+                    <span>${tags || 'N/A'}</span>
+                </div>
+                <div>
+                    <span class="text-blue-950 font-bold">Ends in:</span>
+                    <span>${listing.endsAt || 'N/A'}</span>
+                </div>
+                <div class="mt-3">
+                    <button class="bg-blue-950 hover:bg-blue-800 text-white rounded px-6 py-2">Edit</button>
+                    <button class="bg-blue-950 hover:bg-blue-800 text-white rounded px-6 py-2 mt-2">Delete</button>
                 </div>
             `;
+
+            // Append the created listing card to the container
             listingsContainer.appendChild(listingCard);
         });
     })

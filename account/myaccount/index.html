@@ -105,58 +105,62 @@
         </div>
         
         <!-- Account Page main content -->
-        <div class="w-full p-4 md:px-20 md:py-8 mx-auto container bg-test">
+        <div class="w-full p-4 md:px-20 md:py-8 mx-auto container flex flex-col lg:flex-row lg:items-start lg:justify-start gap-8">
 
             <!-- user information -->
-            <div class="w-full">
+            <div class="w-full flex flex-col items-center lg:items-start text-center lg:text-left">
                 <h2 class="font-bold text-blue-950 text-2xl">Hello, <span class="username-from-local-storage"></span>!</h2>
-                <!-- <p class="text-right">Email: <span class="email-from-local-storage"></span></p> -->
-                <button class="logout-button button">Logout</button>
-                
-
-                <button class="flex items-center px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-200">
+                <div>
+                    <span class="font-bold text-blue-950">Username: </span><span class="username-from-local-storage"></span>
+                </div>
+                <div>
+                    <span class="font-bold text-blue-950">Email: </span><span class="email-from-local-storage"></span>
+                </div>
+                <button class="bg-blue-950 hover:bg-blue-800 text-white rounded px-6 py-2 mt-3 flex justify-center items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 11-4 0v-1m0-8V7a2 2 0 114 0v1" />
                     </svg>
                     Logout
                 </button>
-
-
-                <button class="bg-orange-500 text-white px-12 py-2.5 text-base rounded-md border-none cursor-pointer hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 transition">
-                    Admin Button
-                </button>
-
-                <button class=" hover:bg-blue-700 text-white font-bold py-2 px-4mrounded-md bg-">
-                    Button
-                </button>
-
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                    Button
-                </button>
-                
-                
-
-
-
             </div>
-            
+
             <!-- Change Avatar and Banner picture -->
-            <div>
-                <h2>Change Avatar and Banner picture</h2>
-                <input type="text" id="avatar-input" accept="link" placeholder="paste url to uploaded image" aria-label="Change your profile picture with a link to your uploaded picture">
-                <button id="change-avatar-button">Update Avatar</button>
+            <div class="w-full flex flex-col items-center text-center lg:items-start lg:text-left">
+                <h2 class="font-bold text-blue-950 text-2xl">Change Avatar & Banner image</h2>
 
-                <input type="text" id="banner-input" accept="link" aria-label="Change your profile banner with a link to your uploaded picture">
-                <button id="change-banner-button">Upload Banner</button>
+                <div class="flex flex-col sm:flex-row sm:justify-center lg:justify-start sm:items-center gap-3 mt-3">
+                    <input type="text" id="avatar-input" accept="link" placeholder="paste avatar url" aria-label="Change your profile picture with a link to your uploaded picture"
+                    class="p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0">
+                    <button id="change-avatar-button"
+                    class="bg-blue-950 hover:bg-blue-800 text-white rounded px-6 py-2"
+                    >Update Avatar</button>
+                </div>
+                <div class="flex flex-col sm:flex-row sm:justify-center lg:justify-start sm:items-center gap-3 mt-3">
+                    <input type="text" id="banner-input" accept="link" placeholder="paste banner url" aria-label="Change your profile banner with a link to your uploaded picture"
+                    class="p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0">
+                    <button id="change-banner-button"
+                    class="bg-blue-950 hover:bg-blue-800 text-white rounded px-6 py-2"
+                    >Upload Banner</button>
+                </div>
             </div>
-
-            <!-- My Listings -->
-            <div id="my-listings">
-                <h2>My Listings</h2>
-                <div id="listings-container"></div>
-            </div>
-
         </div>
+
+
+        <!-- My Listings area -->
+        <div id="my-listings" class="bg-gray-100 mx-auto text-center p-8">
+            <h2 class="text-2xl text-blue-950 font-bold p-4">My Listings</h2>
+
+            <!-- Listings load here (apply grid layout) -->
+            <div>
+                <!-- real listings will be inserted here -->
+                <div id="listings-container" class="flex gap-4"></div>
+            </div>
+        </div>
+
+
+
+
+
         
     </main>
     <!-- footer -->
