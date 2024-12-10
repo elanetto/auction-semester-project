@@ -13,14 +13,12 @@
      <!-- CSS & JS -->
     <script type="module" src="../../src/js/auth.js" defer></script>
     <script type="module" src="../../src/js/main.js" defer></script>
-    <link rel="stylesheet" href="../../src/css/main.css">
-    <link rel="stylesheet" href="../../src/css/listing.css">
     <link rel="stylesheet" href="../../src/index.css">
     <title>My Account</title>
 </head>
-<body class="my-account-page m-0 h-screen">
+<body class="my-account-page m-0 h-screen flex flex-col">
     <!-- header -->
-    <header class="bg-orange px-6 py-3 sm:px-8 sm:py-4 md:px-12 md:py-6 flex sticky top-0">
+    <header class="bg-orange-500 px-6 py-3 sm:px-8 sm:py-4 md:px-12 md:py-6 flex top-0">
         <!-- Large Screen Header (visible on medium and larger screens) -->
         <div class="hidden w-full sm:flex sm:justify-between items-center">
             <!-- LOGO -->
@@ -41,11 +39,11 @@
                     <button id="dropdownButton" class="text-3xl text-solid-white focus:outline-none">
                         <i class="fa-solid fa-bars"></i>
                     </button>
-                    <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-solid-white animate-fadeIn" id="dropdownMenuBottom">
-                        <a href="../myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">My account</a>
-                        <a href="../../listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Create new listing</a>
-                        <a href="../login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Login</a>
-                        <a href="../register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Register</a>
+                    <div class="hidden z-20 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-solid-white animate-fadeIn" id="dropdownMenuBottom">
+                        <a href="../myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">My account</a>
+                        <a href="../../listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Create new listing</a>
+                        <a href="../login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Login</a>
+                        <a href="../register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Register</a>
                     </div>
                 </div>
             </nav>
@@ -69,10 +67,10 @@
                             <i class="fa-solid fa-bars"></i>
                         </button>
                         <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-solid-white animate-fadeIn" id="dropdownMenuBottom">
-                            <a href="../myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">My account</a>
-                            <a href="../../listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Create new listing</a>
-                            <a href="../login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Login</a>
-                            <a href="../register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Register</a>
+                            <a href="../myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">My account</a>
+                            <a href="../../listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Create new listing</a>
+                            <a href="../login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Login</a>
+                            <a href="../register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Register</a>
                         </div>
                     </div>
                 </nav>
@@ -86,32 +84,89 @@
     </header>
 
     <!-- currency -->
-    <div class="bg-dark-blue text-solid-white py-2 px-4 text-center top-0">
+    <div class="bg-blue-950 text-solid-white py-2 px-4 text-center top-0">
         Hello, [name!]. Your currency is 1000 🌕
     </div>
 
-    <div class="banner-from-local-storage"></div>
-    <h1>My Account</h1>
-    <p class="logged-in-username"></p>
-    <div>
-        <h2>Account Information</h2>
-        <p>Email: <span class="email-from-local-storage"></span></p>
-        <p>Username: <span class="username-from-local-storage"></span></p>
-        <button class="logout-button">Logout</button>
-    </div>
-    <div class="avatar-from-local-storage"></div>
-    <div>
-        <h2>Change Avatar and Banner picture</h2>
-        <input type="text" id="avatar-input" accept="link" placeholder="paste url to uploaded image" aria-label="Change your profile picture with a link to your uploaded picture">
-        <button id="change-avatar-button">Update Avatar</button>
+    <!-- main -->
+    <main class="grow">
+        <div class="relative mb-20">
+            <!-- Banner -->
+            <img 
+                class="banner-from-local-storage w-full h-[200px] object-cover mx-auto" 
+                src="../../assets/placeholders/banner-placeholder.png" 
+                alt="Banner image">
+            
+            <!-- Avatar -->
+            <img 
+                class="avatar-from-local-storage w-[200px] h-[200px] object-cover mx-auto rounded-full overflow-hidden absolute top-[100px] left-[7%] z-10 border-4 border-solid-white" 
+                src="../../assets/placeholders/avatar-placeholder.png" 
+                alt="User Avatar">
+        </div>
+        
+        <!-- Account Page main content -->
+        <div class="w-full p-4 md:px-20 md:py-8 mx-auto container bg-test">
 
-        <input type="text" id="banner-input" accept="link" aria-label="Change your profile banner with a link to your uploaded picture">
-        <button id="change-banner-button">Upload Banner</button>
-    </div>
-    <div id="my-listings">
-        <h2>My Listings</h2>
-        <div id="listings-container"></div>
-    </div>
-    
+            <!-- user information -->
+            <div class="w-full">
+                <h2 class="font-bold text-blue-950 text-2xl">Hello, <span class="username-from-local-storage"></span>!</h2>
+                <!-- <p class="text-right">Email: <span class="email-from-local-storage"></span></p> -->
+                <button class="logout-button button">Logout</button>
+                
+
+                <button class="flex items-center px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 11-4 0v-1m0-8V7a2 2 0 114 0v1" />
+                    </svg>
+                    Logout
+                </button>
+
+
+                <button class="bg-orange-500 text-white px-12 py-2.5 text-base rounded-md border-none cursor-pointer hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 transition">
+                    Admin Button
+                </button>
+
+                <button class=" hover:bg-blue-700 text-white font-bold py-2 px-4mrounded-md bg-">
+                    Button
+                </button>
+
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                    Button
+                </button>
+                
+                
+
+
+
+            </div>
+            
+            <!-- Change Avatar and Banner picture -->
+            <div>
+                <h2>Change Avatar and Banner picture</h2>
+                <input type="text" id="avatar-input" accept="link" placeholder="paste url to uploaded image" aria-label="Change your profile picture with a link to your uploaded picture">
+                <button id="change-avatar-button">Update Avatar</button>
+
+                <input type="text" id="banner-input" accept="link" aria-label="Change your profile banner with a link to your uploaded picture">
+                <button id="change-banner-button">Upload Banner</button>
+            </div>
+
+            <!-- My Listings -->
+            <div id="my-listings">
+                <h2>My Listings</h2>
+                <div id="listings-container"></div>
+            </div>
+
+        </div>
+        
+    </main>
+    <!-- footer -->
+    <footer class="bg-orange-500 p-4 text-solid-white flex justify-center items-center bottom-0 flex-col">
+        <div class="p-4">
+            <img src="../../assets/logo/emblem-auction-house-white.svg" alt="Emblem from the Auction House logo" class="max-w-60 h-8">
+        </div>
+        <div class="p-2">
+            <p>&copy; 2024 Auction House</p>
+        </div>
+    </footer>
 </body>
 </html>

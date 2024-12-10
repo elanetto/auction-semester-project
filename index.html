@@ -17,9 +17,9 @@
     <script type="module" src="src/js/main.js" defer></script>
     <title>Auction House</title>
 </head>
-<body class="homepage m-0 h-screen">
+<body class="homepage m-0 h-screen flex flex-col">
     <!-- header -->
-    <header class="bg-orange px-6 py-3 sm:px-8 sm:py-4 md:px-12 md:py-6 flex sticky top-0">
+    <header class="bg-orange-500 px-6 py-3 sm:px-8 sm:py-4 md:px-12 md:py-6 flex top-0">
         <!-- Large Screen Header (visible on medium and larger screens) -->
         <div class="hidden w-full sm:flex sm:justify-between items-center">
             <!-- LOGO -->
@@ -41,10 +41,10 @@
                         <i class="fa-solid fa-bars"></i>
                     </button>
                     <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-solid-white animate-fadeIn" id="dropdownMenuBottom">
-                        <a href="account/myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">My account</a>
-                        <a href="listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Create new listing</a>
-                        <a href="account/login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Login</a>
-                        <a href="account/register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Register</a>
+                        <a href="account/myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">My account</a>
+                        <a href="listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Create new listing</a>
+                        <a href="account/login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Login</a>
+                        <a href="account/register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Register</a>
                     </div>
                 </div>
             </nav>
@@ -68,10 +68,10 @@
                             <i class="fa-solid fa-bars"></i>
                         </button>
                         <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-solid-white animate-fadeIn" id="dropdownMenuBottom">
-                            <a href="account/myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">My account</a>
-                            <a href="listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Create new listing</a>
-                            <a href="account/login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Login</a>
-                            <a href="account/register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Register</a>
+                            <a href="account/myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">My account</a>
+                            <a href="listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Create new listing</a>
+                            <a href="account/login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Login</a>
+                            <a href="account/register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Register</a>
                         </div>
                     </div>
                 </nav>
@@ -85,13 +85,13 @@
     </header>
 
     <!-- currency -->
-    <div class="bg-dark-blue text-solid-white py-2 px-4 text-center top-0">
+    <div class="bg-blue-950 text-solid-white py-2 px-4 text-center top-0">
         Hello, [name!]. Your currency is 1000 🌕
     </div>
     
     
     <!-- main -->
-    <main>
+    <main class="grow">
         <h1 class="text-3xl font-bold underline">Auction site</h1>
         <p class="logged-in-username"></p>
         <div class="card">Test</div>
@@ -99,7 +99,7 @@
         <div class="listings-container"></div>
     </main>
     <!-- footer -->
-    <footer class="bg-orange p-4 text-solid-white flex justify-center items-center bottom-0 flex-col">
+    <footer class="bg-orange-500 p-4 text-solid-white flex justify-center items-center bottom-0 flex-col">
         <div class="p-4">
             <img src="assets/logo/emblem-auction-house-white.svg" alt="Emblem from the Auction House logo" class="max-w-60 h-8">
         </div>

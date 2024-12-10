@@ -1,3 +1,7 @@
+/* @import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities"; */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,8 +15,8 @@
         border-radius: 0.5rem;
         width: 300px;
         height: 300px;
-        background-color: theme('colors.orange');
-        border: 0.7px solid theme('colors.dark-blue');
+        /* background-color: theme('colors.orange'); */
+        /* border: 0.7px solid theme('colors.dark-blue'); */
         box-shadow: 0 4px 10px -1px rgba(0, 0, 0, 0.1),
             0 2px 6px -2px rgba(0, 0, 0, 0.2);
         color: white;
@@ -38,3 +42,33 @@
 .visible-if-logged-in {
     display: none;
   }
+
+.banner-from-local-storage {
+    width: 100%; /* or any desired width */
+    height: 200px; /* or any desired height */
+    object-fit: cover; /* Optional if set in JS */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.avatar-from-local-storage {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    top: 100px;
+    left: 7%;
+    z-index: 10;
+    border: 5px solid white; 
+}
+
+.listing-image {
+    width: 300px;  /* Make sure it's the full width of the parent */
+    height: 200px;  /* Set a fixed height for visibility */
+    background-size: cover;  /* Ensure the image covers the area */
+    background-position: center;  /* Center the image */
+}
