@@ -1,15 +1,17 @@
 .banner-from-local-storage {
     width: 100%; /* or any desired width */
     height: 200px; /* or any desired height */
-    background-size: cover; /* Optional if set in JS */
-    background-position: center; /* Optional if set in JS */
+    object-fit: cover; /* Optional if set in JS */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .avatar-from-local-storage {
     width: 200px; /* or any desired width */
     height: 200px; /* or any desired height */
-    background-size: cover; /* Ensures the image covers the entire area */
-    background-position: center; /* Centers the image */
+    object-fit: cover; /* Ensures the image covers the entire area */
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 50%; /* Makes the div circular */
     overflow: hidden; /* Ensures that any overflow is hidden */
 }

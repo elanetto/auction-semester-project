@@ -15,9 +15,9 @@
     <link rel="stylesheet" href="../../src/index.css">
     <title>Create New Listing</title>
 </head>
-<body class="create-listing-page m-0 h-screen">
+<body class="create-listing-page m-0 h-screen flex flex-col">
     <!-- header -->
-    <header class="bg-orange px-6 py-3 sm:px-8 sm:py-4 md:px-12 md:py-6 flex sticky top-0">
+    <header class="bg-orange-500 px-6 py-3 sm:px-8 sm:py-4 md:px-12 md:py-6 flex top-0">
         <!-- Large Screen Header (visible on medium and larger screens) -->
         <div class="hidden w-full sm:flex sm:justify-between items-center">
             <!-- LOGO -->
@@ -39,10 +39,10 @@
                         <i class="fa-solid fa-bars"></i>
                     </button>
                     <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-solid-white animate-fadeIn" id="dropdownMenuBottom">
-                        <a href="../../account/myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">My account</a>
-                        <a href="../create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Create new listing</a>
-                        <a href="../../account/login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Login</a>
-                        <a href="../../account/register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Register</a>
+                        <a href="../../account/myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">My account</a>
+                        <a href="../create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Create new listing</a>
+                        <a href="../../account/login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Login</a>
+                        <a href="../../account/register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Register</a>
                     </div>
                 </div>
             </nav>
@@ -66,10 +66,10 @@
                             <i class="fa-solid fa-bars"></i>
                         </button>
                         <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-solid-white animate-fadeIn" id="dropdownMenuBottom">
-                            <a href="../../account/myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">My account</a>
-                            <a href="../create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Create new listing</a>
-                            <a href="../../account/login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Login</a>
-                            <a href="../../account/register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-hover hover:text-solid-white">Register</a>
+                            <a href="../../account/myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">My account</a>
+                            <a href="../create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Create new listing</a>
+                            <a href="../../account/login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Login</a>
+                            <a href="../../account/register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Register</a>
                         </div>
                     </div>
                 </nav>
@@ -83,24 +83,60 @@
     </header>
 
     <!-- currency -->
-    <div class="bg-dark-blue text-solid-white py-2 px-4 text-center top-0">
+    <div class="bg-blue-950 text-solid-white py-2 px-4 text-center top-0">
         Hello, [name!]. Your currency is 1000 🌕
     </div>
 
-    <h1>Create New Listing</h1>
-    <form id="new-listing-form">
-        <label for="title">Title</label>
-        <input type="text" id="new-listing-title" name="title" required placeholder="Title" aria-label="Add a title for your listing">
-        <label for="description">Description</label>
-        <textarea id="new-listing-description" name="description" required placeholder="Description"></textarea>
-        <label for="category">Category</label>
-        <input type="text" id="new-listing-category" name="category" required aria-label="Write at least one category, add commas in between if you add multiple">
-        </input>
-        <label for="image">Image</label>
-        <input type="text" id="new-listing-image" name="image-url" required aria-label="Paste uploaded image url here" placeholder="image url">
-        <label for="end-date">Ends At</label>
-        <input type="date" id="new-listing-ends-at" name="end-date" required aria-label="Select the end date for your listing" placeholder="Category">
-        <button type="submit" id="new-listing-button">Create Listing</button>
-    </form>
+    <main class="grow w-full p-4 md:px-20 md:py-8 container mx-auto">
+        <div class="w-[360px] flex flex-col mx-auto">
+            <h1 class="text-center text-2xl text-blue-950 font-bold p-4">Create New Listing</h1>
+            <form id="new-listing-form">
+
+                <!-- title -->
+                <label for="title text-left" class=" text-blue-950 font-bold">Title</label>
+                <input type="text" id="new-listing-title" name="title" required placeholder="Title" aria-label="Add a title for your listing"
+                class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-full mb-3">
+                
+                <!-- description -->
+                <label for="description" class=" text-blue-950 font-bold">Description</label>
+                <textarea id="new-listing-description" name="description" required placeholder="Description"
+                class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-full mb-3"></textarea>
+                
+                <!-- tag -->
+                <label for="category" class="text-blue-950 font-bold">Category</label>
+                <input type="text" id="new-listing-category" name="category" required aria-label="Write at least one category, add commas in between if you add multiple"
+                placeholder="Write a category/tag for your listing"
+                class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-full mb-3">
+                </input>
+                
+                <!-- image -->
+                <label for="image" class="text-blue-950 font-bold">Image</label>
+                <input type="text" id="new-listing-image" name="image-url" required aria-label="Paste uploaded image url here" placeholder="paste image url"
+                class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-full mb-3">
+                
+                <!-- end date -->
+                <label for="end-date" class="text-blue-950 font-bold">Ends At</label>
+                <input type="date" id="new-listing-ends-at" name="end-date" required aria-label="Select the end date for your listing" placeholder="Category"
+                class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-full mb-3">
+                
+                <!-- submit button -->
+                <div class="flex items-center justify-center">
+                    <button type="submit" id="new-listing-button"
+                    class="bg-blue-950 hover:bg-blue-800 text-white rounded px-6 py-2 mt-3"
+                    >Create Listing</button>
+                </div>
+            </form>
+
+        </div>
+    </main>
+     <!-- footer -->
+     <footer class="bg-orange-500 p-4 text-solid-white flex justify-center items-center bottom-0 flex-col">
+        <div class="p-4">
+            <img src="../../assets/logo/emblem-auction-house-white.svg" alt="Emblem from the Auction House logo" class="max-w-60 h-8">
+        </div>
+        <div class="p-2">
+            <p>&copy; 2024 Auction House</p>
+        </div>
+    </footer>
 </body>
 </html>
