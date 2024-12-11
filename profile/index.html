@@ -3,29 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!-- favicon -->
-     <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon-sm9KJHkb.png">
-     <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32-DxvmC6tE.png">
-     <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16-Bs-OiQGM.png">
-     <link rel="manifest" href="/assets/site-BwHFeIBa.webmanifest">
-    <!-- Font Awesome -->
+    <!-- font awesome -->
     <script src="https://kit.fontawesome.com/cfcc846d5b.js" crossorigin="anonymous"></script>
-    <!-- CSS & JS -->
-    <title>Register</title>
-  <script type="module" crossorigin src="/assets/main-B5hVbBqe.js"></script>
-  <script type="module" crossorigin src="/assets/auth-DfNUhXv5.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-B_-SnRho.css">
-  <link rel="stylesheet" crossorigin href="/assets/show-password-t35GqPpV.css">
+     <!-- favicon -->
+     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/favicon_io/apple-touch-icon.png">
+     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon_io/favicon-32x32.png">
+     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon_io/favicon-16x16.png">
+     <link rel="manifest" href="../../assets/favicon_io/site.webmanifest">
+     <!-- CSS & JS -->
+    <script type="module" src="../src/js/auth.js" defer></script>
+    <script type="module" src="../src/js/main.js" defer></script>
+    <link rel="stylesheet" href="../src/index.css">
+    <title>Auction House: Profile</title>
 </head>
-<body class="m-0 h-screen flex flex-col">
+<body class="my-account-page m-0 h-screen flex flex-col">
     <!-- header -->
-    <header class="bg-orange-500 px-6 py-3 sm:px-8 sm:py-4 md:px-12 md:py-6 flex sticky top-0">
+    <header class="bg-orange-500 px-6 py-3 sm:px-8 sm:py-4 md:px-12 md:py-6 flex top-0">
         <!-- Large Screen Header (visible on medium and larger screens) -->
         <div class="hidden w-full sm:flex sm:justify-between items-center">
             <!-- LOGO -->
-            <div class="flex justify-start">
-                <a href="../../index.html" aria-label="The logo links back to the homepage">
-                    <img src="/assets/liggende-logo-auction-house--SJuZxw8.svg" alt="Logo for Auction House" class="max-w-60 h-8">
+            <div class="flex justify-start" aria-label="The logo links back to the homepage" >
+                <a href="../../index.html">
+                    <img src="../../assets/logo/liggende-logo-auction-house.svg" alt="Logo for Auction House" class="max-w-60 h-8">
                 </a>
             </div>
 
@@ -40,7 +39,7 @@
                     <button id="dropdownButton" class="text-3xl text-white focus:outline-none">
                         <i class="fa-solid fa-bars"></i>
                     </button>
-                    <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white animate-fadeIn" id="dropdownMenuBottom">
+                    <div class="hidden z-20 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white animate-fadeIn" id="dropdownMenuBottom">
                         <a href="../myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">My account</a>
                         <a href="../../listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Create new listing</a>
                         <a href="../login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Login</a>
@@ -57,7 +56,7 @@
                 <!-- LOGO -->
                 <div class="flex justify-start">
                     <a href="../../index.html" aria-label="The logo links back to the homepage">
-                        <img src="/assets/white_logo_auction_house-CvfPHKlL.svg" alt="Logo for Auction House" class="max-w-20 h-8">
+                        <img src="../../assets/logo/white_logo_auction_house.svg" alt="Logo for Auction House" class="max-w-20 h-8">
                     </a>
                 </div>
                 
@@ -85,51 +84,74 @@
     </header>
 
     <!-- currency -->
-    <!-- currency -->
     <div class="bg-blue-950 text-white py-2 px-4 text-center top-0">
         Hello, <span class="username-from-local-storage"></span>! Your currency is <span class="my-credits"></span> 🌕
     </div>
 
-    <main class="grow container mx-auto w-full p-4 md:px-20 md:py-8">
-        <div class="w-[360px] flex flex-col mx-auto text-center">
-            <h1 class="text-2xl text-blue-950 font-bold p-4">Register</h1>
-            <form id="register-form">
-                <div class="p-2">
-                    <input type="text" id="username" placeholder="Username" required
-                    class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-[310px]">
-                </div>
-                <div class="p-2">
-                    <input type="email" id="register-email" placeholder="Email" required
-                    class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-[310px]">
-                </div>
-                <div class="flex items-center gap-2 p-2">
-                    <input type="password" id="register-password" placeholder="Password" required
-                    class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-[310px]">
-                    <span class="eye-container show-password">
-                        <i class="fa-solid fa-eye-slash"></i>
-                        <i class="fa-solid fa-eye hide"></i>
-                    </span>
-                </div>
-                <p id="error-message"></p>
-                <p id="success-message"></p>
-                <button type="submit" id="register-btn"
-                class="bg-blue-950 hover:bg-blue-800 text-white rounded px-6 py-2 mt-3"
-                >Register</button>
-            </form>
-            <p id="error-message"></p>
-            <p id="success-message"></p>
-            <a href="../login/" class="italic p-4 hover:underline">Login</a>
+    <!-- main -->
+    <main class="grow">
+        <div class="relative mb-20">
+            <!-- Banner -->
+            <img 
+                class="banner-profile w-full h-[200px] object-cover mx-auto" 
+                src="../../assets/placeholders/banner-placeholder.png" 
+                alt="Banner image">
+            
+            <!-- Avatar -->
+            <img 
+                class="avatar-profile w-[200px] h-[200px] object-cover mx-auto rounded-full overflow-hidden absolute top-[100px] left-[7%] z-10 border-4 border-white" 
+                src="../../assets/placeholders/avatar-placeholder.png" 
+                alt="User Avatar">
         </div>
+        
+        <!-- View Profile page - main content -->
+        <div class="w-full p-4 md:px-20 md:py-8 mx-auto container flex flex-col lg:flex-row lg:items-start lg:justify-start gap-8">
+
+            <!-- user information -->
+            <div class="w-full flex flex-col items-center lg:items-start text-center lg:text-left">
+                <div>
+                    <span class="font-bold text-blue-950">Username: </span><span class="profile-name"></span>
+                </div>
+                <div>
+                    <span class="font-bold text-blue-950">Email: </span><span class="profile-email"></span>
+                </div>
+                <div>
+                    <span class="font-bold text-blue-950">Currency: </span><span class="profile-credits"></span> 🌕
+                </div>
+                <div>
+                    <span class="font-bold text-blue-950">Listings: </span><span class="profile-listings-count"></span>
+                </div>
+                <div>
+                    <span class="font-bold text-blue-950">Wins: </span><span class="profile-wins-count"></span>
+                </div>
+            </div>
+            <div>
+                <!-- Missing bio in Javascrip. See renderProfileData.js -->
+                <span class="font-bold text-blue-950">Bio:</span><span class="bio-this-profile"></span>
+            </div>
+        </div>
+
+
+        <!-- My Listings area -->
+        <div id="my-listings" class="bg-gray-100 mx-auto text-center p-8">
+            <h2 class="text-2xl text-blue-950 font-bold p-4"><span class="username-this-profile"></span>'s Listings</h2>
+
+            <!-- Listings load here (apply grid layout) -->
+            <div>
+                <!-- real listings will be inserted here -->
+                <div id="listings-container-this-profile" class="flex gap-4"></div>
+            </div>
+        </div>
+        
     </main>
     <!-- footer -->
     <footer class="bg-orange-500 p-4 text-white flex justify-center items-center bottom-0 flex-col">
         <div class="p-4">
-            <img src="data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'?%3e%3csvg%20id='Layer_2'%20data-name='Layer%202'%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20109.52%2089.06'%3e%3cdefs%3e%3cstyle%3e%20.cls-1%20{%20fill:%20%23fff;%20}%20%3c/style%3e%3c/defs%3e%3cg%20id='Layer_1-2'%20data-name='Layer%201'%3e%3cg%3e%3cpolygon%20class='cls-1'%20points='54.76%2030.78%2099.49%2075.5%20109.52%2065.47%2054.76%2010.71%200%2065.47%2010.03%2075.5%2054.76%2030.78'/%3e%3cg%3e%3cpolygon%20class='cls-1'%20points='92.54%2039.36%2092.54%200%2075.64%200%2075.64%2022.46%2092.54%2039.36'/%3e%3cpolygon%20class='cls-1'%20points='33.88%2024.23%2033.88%200%2016.98%200%2016.98%2041.13%2033.88%2024.23'/%3e%3cpolygon%20class='cls-1'%20points='75.64%2059.03%2075.64%2089.06%2092.54%2089.06%2092.54%2075.92%2075.64%2059.03'/%3e%3cpolygon%20class='cls-1'%20points='16.98%2077.7%2016.98%2089.06%2033.88%2089.06%2033.88%2060.8%2016.98%2077.7'/%3e%3c/g%3e%3c/g%3e%3c/g%3e%3c/svg%3e" alt="Emblem from the Auction House logo" class="max-w-60 h-8">
+            <img src="../../assets/logo/emblem-auction-house-white.svg" alt="Emblem from the Auction House logo" class="max-w-60 h-8">
         </div>
         <div class="p-2">
             <p>&copy; 2024 Auction House</p>
         </div>
     </footer>
-    
 </body>
 </html>

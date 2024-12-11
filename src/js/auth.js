@@ -6,18 +6,15 @@ import { myAccountPage } from './auth/myaccount.js';
 import { fetchToken } from './auth/fetchToken.js';
 import { fetchApiKey } from './auth/fetchApiKey.js';
 import { myListings } from './listing/view-my-listings.js';
+import { fetchProfileData } from './auth/myProfile.js';
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
     // Fetch form elements for login
     const loginElements = getLoginFormElements();
     login(loginElements);
     fetchLocalData();
-    fetchToken();
 
-    // My account page
-    myAccountPage();
-    fetchApiKey();
-    myListings();
+    fetchProfileData();
 
     // Fetch form elements for registration if the register form exists
     const registerElements = document.getElementById('register-form') ? getRegisterFormElements() : null;
@@ -25,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
         register(registerElements);
     }
 
-    // fetch username from local storage when logged in
+    // Fetch username from local storage when logged in
     const username = localStorage.getItem('username');
 
     // Exit early if the user is not logged in
@@ -33,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
-    // Clean up the username and ensure the DOM element exists
+    // Ensure the DOM element exists and clean up the username
     const tidyName = username.replace(/['"]+/g, '');
     const loggedInUsernameElement = document.querySelector('.logged-in-username');
 
@@ -48,4 +45,15 @@ document.addEventListener('DOMContentLoaded', function () {
             element.style.display = 'block';
         }
     });
+
+    // Initialize the "My Account" page
+    myAccountPage();
+
+    // Use Promises to ensure fetchToken and fetchApiKey complete before calling myListings
+    try {
+        await Promise.all([fetchToken(), fetchApiKey()]);
+        myListings(); // Call myListings only after the promises resolve
+    } catch (error) {
+        console.error('Error fetching required data:', error);
+    }
 });

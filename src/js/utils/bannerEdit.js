@@ -51,9 +51,9 @@ export function changeBanner() {
             myHeaders.append("Authorization", `Bearer ${cleanedToken}`);
 
             const raw = JSON.stringify({
-                "avatar": {
+                "banner": {
                     "url": newBannerUrl,
-                    "alt": "Avatar"
+                    "alt": "banner"
                 }
             });
 
@@ -73,7 +73,7 @@ export function changeBanner() {
 
             const result = await response.json();
 
-            // Save the new avatar URL to localStorage
+            // Save the new banner URL to localStorage
             localStorage.setItem('banner', newBannerUrl);
             alert('Your profile banner has been updated!');
             location.reload(); // Reload the page
