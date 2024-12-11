@@ -1,5 +1,4 @@
 export function myListings() {
-
     // Check if the current page is the My Account page
     if (!document.body.classList.contains("my-account-page")) {
         return;
@@ -28,7 +27,6 @@ export function myListings() {
         throw new Error('Failed to fetch listings');
     })
     .then(data => {
-
         // Ensure data.data exists and is an array
         const listings = (data && Array.isArray(data.data)) ? data.data : [];
 
@@ -54,10 +52,35 @@ export function myListings() {
                 : 'default-image.jpg'; // Fallback image if none exists
 
             const tags = listing.tags || [];
-
             const lastBidAmount = listing.bids?.length
-            ? listing.bids[listing.bids.length - 1].amount
-            : "0";
+                ? listing.bids[listing.bids.length - 1].amount
+                : "0";
+
+            // Calculate remaining time
+            const endsAt = listing.endsAt;
+            let timeLeft = "N/A";
+
+            if (endsAt) {
+                const targetDate = new Date(endsAt);
+                const currentDate = new Date();
+                const differenceInMs = targetDate - currentDate;
+
+                if (differenceInMs > 0) {
+                    const daysLeft = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
+                    const hoursLeft = Math.floor((differenceInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutesLeft = Math.floor((differenceInMs % (1000 * 60 * 60)) / (1000 * 60));
+
+                    if (daysLeft > 0) {
+                        timeLeft = `${daysLeft} day${daysLeft > 1 ? 's' : ''}`;
+                    } else if (hoursLeft > 0) {
+                        timeLeft = `${hoursLeft} hour${hoursLeft > 1 ? 's' : ''}`;
+                    } else {
+                        timeLeft = `${minutesLeft} minute${minutesLeft > 1 ? 's' : ''}`;
+                    }
+                } else {
+                    timeLeft = "Ended";
+                }
+            }
 
             // Create the HTML for the listing card
             listingCard.innerHTML = `
@@ -77,7 +100,7 @@ export function myListings() {
                 </div>
                 <div>
                     <span class="text-blue-950 font-bold">Ends in:</span>
-                    <span>${listing.endsAt || 'N/A'}</span>
+                    <span>${timeLeft}</span>
                 </div>
                 <div class="mt-3">
                     <button class="bg-blue-950 hover:bg-blue-800 text-white rounded px-6 py-2">Edit</button>

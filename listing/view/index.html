@@ -3,23 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/cfcc846d5b.js" crossorigin="anonymous"></script>
      <!-- favicon -->
      <link rel="apple-touch-icon" sizes="180x180" href="../../assets/favicon_io/apple-touch-icon.png">
      <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon_io/favicon-32x32.png">
      <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon_io/favicon-16x16.png">
      <link rel="manifest" href="../../assets/favicon_io/site.webmanifest">
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/cfcc846d5b.js" crossorigin="anonymous"></script>
     <!-- CSS & JS -->
-    <script type="module" src="../../src/js/auth.js" defer></script>
     <script type="module" src="../../src/js/main.js" defer></script>
-    <link rel="stylesheet" href="../../src/css/show-password.css">
     <link rel="stylesheet" href="../../src/index.css">
-    <title>Register</title>
+    <title>View Listing</title>
 </head>
-<body class="m-0 h-screen flex flex-col">
+<body class="create-listing-page m-0 h-screen flex flex-col">
     <!-- header -->
-    <header class="bg-orange-500 px-6 py-3 sm:px-8 sm:py-4 md:px-12 md:py-6 flex sticky top-0">
+    <header class="bg-orange-500 px-6 py-3 sm:px-8 sm:py-4 md:px-12 md:py-6 flex top-0">
         <!-- Large Screen Header (visible on medium and larger screens) -->
         <div class="hidden w-full sm:flex sm:justify-between items-center">
             <!-- LOGO -->
@@ -41,10 +39,10 @@
                         <i class="fa-solid fa-bars"></i>
                     </button>
                     <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white animate-fadeIn" id="dropdownMenuBottom">
-                        <a href="../myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">My account</a>
-                        <a href="../../listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Create new listing</a>
-                        <a href="../login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Login</a>
-                        <a href="../register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Register</a>
+                        <a href="../../account/myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">My account</a>
+                        <a href="../create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Create new listing</a>
+                        <a href="../../account/login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Login</a>
+                        <a href="../../account/register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Register</a>
                     </div>
                 </div>
             </nav>
@@ -68,10 +66,10 @@
                             <i class="fa-solid fa-bars"></i>
                         </button>
                         <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white animate-fadeIn" id="dropdownMenuBottom">
-                            <a href="../myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">My account</a>
-                            <a href="../../listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Create new listing</a>
-                            <a href="../login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Login</a>
-                            <a href="../register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Register</a>
+                            <a href="../../account/myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">My account</a>
+                            <a href="../create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Create new listing</a>
+                            <a href="../../account/login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Login</a>
+                            <a href="../../account/register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Register</a>
                         </div>
                     </div>
                 </nav>
@@ -85,44 +83,20 @@
     </header>
 
     <!-- currency -->
-    <!-- currency -->
     <div class="bg-blue-950 text-white py-2 px-4 text-center top-0">
         Hello, <span class="username-from-local-storage"></span>! Your currency is <span class="my-credits"></span> 🌕
     </div>
 
-    <main class="grow container mx-auto w-full p-4 md:px-20 md:py-8">
-        <div class="w-[360px] flex flex-col mx-auto text-center">
-            <h1 class="text-2xl text-blue-950 font-bold p-4">Register</h1>
-            <form id="register-form">
-                <div class="p-2">
-                    <input type="text" id="username" placeholder="Username" required
-                    class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-[310px]">
-                </div>
-                <div class="p-2">
-                    <input type="email" id="register-email" placeholder="Email" required
-                    class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-[310px]">
-                </div>
-                <div class="flex items-center gap-2 p-2">
-                    <input type="password" id="register-password" placeholder="Password" required
-                    class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-[310px]">
-                    <span class="eye-container show-password">
-                        <i class="fa-solid fa-eye-slash"></i>
-                        <i class="fa-solid fa-eye hide"></i>
-                    </span>
-                </div>
-                <p id="error-message"></p>
-                <p id="success-message"></p>
-                <button type="submit" id="register-btn"
-                class="bg-blue-950 hover:bg-blue-800 text-white rounded px-6 py-2 mt-3"
-                >Register</button>
-            </form>
-            <p id="error-message"></p>
-            <p id="success-message"></p>
-            <a href="../login/" class="italic p-4 hover:underline">Login</a>
+    <main class="grow w-full p-4 md:px-20 md:py-8 container mx-auto">
+        <div class="flex flex-col mx-auto">
+            <h1 class="text-center text-2xl text-blue-950 font-bold p-4">View Listing</h1>
+            <div class="view-listing">View listing js code</div>
+            <div class="view-listing-bid-history">View listing history js code</div>
+
         </div>
     </main>
-    <!-- footer -->
-    <footer class="bg-orange-500 p-4 text-white flex justify-center items-center bottom-0 flex-col">
+     <!-- footer -->
+     <footer class="bg-orange-500 p-4 text-white flex justify-center items-center bottom-0 flex-col">
         <div class="p-4">
             <img src="../../assets/logo/emblem-auction-house-white.svg" alt="Emblem from the Auction House logo" class="max-w-60 h-8">
         </div>
@@ -130,6 +104,5 @@
             <p>&copy; 2024 Auction House</p>
         </div>
     </footer>
-    
 </body>
 </html>

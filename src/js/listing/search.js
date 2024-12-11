@@ -1,56 +1,37 @@
-export function allListings() {
-    // Check if the current page is the My Account page
-    if (!document.body.classList.contains("load-all-listings")) {
+export function initializeSearchBar(data) {
+    const searchInput = document.getElementById('search-input');
+    const mainElement = document.querySelector('main');
+
+    if (!searchInput || !mainElement) {
+        console.error('Search input or main element not found.');
         return;
     }
 
-    // Fetch user's listings
-    fetch(`https://v2.api.noroff.dev/auction/listings?_bids=true`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        }
-        throw new Error('Failed to fetch listings');
-    })
-    .then(data => {
-        // Ensure data.data exists and is an array
-        const listings = (data && Array.isArray(data.data)) ? data.data : [];
+    function renderSearchResults(results) {
+        mainElement.innerHTML = ''; // Clear existing content
 
-        // Check if listings is an array and has items
-        if (!Array.isArray(listings) || listings.length === 0) {
+        if (results.length === 0) {
+            mainElement.innerHTML = `
+                <div class="text-center py-8">
+                    <h2 class="text-xl font-bold">No results found</h2>
+                    <p>Try adjusting your search query.</p>
+                </div>
+            `;
             return;
         }
 
-        const listingsContainer = document.getElementById('listings-container');
-        if (!listingsContainer) {
-            console.error('Listings container not found in DOM');
-            return;
-        }
+        const listingsContainer = document.createElement('div');
+        listingsContainer.classList.add('flex', 'flex-wrap', 'gap-4');
 
-        // Loop through all listings and display them
-        listings.forEach(listing => {
+        results.forEach(listing => {
             const listingCard = document.createElement('div');
             listingCard.classList.add('flex', 'flex-col', 'p-4', 'bg-white', 'w-[320px]', 'rounded', 'shadow-md', 'h-auto');
 
-            // Attempt to fetch the media URL
-            const mediaUrl = listing.media && listing.media[0] && listing.media[0].url
-                ? listing.media[0].url
-                : 'default-image.jpg'; // Fallback image if none exists
-
-            const tags = listing.tags || [];
-            const highestBid = listing.bids && listing.bids.length > 0
-                ? Math.max(...listing.bids.map(bid => bid.amount))
-                : "0";
-
-            // Calculate remaining time
+            const mediaUrl = listing.media?.[0]?.url || 'default-image.jpg';
+            const highestBid = listing.bids?.length ? Math.max(...listing.bids.map(bid => bid.amount)) : '0';
             const endsAt = listing.endsAt;
-            let timeLeft = "N/A";
 
+            let timeLeft = "N/A";
             if (endsAt) {
                 const targetDate = new Date(endsAt);
                 const currentDate = new Date();
@@ -73,7 +54,6 @@ export function allListings() {
                 }
             }
 
-            // Create the HTML for the listing card
             listingCard.innerHTML = `
                 <img src="${mediaUrl}" alt="${listing.title}" class="mb-4 rounded h-[250px] object-cover">
                 <h3 class="text-blue-950 font-bold text-lg">${listing.title}</h3>
@@ -86,22 +66,32 @@ export function allListings() {
                     <span class="italic">${listing.description}</span>
                 </div>
                 <div>
-                    <span class="text-blue-950 font-bold">Category:</span>
-                    <span>${tags || 'N/A'}</span>
-                </div>
-                <div>
                     <span class="text-blue-950 font-bold">Ends in:</span>
                     <span>${timeLeft}</span>
                 </div>
-                <div class="grow"></div>
                 <a href="/listing.html?id=${listing.id}" class="mt-4 bg-blue-950 text-white py-2 px-4 rounded text-center">View Listing</a>
             `;
 
-            // Append the created listing card to the container
             listingsContainer.appendChild(listingCard);
         });
-    })
-    .catch(error => {
-        console.error('Error fetching listings:', error);
+
+        mainElement.appendChild(listingsContainer);
+    }
+
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase();
+        const filteredResults = data.filter(listing => {
+            const matchesTitle = listing.title?.toLowerCase().includes(query);
+            const matchesDescription = listing.description?.toLowerCase().includes(query);
+            const matchesAltText = listing.media?.[0]?.alt?.toLowerCase().includes(query);
+            const matchesTags = listing.tags?.some(tag => tag.toLowerCase().includes(query));
+
+            const endsAt = listing.endsAt ? new Date(listing.endsAt) : null;
+            const isActive = endsAt && endsAt > new Date();
+
+            return (matchesTitle || matchesDescription || matchesAltText || matchesTags) && isActive;
+        });
+
+        renderSearchResults(filteredResults);
     });
 }

@@ -95,18 +95,16 @@ export function register() {
             }
 
             // Redirect to login page if registration is successful
-            if (data.email) {
-                localStorage.setItem('username', data.name);
-                localStorage.setItem('email', data.email);
-                localStorage.setItem('avatar', data.avatar.url);
-                localStorage.setItem('banner', data.banner.url);
+            if (response.ok) {
                 successMessage.style.display = 'block';
                 console.log('User registered successfully.');
 
+                alert('User registered successfully. You will be redirected to the login page.');
+
                 // Redirect to login page after 3 seconds
                 setTimeout(() => {
-                    window.location.href = 'account/login/';
-                }, 3000);
+                    window.location.href = '../login/';
+                }, 2000);
             }
 
         } catch (error) {

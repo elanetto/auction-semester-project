@@ -17,10 +17,10 @@
     <script type="module" src="src/js/main.js" defer></script>
     <title>Auction House</title>
 </head>
-<body class="homepage m-0 h-screen flex flex-col">
+<body class="homepage m-0 h-screen flex flex-col load-all-listings">
     <!-- header -->
     <header class="bg-orange-500 px-6 py-3 sm:px-8 sm:py-4 md:px-12 md:py-6 flex top-0">
-        <!-- Large Screen Header (visible on medium and larger screens) -->
+        <!-- Large Screen Header -->
         <div class="hidden w-full sm:flex sm:justify-between items-center">
             <!-- LOGO -->
             <div class="flex justify-start">
@@ -31,78 +31,67 @@
 
             <!-- SEARCH -->
             <div class="mt-4 w-full flex justify-center">
-                <input type="text" placeholder="Search" class="search-input rounded-lg text-sm px-5 py-2.5 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl" aria-label="search">
+                <input id="search-input" type="text" placeholder="Search listings" class="search-input rounded-lg text-sm px-5 py-2.5 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl" aria-label="search">
             </div>
             
             <!-- NAV -->
             <nav class="flex justify-end">
                 <div class="relative inline-block text-left">
-                    <button id="dropdownButton" class="text-3xl text-solid-white focus:outline-none">
+                    <button id="dropdownButton" class="text-3xl text-white focus:outline-none">
                         <i class="fa-solid fa-bars"></i>
                     </button>
-                    <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-solid-white animate-fadeIn" id="dropdownMenuBottom">
-                        <a href="account/myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">My account</a>
-                        <a href="listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Create new listing</a>
-                        <a href="account/login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Login</a>
-                        <a href="account/register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Register</a>
+                    <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white animate-fadeIn" id="dropdownMenuBottom">
+                        <a href="account/myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">My account</a>
+                        <a href="listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Create new listing</a>
+                        <a href="account/login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Login</a>
+                        <a href="account/register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Register</a>
+                        <a href="profile/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Profile</a>
                     </div>
                 </div>
             </nav>
         </div>
-    
-        <!-- Small Screen Header (visible on small screens) -->
-        <div class="sm:hidden w-full flex flex-col items-center">
-            <!-- Logo + nav on the same level -->
-            <div class="flex justify-between items-center w-full max-w-80">
-                <!-- LOGO -->
-                <div class="flex justify-start">
-                    <a href="index.html" aria-label="The logo links to the homepage">
-                        <img src="assets/logo/white_logo_auction_house.svg" alt="Logo for Auction House" class="max-w-20 h-8">
-                    </a>
-                </div>
-                
-                <!-- NAV -->
-                <nav class="flex justify-end mt-4">
-                    <div class="relative inline-block text-left">
-                        <button id="dropdownButton" class="h-9 text-3xl text-solid-white focus:outline-none">
-                            <i class="fa-solid fa-bars"></i>
-                        </button>
-                        <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-solid-white animate-fadeIn" id="dropdownMenuBottom">
-                            <a href="account/myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">My account</a>
-                            <a href="listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Create new listing</a>
-                            <a href="account/login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Login</a>
-                            <a href="account/register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-solid-white">Register</a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-    
-            <!-- SEARCH (Positioned under logo and nav on small screens) -->
-            <div class="mt-4 w-full flex justify-center">
-                <input type="text" placeholder="Search" class="search-input rounded-lg text-sm px-5 py-2.5 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl" aria-label="search">
-            </div>
-        </div>
     </header>
 
     <!-- currency -->
-    <div class="bg-blue-950 text-solid-white py-2 px-4 text-center top-0">
-        Hello, [name!]. Your currency is 1000 🌕
+    <div class="bg-blue-950 text-white py-2 px-4 text-center top-0">
+        Hello, <span class="username-from-local-storage"></span>! Your currency is <span class="my-credits"></span> 🌕
     </div>
-    
-    
+
     <!-- main -->
     <main class="grow w-full p-4 md:px-20 md:py-8 mx-auto container">
-        <h1 class="text-3xl font-bold text-center mb-4">Welcome to the Auction House</h1>
-        <p class="text-center mb-4">Looking around? The index page is not done.</p>
-        <p class="text-center mb-4">Check out the other pages using the links in the top right corner.</p>
-        <p class="logged-in-username text-center mb-4 text-blue-800 font-bold"></p>
-        <div class="flex justify-center items-center">
-            <button id="logout-button" class="visible-if-logged-in py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">logout</button>
+        <h1 class="text-4xl font-bold text-center mb-4">🔥 Hottest Listings 🔥</h1>
+
+        <!-- Carousel -->
+        <div class="background-for-carousel overflow-hidden relative">
+            <div id="carousel-container" class="w-full h-[500px] relative">
+                <div id="carousel" class="flex transition-transform duration-500 ease-in-out">
+                    <!-- Carousel items will be added dynamically here -->
+                </div>
+                <button id="prev-button" class="carousel-button absolute top-1/2 left-2 transform -translate-y-1/2 z-10 text-white bg-black bg-opacity-50 p-2 rounded-full">&#10094;</button>
+                <button id="next-button" class="carousel-button absolute top-1/2 right-2 transform -translate-y-1/2 z-10 text-white bg-black bg-opacity-50 p-2 rounded-full">&#10095;</button>
+                <div id="dots-container" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+                    <!-- Dots will be added dynamically here -->
+                </div>
+            </div>
         </div>
-        <div class="listings-container"></div>
+        
+        <!-- Listings Section -->
+        <div class="bg-gray-100 mx-auto text-center p-8">
+            <h2 class="text-2xl font-bold mb-4">Listings</h2>
+            <div class="flex gap-5 justify-center items-center mb-4">
+                <select id="tag-filter" class="rounded border p-2">
+                    <option value="">All Tags</option>
+                    <!-- Tag options will be populated dynamically -->
+                </select>
+                <input id="search-input" type="text" placeholder="Search listings" class="search-input rounded-lg text-sm px-5 py-2.5 border" aria-label="search for a listing">
+            </div>
+            <div id="listings-container" class="flex flex-wrap gap-4 p-4"></div>
+            <div id="pagination-container" class="flex justify-center mt-4"></div>
+        </div>
     </main>
+
     <!-- footer -->
-    <footer class="bg-orange-500 p-4 text-solid-white flex justify-center items-center bottom-0 flex-col">
+    <footer class="bg-orange-500 p-4 text-white flex justify-center items-center bottom-0 flex-col">
         <div class="p-4">
             <img src="assets/logo/emblem-auction-house-white.svg" alt="Emblem from the Auction House logo" class="max-w-60 h-8">
         </div>
