@@ -1,31 +1,16 @@
-export function pagination(data, itemsPerPage = 9) {
+export function pagination(data, itemsPerPage = 10) {
     let currentPage = 1;
-    let filteredData = [...data];
+
+    // Filter only active listings initially
+    let filteredData = data.filter(listing => {
+        const endsAt = listing.endsAt ? new Date(listing.endsAt) : null;
+        return endsAt && endsAt > new Date(); // Only include listings with time left
+    });
 
     const listingsContainer = document.getElementById('listings-container');
     const paginationContainer = document.getElementById('pagination-container');
     const tagFilter = document.getElementById('tag-filter');
-    const searchInput = document.getElementById('search-input');
-
-    // Function to populate the tag filter dropdown
-    function populateTagFilter() {
-        if (!tagFilter) return;
-
-        const uniqueTags = new Set();
-        data.forEach(listing => {
-            if (listing.tags) {
-                listing.tags.forEach(tag => uniqueTags.add(tag));
-            }
-        });
-
-        tagFilter.innerHTML = '<option value="">All Tags</option>'; // Default option
-        uniqueTags.forEach(tag => {
-            const option = document.createElement('option');
-            option.value = tag;
-            option.textContent = tag;
-            tagFilter.appendChild(option);
-        });
-    }
+    const searchInputs = document.querySelectorAll('.search-input'); // Use class for multiple inputs
 
     function renderPage(page) {
         const startIndex = (page - 1) * itemsPerPage;
@@ -114,18 +99,22 @@ export function pagination(data, itemsPerPage = 9) {
     }
 
     function applyFilters() {
-        const query = searchInput?.value.toLowerCase() || '';
+        const query = Array.from(searchInputs).map(input => input.value.toLowerCase()).join(' ').trim();
         const selectedTag = tagFilter?.value || '';
 
         filteredData = data.filter(listing => {
-            const matchesTag = !selectedTag || listing.tags?.includes(selectedTag);
+            const endsAt = listing.endsAt ? new Date(listing.endsAt) : null;
+            const isActive = endsAt && endsAt > new Date();
+
+            const matchesTag = (!selectedTag || listing.tags?.includes(selectedTag)) && isActive;
             const matchesSearch =
                 !query ||
                 listing.title?.toLowerCase().includes(query) ||
                 listing.description?.toLowerCase().includes(query) ||
                 listing.media?.[0]?.alt?.toLowerCase().includes(query) ||
                 listing.tags?.some(tag => tag.toLowerCase().includes(query)) ||
-                listing.seller?.name?.toLowerCase().includes(query);
+                listing.seller?.name?.toLowerCase().includes(query) ||
+                listing.id?.toLowerCase().includes(query);
 
             return matchesTag && matchesSearch;
         });
@@ -135,12 +124,34 @@ export function pagination(data, itemsPerPage = 9) {
         setupPaginationControls();
     }
 
+    function populateTagFilter() {
+        if (!tagFilter) return;
+
+        const uniqueTags = new Set();
+        data.forEach(listing => {
+            const endsAt = listing.endsAt ? new Date(listing.endsAt) : null;
+            const isActive = endsAt && endsAt > new Date();
+
+            if (isActive && listing.tags) {
+                listing.tags.forEach(tag => uniqueTags.add(tag));
+            }
+        });
+
+        tagFilter.innerHTML = '<option value="">All Tags</option>'; // Default option
+        uniqueTags.forEach(tag => {
+            const option = document.createElement('option');
+            option.value = tag;
+            option.textContent = tag;
+            tagFilter.appendChild(option);
+        });
+    }
+
     if (tagFilter) {
         tagFilter.addEventListener('change', applyFilters);
     }
 
-    if (searchInput) {
-        searchInput.addEventListener('input', applyFilters);
+    if (searchInputs.length > 0) {
+        searchInputs.forEach(input => input.addEventListener('input', applyFilters));
     }
 
     populateTagFilter();

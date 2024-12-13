@@ -87,14 +87,138 @@
         Hello, <span class="username-from-local-storage"></span>! Your currency is <span class="my-credits"></span> 🌕
     </div>
 
+    <!-- show single listing in main -->
     <main class="grow w-full p-4 md:px-20 md:py-8 container mx-auto">
-        <div class="flex flex-col mx-auto">
-            <h1 class="text-center text-2xl text-blue-950 font-bold p-4">View Listing</h1>
-            <div class="view-listing">View listing js code</div>
-            <div class="view-listing-bid-history">View listing history js code</div>
+        <div class="copy-link-to-listing cursor-pointer italic text-gray-500 text-xs text-right">Click here to copy link for this listing <i class="fa-solid fa-paperclip"></i></div>
 
+        <div class="view-single-isting lg:flex">
+
+            <!-- Title, description and image -->
+            <div class="lg:w-4/6 w-full">
+                <!-- Title & Description -->
+                <div>
+                    <div class="view-single-isting-title w-full text-3xl font-bold text-blue-950 py-4">
+                        Listing title</div>
+                    <div class="view-single-listing-description w-full text-blue-950">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. A minima deserunt ab iste reiciendis. Ratione repellat veniam voluptatibus adipisci beatae nemo, esse, sunt provident id facere sit, ut eveniet harum. 
+                    </div>
+                </div>
+            
+                <!-- Image -->
+                <div class="view-single-listing-carousel pt-6">
+                    <div class="flex justify-center items-center">
+                        <img src="../../assets/placeholders/placeholder-pen.png" alt="Placeholder image" class="view-single-listing-image w-full object-cover">
+                    </div>
+                    <div class="view-single-listing-image-alt-text text-center italic text-blue-950 text-xs">Image alt text goes here</div>
+                </div>
+
+            </div>
+
+
+            <!-- Info -->
+            <div class="w-full lg:flex lg:flex-col lg:w-2/6 lg:mx-10 place-items-end">
+                <div class="lg:grow"></div>
+                <div class="w-full">
+                    <div class="view-single-listing-info w-full flex justify-between items-center lg:flex lg:flex-col lg:items-start">
+                        <!-- Time & category -->
+                        <div class="lg:flex lg:flex-col">
+                            <div class="pt-4 pb-2"><span class="font-bold text-blue-950">Time left: </span><span class="single-listing-endat text-blue-950">23 days</span></div>
+                            <div class="py-4"><span class="font-bold text-blue-950">Category: </span><span class="single-listing-tags text-blue-950">Art</span></div>
+                        </div>
+                        <!-- Seller -->
+                        <div class="lg:items-start">
+                            <a href="#">
+                                <div class="flex p-4 gap-4 items-center" class="lg:flex lg:flex-col">
+                                    <div>
+                                        <img src="../../assets/placeholders/avatar-placeholder.png" alt="Avatar of seller" 
+                                        class="view-single-listing-seller-avatar w-[100px] h-[100px] object-cover mx-auto rounded-full overflow-hidden">
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-blue-950">Seller:</div>
+                                        <div class="view-single-listing-seller-name text-blue-950">Username</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full">
+                    <!-- Highest Bid (currently) -->
+                    <div class="bid-on-single-listing bg-orange-600 p-5 w-full flex justify-between items-center lg:flex lg:flex-col">
+                        <span class="text-white font-bold">Highest Bid: </span><span class="highest-bid-on-single-listing font-bold text-white text-2xl lg:pt-2"> 25 🌕</span>
+                    </div>
+                    <a href="#">
+                        <div class="who-placed-highest-bid bg-blue-950 text-white italic text-center p-3 text-xs">
+                            Highest bid is placed by <span class="higest-bidder-dame font-bold ">Username</span></div>
+                    </a>
+                    <!-- Place Bid -->
+                    <div class="place-bid mt-8">
+                        <div>
+                            <input type="text" id="place-bid" placeholder="Place a higher bid" required
+                            class="p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-full">
+                        </div>
+                        <button type="submit" id="place-bid-button"
+                        class="bg-orange-600 hover:bg-orange-500 text-white rounded w-full p-3 my-3 font-bold text-center"
+                        >Place bid</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
+
+    <!-- Bid History (under main to get full bg color) -->
+    <div class="bg-gray-200 w-full p-4 md:px-20 lg:px-40 md:py-8 mx-auto">
+        <h2 class="text-blue-950 text-2xl text-center font-bold py-3">Bid History</h2>
+        <!-- Bid History Table -->
+        <div class="bid-history-table bg-white flex justify-between p-4 m-4 items-center text-blue-950">
+            <div>
+                <img src="../../assets/placeholders/avatar-placeholder.png" alt="avatar" class="bid-history-avatar w-[50px] h-[50px] object-cover mx-auto rounded-full overflow-hidden">
+            </div>
+            <div class="bid-history-username font-bold">
+                Username
+            </div>
+            <div class="bid-history-date">
+                12.12.2024
+            </div>
+            <div class="bid-history-amount-of-bid font-bold">
+                25 🌕
+            </div>
+        </div>
+        <!-- Bid History copy paste example 2 -->
+        <div class="bid-history-table bg-white flex justify-between p-4 m-4 items-center text-blue-950">
+            <div>
+                <img src="../../assets/placeholders/avatar-placeholder.png" alt="avatar" class="bid-history-avatar w-[50px] h-[50px] object-cover mx-auto rounded-full overflow-hidden">
+            </div>
+            <div class="bid-history-username font-bold">
+                Username
+            </div>
+            <div class="bid-history-date">
+                12.12.2024
+            </div>
+            <div class="bid-history-amount-of-bid font-bold">
+                25 🌕
+            </div>
+        </div>
+        <!-- Bid History copy paste example 3 -->
+        <div class="bid-history-table bg-white flex justify-between p-4 m-4 items-center text-blue-950">
+            <div>
+                <img src="../../assets/placeholders/avatar-placeholder.png" alt="avatar" class="bid-history-avatar w-[50px] h-[50px] object-cover mx-auto rounded-full overflow-hidden">
+            </div>
+            <div class="bid-history-username font-bold">
+                Username
+            </div>
+            <div class="bid-history-date">
+                12.12.2024
+            </div>
+            <div class="bid-history-amount-of-bid font-bold">
+                25 🌕
+            </div>
+        </div>
+    </div>
+
+
+
+
      <!-- footer -->
      <footer class="bg-orange-500 p-4 text-white flex justify-center items-center bottom-0 flex-col">
         <div class="p-4">
