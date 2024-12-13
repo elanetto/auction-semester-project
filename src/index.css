@@ -72,3 +72,9 @@
     background-size: cover;  /* Ensure the image covers the area */
     background-position: center;  /* Center the image */
 }
+
+.bid-history-table {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

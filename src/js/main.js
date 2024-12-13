@@ -7,11 +7,18 @@ import { allListings } from '../js/listing/displayListing.js';
 import { initializeHighestBidCarousel } from '../js/listing/highestBidCarousel.js';
 import { pagination } from '../js/listing/pagination.js';
 import { initializeSearchBar } from '../js/listing/search.js';
+import { fetchSingleListing } from '../js/listing/single-listing.js';
+import { copyLink } from '../js/listing/copy-link.js';
+import { placeBid } from '../js/listing/placeBid.js';
 
 document.addEventListener('DOMContentLoaded', async function () { 
     logoutButtonFunction();
     createNewListing();
     initializeHighestBidCarousel();
+
+    fetchSingleListing();
+    copyLink();
+    placeBid()
 
     try {
         // Fetch listings
@@ -31,7 +38,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         // Initialize pagination and search bar with listings
         pagination(listings);
-        initializeSearchBar(listings); // Pass fetched listings to the search bar function
+        pagination("https://v2.api.noroff.dev/auction/listings");
+
+        initializeSearchBar(listings);
+        initializeSearchBar("https://v2.api.noroff.dev/auction/listings"); // Pass fetched listings to the search bar function
     } catch (error) {
         console.error('Error fetching listings:', error);
     }
