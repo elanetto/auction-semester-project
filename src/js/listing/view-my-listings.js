@@ -35,7 +35,7 @@ export function myListings() {
             return;
         }
 
-        const listingsContainer = document.getElementById('listings-container');
+        const listingsContainer = document.getElementById('my-listings-container');
         if (!listingsContainer) {
             console.error('Listings container not found in DOM');
             return;
