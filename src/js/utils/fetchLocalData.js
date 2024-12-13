@@ -29,6 +29,11 @@ export function fetchLocalData() {
         avatarElement.src = avatar; // Update the src attribute for the avatar image
     }
 
+    const myAvatar = document.querySelector('.my-avatar');
+    if (avatar && myAvatar) {
+        myAvatar.src = avatar;
+    }
+
     // Update banner if there's a valid value
     const bannerElement = document.querySelector('.banner-from-local-storage');
     if (banner && bannerElement) {

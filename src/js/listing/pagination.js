@@ -1,16 +1,44 @@
-export function pagination(data, itemsPerPage = 10) {
+export async function pagination(apiUrl, itemsPerPage = 9) {
     let currentPage = 1;
-
-    // Filter only active listings initially
-    let filteredData = data.filter(listing => {
-        const endsAt = listing.endsAt ? new Date(listing.endsAt) : null;
-        return endsAt && endsAt > new Date(); // Only include listings with time left
-    });
+    let filteredData = [];
 
     const listingsContainer = document.getElementById('listings-container');
     const paginationContainer = document.getElementById('pagination-container');
     const tagFilter = document.getElementById('tag-filter');
     const searchInputs = document.querySelectorAll('.search-input'); // Use class for multiple inputs
+
+    async function fetchAllListings(apiUrl, limit = 100) {
+        let allListings = [];
+        let page = 1;
+        let hasMore = true;
+
+        while (hasMore) {
+            try {
+                const response = await fetch(`${apiUrl}?_seller=true&_bids=true&limit=${limit}&page=${page}`);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch listings: ${response.status}`);
+                }
+                const data = await response.json();
+                allListings = allListings.concat(data.data || []);
+                hasMore = (data.data || []).length === limit; // Stop if fewer items are returned than the limit
+                page++;
+                if (allListings.length >= 1000) break; // Cap at 1000 items
+            } catch (error) {
+                console.error('Error fetching listings:', error);
+                hasMore = false; // Exit the loop on error
+            }
+        }
+
+        return allListings;
+    }
+
+    const data = await fetchAllListings(apiUrl);
+
+    // Filter only active listings initially
+    filteredData = data.filter(listing => {
+        const endsAt = listing.endsAt ? new Date(listing.endsAt) : null;
+        return endsAt && endsAt > new Date(); // Only include listings with time left
+    });
 
     function renderPage(page) {
         const startIndex = (page - 1) * itemsPerPage;
@@ -23,7 +51,7 @@ export function pagination(data, itemsPerPage = 10) {
             const listingCard = document.createElement('div');
             listingCard.classList.add('flex', 'flex-col', 'p-4', 'bg-white', 'w-[320px]', 'rounded', 'shadow-md', 'h-auto');
 
-            const mediaUrl = listing.media?.[0]?.url || 'default-image.jpg';
+            const mediaUrl = listing.media?.[0]?.url || '../../assets/placeholders/placeholder-pen-02.png';
             const highestBid = listing.bids?.length ? Math.max(...listing.bids.map(bid => bid.amount)) : '0';
             const endsAt = listing.endsAt;
 
@@ -50,16 +78,22 @@ export function pagination(data, itemsPerPage = 10) {
                 }
             }
 
+            // Truncate description
+            const truncateText = (text, maxLength) => {
+                if (!text) return '';
+                return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+            };
+
             listingCard.innerHTML = `
                 <img src="${mediaUrl}" alt="${listing.title}" class="mb-4 rounded h-[250px] object-cover">
-                <h3 class="text-blue-950 font-bold text-lg">${listing.title}</h3>
+                <h3 class="text-blue-950 font-bold text-lg break-words truncate">${listing.title}</h3>
                 <div>
                     <span class="text-blue-950 font-bold">Current Bid:</span>
                     <span>${highestBid} 🌕</span>
                 </div>
                 <div>
                     <span class="text-blue-950 font-bold">Description:</span>
-                    <span class="italic">${listing.description}</span>
+                    <span class="italic break-words">${truncateText(listing.description, 30)}</span>
                 </div>
                 <div>
                     <span class="text-blue-950 font-bold">Ends in:</span>
@@ -69,7 +103,7 @@ export function pagination(data, itemsPerPage = 10) {
                     <span class="text-blue-950 font-bold">Seller:</span>
                     <span>${listing.seller?.name || 'Unknown'}</span>
                 </div>
-                <a href="/listing.html?id=${listing.id}" class="mt-4 bg-blue-950 text-white py-2 px-4 rounded text-center">View Listing</a>
+                <a href="/listing/view/index.html?id=${listing.id}" class="mt-4 bg-blue-950 text-white py-2 px-4 rounded text-center">View Listing</a>
             `;
 
             listingsContainer.appendChild(listingCard);
@@ -78,25 +112,47 @@ export function pagination(data, itemsPerPage = 10) {
 
     function setupPaginationControls() {
         paginationContainer.innerHTML = '';
-
+    
         const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-        for (let i = 1; i <= totalPages; i++) {
+        const maxVisiblePages = 5; // Number of visible pages around the current page
+    
+        const createButton = (text, page, isActive = false) => {
             const button = document.createElement('button');
-            button.textContent = i;
+            button.textContent = text;
             button.classList.add('px-3', 'py-1', 'border', 'rounded', 'mx-1', 'hover:bg-gray-200');
-            if (i === currentPage) {
-                button.classList.add('bg-blue-500', 'text-white');
-            }
-
+            if (isActive) button.classList.add('bg-blue-500', 'text-white');
             button.addEventListener('click', () => {
-                currentPage = i;
+                currentPage = page;
                 renderPage(currentPage);
                 setupPaginationControls();
             });
-
-            paginationContainer.appendChild(button);
+            return button;
+        };
+    
+        // Add "First" and "Previous" buttons
+        if (currentPage > 1) {
+            paginationContainer.appendChild(createButton('1', 1));
+            paginationContainer.appendChild(createButton('Previous', currentPage - 1));
+        }
+    
+        // Determine start and end of visible pages
+        const startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+        const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+    
+        // Adjust startPage if we're at the end of the range
+        const adjustedStartPage = Math.max(1, endPage - maxVisiblePages + 1);
+    
+        for (let i = adjustedStartPage; i <= endPage; i++) {
+            paginationContainer.appendChild(createButton(i, i, i === currentPage));
+        }
+    
+        // Add "Next" and "Last" buttons
+        if (currentPage < totalPages) {
+            paginationContainer.appendChild(createButton('Next', currentPage + 1));
+            paginationContainer.appendChild(createButton('28', totalPages));
         }
     }
+    
 
     function applyFilters() {
         const query = Array.from(searchInputs).map(input => input.value.toLowerCase()).join(' ').trim();

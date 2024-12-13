@@ -84,24 +84,26 @@ export function myListings() {
 
             // Create the HTML for the listing card
             listingCard.innerHTML = `
-                <img src="${mediaUrl}" alt="${listing.title}" class="mb-4 rounded">
-                <h3 class="text-blue-950 font-bold text-lg">${listing.title}</h3>
-                <div>
-                    <span class="text-blue-950 font-bold">Current Bid:</span>
-                    <span>${lastBidAmount} 🌕</span>
-                </div>
-                <div>
-                    <span class="text-blue-950 font-bold">Description:</span>
-                    <span class="italic">${listing.description}</span>
-                </div>
-                <div>
-                    <span class="text-blue-950 font-bold">Category:</span>
-                    <span>${tags || 'N/A'}</span>
-                </div>
-                <div>
-                    <span class="text-blue-950 font-bold">Ends in:</span>
-                    <span>${timeLeft}</span>
-                </div>
+                <a href="/listing/view/index.html?id=${listing.id}">
+                    <img src="${mediaUrl}" alt="${listing.title}" class="mb-4 rounded">
+                    <h3 class="text-blue-950 font-bold text-lg">${listing.title}</h3>
+                    <div>
+                        <span class="text-blue-950 font-bold">Current Bid:</span>
+                        <span>${lastBidAmount} 🌕</span>
+                    </div>
+                    <div>
+                        <span class="text-blue-950 font-bold">Description:</span>
+                        <span class="italic">${listing.description}</span>
+                    </div>
+                    <div>
+                        <span class="text-blue-950 font-bold">Category:</span>
+                        <span>${tags || 'N/A'}</span>
+                    </div>
+                    <div>
+                        <span class="text-blue-950 font-bold">Ends in:</span>
+                        <span>${timeLeft}</span>
+                    </div>
+                </a>
                 <div class="mt-3">
                     <button class="bg-blue-950 hover:bg-blue-800 text-white rounded px-6 py-2">Edit</button>
                     <button class="bg-blue-950 hover:bg-blue-800 text-white rounded px-6 py-2 mt-2">Delete</button>

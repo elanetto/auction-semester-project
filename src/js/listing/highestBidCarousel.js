@@ -39,6 +39,12 @@ export function initializeHighestBidCarousel() {
         // Set carousel container to flex
         carousel.classList.add('flex', 'transition-transform', 'duration-500', 'ease-in-out');
 
+        // Truncate description
+        const truncateText = (text, maxLength) => {
+            if (!text) return '';
+            return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+        };
+
         listings.forEach(listing => {
             const highestBid = Math.max(...listing.bids.map(bid => bid.amount));
             const mediaUrl = listing.media && listing.media[0] && listing.media[0].url
@@ -50,13 +56,13 @@ export function initializeHighestBidCarousel() {
 
             carouselItem.innerHTML = `
                 <div class="absolute inset-0">
-                    <img src="${mediaUrl}" alt="${listing.title}" class="w-full h-full object-cover">
+                    <img src="${mediaUrl}" alt="${listing.title}" class="w-full h-full object-cover break-words truncate">
                 </div>
                 <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white p-4">
-                    <h3 class="text-3xl font-bold mb-4">${listing.title}</h3>
+                    <h3 class="text-3xl font-bold mb-4 break-words truncate">${truncateText(listing.title, 20)}</h3>
                     <p class="text-xl mb-2"><strong>Highest Bid:</strong> ${highestBid} 🌕</p>
                     <p class="text-xl mb-4"><strong>Ends in:</strong> ${calculateTimeLeft(listing.endsAt)}</p>
-                    <a href="/listing.html?id=${listing.id}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">View Listing</a>
+                    <a href="/listing/view/index.html?id=${listing.id}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">View Listing</a>
                 </div>
             `;
 
