@@ -1,5 +1,5 @@
 export async function createNewListing() {
-    // Check if the current page is the Create Listing page
+    
     if (!document.body.classList.contains("create-listing-page")) {
         return;
     }
@@ -7,44 +7,43 @@ export async function createNewListing() {
     const token = localStorage.getItem("token");
     const apiKey = localStorage.getItem("api_key");
 
-    // Fetch form and input elements
     const newListingForm = document.getElementById("new-listing-form");
     const newListingTitle = document.getElementById("new-listing-title");
     const newListingDescription = document.getElementById("new-listing-description");
     const newListingCategory = document.getElementById("new-listing-category");
-    const newListingImage = document.getElementById("new-listing-image");
     const newListingEndsAt = document.getElementById("new-listing-ends-at");
     const newListingButton = document.getElementById("new-listing-button");
 
-    // Validate that all required elements exist
-    if (
-        !newListingForm ||
-        !newListingTitle ||
-        !newListingDescription ||
-        !newListingCategory ||
-        !newListingImage ||
-        !newListingButton ||
-        !newListingEndsAt
-    ) {
-        console.error("Required input or button elements are missing.");
+    if (!newListingForm || !newListingTitle || !newListingDescription || !newListingCategory || !newListingEndsAt || !newListingButton) {
+        console.error("Required elements are missing.");
         return;
     }
 
-    // Add event listener to the button
     newListingButton.addEventListener("click", async (event) => {
-        console.log("New listing button clicked.");
         event.preventDefault();
 
-        // Get and validate input values
         const title = newListingTitle.value.trim();
         const description = newListingDescription.value.trim();
         const tags = newListingCategory.value.trim();
-        const image = newListingImage.value.trim();
         const endsAt = newListingEndsAt.value.trim();
 
-        if (!title || !description || !tags || !image || !endsAt) {
-            alert("Please fill in all fields correctly.");
-            console.error("One or more fields are empty or invalid.");
+        if (!title || !description || !tags || !endsAt) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+
+        const media = [];
+        for (let i = 1; i <= 3; i++) {
+            const imageUrl = document.getElementById(`new-listing-image-${i}`).value.trim();
+            const imageAlt = document.getElementById(`new-listing-image-alt-${i}`).value.trim();
+
+            if (imageUrl && imageAlt) {
+                media.push({ url: imageUrl, alt: imageAlt });
+            }
+        }
+
+        if (media.length === 0) {
+            alert("Please provide at least one image with alt text.");
             return;
         }
 
@@ -55,35 +54,39 @@ export async function createNewListing() {
                 "Authorization": `Bearer ${token}`,
             });
 
-            const raw = JSON.stringify({
+            const payload = JSON.stringify({
                 title,
                 description,
-                tags,
-                media: [{ url: image, alt: title }], 
+                tags: tags.split(",").map(tag => tag.trim()),
+                media,
                 endsAt,
             });
 
-            console.log("Request Payload:", raw);
+            console.log("Payload:", payload);
 
             const response = await fetch("https://v2.api.noroff.dev/auction/listings", {
                 method: "POST",
                 headers: myHeaders,
-                body: raw,
+                body: payload,
             });
 
             if (!response.ok) {
-                throw new Error(`New listing request failed: ${response.status} ${response.statusText}`);
+                throw new Error(`Request failed: ${response.status} ${response.statusText}`);
             }
 
             const responseData = await response.json();
-            console.log("New listing created successfully:", responseData);
-            alert("New listing created successfully!");
+            console.log("API Response:", responseData);
 
-            // Optional: Reset form or navigate
-            // newListingForm.reset();
-            // window.location.href = "account/myaccount/"; // Adjust path if necessary
+            const newListingId = responseData.id || responseData.data?.id;
+            if (newListingId) {
+                alert("New listing created successfully!");
+                window.location.href = `/listing/view/index.html?id=${newListingId}`;
+            } else {
+                console.error("Listing ID not found in the response.");
+                alert("Failed to retrieve the listing ID. Please check your response.");
+            }
         } catch (error) {
-            console.error("Error creating new listing:", error.message);
+            console.error("Error creating new listing:", error);
             alert("Failed to create new listing.");
         }
     });

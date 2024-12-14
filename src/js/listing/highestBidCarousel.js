@@ -1,4 +1,10 @@
 export function initializeHighestBidCarousel() {
+
+    // Check if the current page is the homepage
+    if (!document.body.classList.contains("homepage")) {
+        return;
+    }
+
     const carousel = document.getElementById('carousel');
     const prevButton = document.getElementById('prev-button');
     const nextButton = document.getElementById('next-button');

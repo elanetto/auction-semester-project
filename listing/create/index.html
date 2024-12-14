@@ -12,6 +12,7 @@
      <link rel="manifest" href="../../assets/favicon_io/site.webmanifest">
     <!-- CSS & JS -->
     <script type="module" src="../../src/js/main.js" defer></script>
+    <script type="module" src="../../src/js/auth.js" defer></script>
     <link rel="stylesheet" href="../../src/index.css">
     <title>Create New Listing</title>
 </head>
@@ -125,12 +126,51 @@
                 placeholder="Write a category/tag for your listing"
                 class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-full mb-3">
                 </input>
+
+                <div id="image-input-container">
+                    <!-- Image 1 -->
+                    <label for="new-listing-image-1" class="text-blue-950 font-bold">Image nr.1: URL</label>
+                    <input type="text" id="new-listing-image-1" name="image-url-1" placeholder="Paste image URL"
+                        class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-full mb-3">
+                    <label for="new-listing-image-alt-1" class="text-blue-950 font-bold">Image nr.1: Alt text</label>
+                    <input type="text" id="new-listing-image-alt-1" name="image-alt-text-1" placeholder="Explain what the image shows"
+                        class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-full mb-3">
                 
-                <!-- image -->
-                <label for="image" class="text-blue-950 font-bold">Image</label>
-                <input type="text" id="new-listing-image" name="image-url" required aria-label="Paste uploaded image url here" placeholder="paste image url"
-                class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-full mb-3">
+                    <!-- Image 2 -->
+                    <label for="new-listing-image-2" class="text-blue-950 font-bold">Image nr.2: URL</label>
+                    <input type="text" id="new-listing-image-2" name="image-url-2" placeholder="Paste image URL"
+                        class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-full mb-3">
+                    <label for="new-listing-image-alt-2" class="text-blue-950 font-bold">Image nr.2: Alt text</label>
+                    <input type="text" id="new-listing-image-alt-2" name="image-alt-text-2" placeholder="Explain what the image shows"
+                        class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-full mb-3">
                 
+                    <!-- Image 3 -->
+                    <label for="new-listing-image-3" class="text-blue-950 font-bold">Image nr.3: URL</label>
+                    <input type="text" id="new-listing-image-3" name="image-url-3" placeholder="Paste image URL"
+                        class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-full mb-3">
+                    <label for="new-listing-image-alt-3" class="text-blue-950 font-bold">Image nr.3: Alt text</label>
+                    <input type="text" id="new-listing-image-alt-3" name="image-alt-text-3" placeholder="Explain what the image shows"
+                        class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-full mb-3">
+                </div>
+                
+                
+                <!-- <div id="image-input-container">
+                    <label for="image-1" class="text-blue-950 font-bold">Image nr.1: URL</label>
+                    <input type="text" id="new-listing-image-1" name="image-url" required placeholder="Paste image URL"
+                        class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-full mb-3">
+                    <label for="image-alt-1" class="text-blue-950 font-bold">Image nr.1: Alt text</label>
+                    <input type="text" id="new-listing-image-alt-1" name="image-alt-text" required placeholder="Explain what the image shows"
+                        class="mt-1 p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-full mb-3">
+                </div> -->
+                
+                <!-- Button to add more images -->
+                <div class="flex items-center justify-center">
+                    <button type="button" id="add-more-images-button" class="bg-gray-400 hover:bg-gray-500 text-white rounded px-6 py-2 mt-3">
+                        Add more images
+                    </button>
+                </div>
+                
+
                 <!-- end date -->
                 <label for="end-date" class="text-blue-950 font-bold">Ends At</label>
                 <input type="date" id="new-listing-ends-at" name="end-date" required aria-label="Select the end date for your listing" placeholder="Category"
@@ -143,8 +183,91 @@
                     >Create Listing</button>
                 </div>
             </form>
-
         </div>
+
+
+        <div>
+            <h2 class="text-white font-bold text-2xl text-center p-10 bg-blue-950 mt-10">Review your new Listing:</h2>
+        </div>
+
+        <!-- Preview Listing Edits -->
+        <div class="review-new-listing lg:flex my-5">
+
+            <!-- Title, description and image -->
+            <div class="lg:w-4/6 w-full">
+                <!-- Title & Description -->
+                <div>
+                    <div class="review-new-listing-title w-full text-3xl font-bold text-blue-950 py-4 break-words truncate">
+                        Listing title</div>
+                    <div class="review-new-listing-description w-full text-blue-950 break-words truncate">
+                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. A minima deserunt ab iste reiciendis. Ratione repellat veniam voluptatibus adipisci beatae nemo, esse, sunt provident id facere sit, ut eveniet harum. 
+                    </div>
+                </div>
+            
+                <!-- Image -->
+                <div class="review-new-listing-carousel pt-6">
+                    <div class="flex justify-center items-center">
+                        <img src="../../assets/placeholders/placeholder-pen.png" alt="Placeholder image" class="review-new-listing-image w-full h-[500px] object-cover">
+                    </div>
+                    <div class="review-new-listing-image-alt-text text-center italic text-blue-950 text-xs">Image alt text goes here</div>
+                </div>
+
+            </div>
+
+
+            <!-- Info -->
+            <div class="w-full lg:flex lg:flex-col lg:w-2/6 lg:mx-10 place-items-end">
+                <div class="lg:grow"></div>
+                <div class="w-full">
+                    <div class="review-new-listing-info w-full flex justify-between items-center lg:flex lg:flex-col lg:items-start">
+                        <!-- Time & category -->
+                        <div class="lg:flex lg:flex-col">
+                            <div class="pt-4 pb-2"><span class="font-bold text-blue-950">Time left: </span><span class="review-new-listing-endat text-blue-950">23 days</span></div>
+                            <div class="py-4"><span class="font-bold text-blue-950">Category: </span><span class="review-new-listing-tags text-blue-950">Art</span></div>
+                        </div>
+                        <!-- Seller -->
+                        <div class="lg:items-start">
+                            <a href="#">
+                                <div class="flex p-4 gap-4 items-center" class="lg:flex lg:flex-col">
+                                    <div>
+                                        <img src="../../assets/placeholders/avatar-placeholder.png" alt="Avatar of seller" 
+                                        class="my-avatar w-[100px] h-[100px] object-cover mx-auto rounded-full overflow-hidden">
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-blue-950">Seller:</div>
+                                        <div class="username-from-local-storage text-blue-950">Username</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full">
+                    <!-- Highest Bid (currently) -->
+                    <div class="bg-orange-600 p-5 w-full flex justify-between items-center lg:flex lg:flex-col">
+                        <span class="text-white font-bold">Highest Bid: </span><span class="font-bold text-white text-2xl lg:pt-2"> 0 🌕</span>
+                    </div>
+                    <a href="#">
+                        <div class="who-placed-highest-bid bg-blue-950 text-white italic text-center p-3 text-xs">
+                            Highest bid is placed by <span class="font-bold ">Nobody</span></div>
+                    </a>
+                    <!-- Place Bid -->
+                    <div class="place-bid mt-8">
+                        <div>
+                            <input type="text" id="place-bid" placeholder="You cannot bid on your own listing" required
+                            class="p-2 block rounded-md border-transparent bg-gray-100 focus:border-gray-500 focus:bg-white focus:ring-0 w-full">
+                        </div>
+                        <button type="submit"
+                        class="bg-orange-600 hover:bg-orange-500 text-white rounded w-full p-3 my-3 font-bold text-center"
+                        >Place bid</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
     </main>
      <!-- footer -->
      <footer class="bg-orange-500 p-4 text-white flex justify-center items-center bottom-0 flex-col">

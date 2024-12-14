@@ -1,5 +1,5 @@
 export function allListings() {
-    // Check if the current page is the My Account page
+    
     if (!document.body.classList.contains("load-all-listings")) {
         return;
     }

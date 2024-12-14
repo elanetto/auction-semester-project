@@ -1,11 +1,13 @@
 export async function fetchProfileData() {
-    const token = localStorage.getItem('token'); // Get the token from local storage
-    const username = localStorage.getItem('username'); // Get the username from local storage
-    const apiKey = localStorage.getItem('api_key'); // Get the API key from local storage
-
-    console.log('username: ', username);
-    console.log('token: ', token);
-    console.log('apiKey: ', apiKey);
+    
+    // Check if the current page is the My Account page
+    if (!document.body.classList.contains("my-account-page")) {
+        return;
+    }
+    
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('username');
+    const apiKey = localStorage.getItem('api_key');
 
     if (!token) {
         console.error('No token found. User may not be logged in.');
@@ -43,6 +45,7 @@ export async function fetchProfileData() {
         localStorage.setItem('winsCount', result.data._count.wins);
 
         return profileData; // Return the profile data
+        
     } catch (error) {
         console.error('Error fetching profile data:', error);
         return null;

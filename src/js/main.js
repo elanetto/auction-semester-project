@@ -1,6 +1,7 @@
 import { logoutButtonFunction } from './auth/logout.js';
 import { createNewListing } from '../../src/js/listing/create-new-listing.js';
-import { toggleDropdown } from '../js/utils/dropdown.js';
+// import { toggleDropdown } from '../js/utils/dropdown.js';
+import { initializeDropdown } from '../js/utils/dropdown.js';
 import { viewProfile } from '../js/profile/viewProfile.js';
 import { renderProfileData } from '../js/profile/renderProfileData.js';
 import { allListings } from '../js/listing/displayListing.js';
@@ -10,6 +11,14 @@ import { initializeSearchBar } from '../js/listing/search.js';
 import { fetchSingleListing } from '../js/listing/single-listing.js';
 import { copyLink } from '../js/listing/copy-link.js';
 import { placeBid } from '../js/listing/placeBid.js';
+import { fetchUserWins } from '../js/profile/fetchUserWins.js';
+import { createListingPreview } from '../js/listing/newListingPreview.js';
+import { editListing } from '../js/listing/edit/editListing.js';
+import { previewEditListing } from '../js/listing/edit/previewEditListing.js';
+import { editAndPreviewListing } from '../js/listing/edit/editAndPreviewListing.js';
+import { fetchAndEditListing } from '../js/listing/edit/fetchAndEditListing.js';
+import { fetchAndPopulateEditListing } from '../js/listing/edit/fetchAndPopulateEdit.js';
+import { saveEditedListing, initializeSaveButton } from '../js/listing/edit/saveEditedListing.js';
 
 document.addEventListener('DOMContentLoaded', async function () { 
     logoutButtonFunction();
@@ -18,7 +27,21 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     fetchSingleListing();
     copyLink();
-    placeBid()
+    placeBid();
+
+    initializeDropdown();
+
+    fetchUserWins();
+
+    createListingPreview(); 
+
+    // editListing()
+    // previewEditListing()
+    // editAndPreviewListing()
+    fetchAndEditListing();
+    fetchAndPopulateEditListing();
+    saveEditedListing();
+    initializeSaveButton();
 
     try {
         // Fetch listings
@@ -46,12 +69,12 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.error('Error fetching listings:', error);
     }
 
-    const dropdownButton = document.getElementById('dropdownButton');
-    if (dropdownButton) {
-        dropdownButton.addEventListener('click', function () {
-            toggleDropdown('dropdownMenuBottom');
-        });
-    }
+    // const dropdownButton = document.getElementById('dropdownButton');
+    // if (dropdownButton) {
+    //     dropdownButton.addEventListener('click', function () {
+    //         toggleDropdown('dropdownMenuBottom');
+    //     });
+    // }
 
     const profileData = await viewProfile(); 
     if (profileData) {
@@ -72,4 +95,13 @@ document.addEventListener('DOMContentLoaded', async function () {
             visibleElement.style.display = 'block';
         }
     }
+
+    // Attach the saveEditedListing function to the "Save Changes" button
+    const saveButton = document.getElementById("edit-listing-button");
+    if (saveButton) {
+        saveButton.addEventListener("click", saveEditedListing);
+    }
+
+
+
 });
