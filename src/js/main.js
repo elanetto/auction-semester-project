@@ -19,6 +19,7 @@ import { editAndPreviewListing } from '../js/listing/edit/editAndPreviewListing.
 import { fetchAndEditListing } from '../js/listing/edit/fetchAndEditListing.js';
 import { fetchAndPopulateEditListing } from '../js/listing/edit/fetchAndPopulateEdit.js';
 import { saveEditedListing, initializeSaveButton } from '../js/listing/edit/saveEditedListing.js';
+import { deleteListing } from '../js/listing/delete/deleteListing.js';
 
 document.addEventListener('DOMContentLoaded', async function () { 
     logoutButtonFunction();
@@ -42,6 +43,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     fetchAndPopulateEditListing();
     saveEditedListing();
     initializeSaveButton();
+
 
     try {
         // Fetch listings
@@ -69,13 +71,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.error('Error fetching listings:', error);
     }
 
-    // const dropdownButton = document.getElementById('dropdownButton');
-    // if (dropdownButton) {
-    //     dropdownButton.addEventListener('click', function () {
-    //         toggleDropdown('dropdownMenuBottom');
-    //     });
-    // }
-
     const profileData = await viewProfile(); 
     if (profileData) {
         renderProfileData(profileData); 
@@ -101,6 +96,36 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (saveButton) {
         saveButton.addEventListener("click", saveEditedListing);
     }
+
+
+
+    
+    // DELETE function
+
+    console.log("DOMContentLoaded event fired.");
+
+    // Find all delete buttons on the My Account page
+    const deleteButtons = document.querySelectorAll(".delete-listing-button");
+
+    if (deleteButtons.length === 0) {
+        console.warn("No delete buttons found on the page.");
+    }
+
+    deleteButtons.forEach((button) => {
+        const listingId = button.getAttribute("data-listing-id");
+        const listingCard = button.closest(".listing-card"); // Update the class if necessary
+
+        if (!listingId || !listingCard) {
+            console.error("Missing listing ID or listing card for delete button.");
+            return;
+        }
+
+        console.log(`Attaching delete listener to listing ID: ${listingId}`);
+
+        button.addEventListener("click", () => {
+            deleteListing(listingId, listingCard);
+        });
+    });
 
 
 
