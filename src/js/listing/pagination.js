@@ -1,4 +1,10 @@
 export async function pagination(apiUrl, itemsPerPage = 9) {
+
+    // Check if the current page is the homepage
+    if (!document.body.classList.contains("homepage")) {
+        return;
+    }
+
     let currentPage = 1;
     let filteredData = [];
 

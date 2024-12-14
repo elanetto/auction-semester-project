@@ -71,6 +71,7 @@ export function login() {
                 localStorage.setItem('avatar', data.data.avatar.url);
                 localStorage.setItem('banner', data.data.banner.url);
                 localStorage.setItem('token', data.data.accessToken);
+                localStorage.setItem('bio', data.data.bio);
                 
                 window.location.href = '../../account/myaccount/';
 

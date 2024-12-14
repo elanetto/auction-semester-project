@@ -1,4 +1,10 @@
 export function placeBid() {
+
+    // Check if the current page is the view single listing page
+    if (!document.body.classList.contains("view-single-listing-page")) {
+        return;
+    }
+
     const bidButton = document.getElementById('place-bid-button');
     const bidInput = document.getElementById('place-bid');
 

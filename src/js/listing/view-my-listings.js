@@ -12,7 +12,7 @@ export function myListings() {
     const cleanedUsername = username.replace(/['"]+/g, '');
 
     // Fetch user's listings
-    fetch(`https://v2.api.noroff.dev/auction/profiles/${cleanedUsername}/listings`, {
+    fetch(`https://v2.api.noroff.dev/auction/profiles/${cleanedUsername}/listings?_bids=true`, {
         method: 'GET',
         headers: {
             'X-Noroff-API-Key': apiKey,
@@ -85,7 +85,7 @@ export function myListings() {
             // Create the HTML for the listing card
             listingCard.innerHTML = `
                 <a href="/listing/view/index.html?id=${listing.id}">
-                    <img src="${mediaUrl}" alt="${listing.title}" class="mb-4 rounded">
+                    <img src="${mediaUrl}" alt="${listing.title}" class="mb-4 rounded h-[220px]">
                     <h3 class="text-blue-950 font-bold text-lg">${listing.title}</h3>
                     <div>
                         <span class="text-blue-950 font-bold">Current Bid:</span>
@@ -105,7 +105,7 @@ export function myListings() {
                     </div>
                 </a>
                 <div class="mt-3">
-                    <button class="bg-blue-950 hover:bg-blue-800 text-white rounded px-6 py-2">Edit</button>
+                    <a href="/listing/edit/index.html?id=${listing.id}" class="bg-blue-950 hover:bg-blue-800 text-white rounded px-6 py-2">Edit</a>
                     <button class="bg-blue-950 hover:bg-blue-800 text-white rounded px-6 py-2 mt-2">Delete</button>
                 </div>
             `;

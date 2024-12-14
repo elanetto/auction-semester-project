@@ -1,4 +1,10 @@
 export async function viewProfile() {
+
+    // Check if the current page is the homepage
+    if (!document.body.classList.contains("view-profile-page")) {
+        return;
+    }
+
     const username = getUsernameFromURL(); // Get the username from the URL
     const token = localStorage.getItem('token'); // Get the token from local storage
     const apiKey = localStorage.getItem('api_key'); // Get the API key from local storage

@@ -1,4 +1,10 @@
 export function copyLink() {
+
+    // Check if the current page is the view single listing page
+    if (!document.body.classList.contains("view-single-listing-page")) {
+        return;
+    }
+
     const copyLinkElement = document.querySelector('.copy-link-to-listing');
 
     if (!copyLinkElement) {
