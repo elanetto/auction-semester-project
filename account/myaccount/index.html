@@ -35,23 +35,23 @@
             
             <!-- NAV -->
             <div class="flex justify-center items-center pl-4">
-                <a href="/myaccount/" class="visible-if-logged-in">
+                <a href="../myaccount/" class="visible-if-logged-in">
                     <div class="w-[100px]">
                         <img src="../../assets/placeholders/avatar-placeholder.png" alt="avatar" class="my-avatar w-[50px] h-[50px] object-cover rounded-full overflow-hidden">
                     </div>
                  </a>
                  <nav class="flex justify-end">
                     <div class="relative inline-block text-left">
-                        <button id="dropdownButton" class="text-3xl text-white focus:outline-none">
+                        <button class="dropdownButton text-3xl text-white focus:outline-none">
                             <i class="fa-solid fa-bars"></i>
                         </button>
-                        <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white animate-fadeIn z-20" id="dropdownMenuBottom">
-                            <a href="/myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">My account</a>
+                        <div class="dropdownMenuBottom hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white animate-fadeIn z-20">
+                            <a href="../myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">My account</a>
                             <a href="../../listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Create new listing</a>
                             <a href="../login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Login</a>
                             <a href="../register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Register</a>
                         </div>
-                    </div>
+                    </div>                    
                 </nav>
             </div>
         </div>
@@ -69,23 +69,24 @@
                 
                 <!-- NAV -->
                 <div class="flex justify-center items-center pl-4">
-                    <a href="/myaccount/" class="visible-if-logged-in">
+                    <a href="../myaccount/" class="visible-if-logged-in">
                         <div class="w-[100px]">
                             <img src="../../assets/placeholders/avatar-placeholder.png" alt="avatar" class="my-avatar w-[50px] h-[50px] object-cover rounded-full overflow-hidden">
                         </div>
                      </a>
                     <nav class="flex justify-end mt-4">
                         <div class="relative inline-block text-left">
-                            <button id="dropdownButton" class="h-9 text-3xl text-white focus:outline-none">
+                            <button class="dropdownButton text-3xl text-white focus:outline-none">
                                 <i class="fa-solid fa-bars"></i>
                             </button>
-                            <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white animate-fadeIn z-20" id="dropdownMenuBottom">
-                                <a href="/myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">My account</a>
+                            <div class="dropdownMenuBottom hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white animate-fadeIn z-20">
+                                <a href="../myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">My account</a>
                                 <a href="../../listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Create new listing</a>
                                 <a href="../login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Login</a>
                                 <a href="../register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Register</a>
                             </div>
                         </div>
+                        
                     </nav>
                 </div>    
             </div>
@@ -176,13 +177,13 @@
 
 
         <!-- My Listings area -->
-        <div id="my-listings" class="bg-gray-100 mx-auto text-center p-8">
+        <div id="my-listings" class="bg-gray-100 mx-auto justify-center items-center text-center p-8">
             <h2 class="text-2xl text-blue-950 font-bold p-4">My Listings</h2>
 
             <!-- Listings load here (apply grid layout) -->
             <div>
                 <!-- real listings will be inserted here -->
-                <div id="my-listings-container" class="flex flex-wrap gap-4 p-4 lg:px-20"></div>
+                <div id="my-listings-container" class="flex flex-wrap gap-4 p-4 lg:px-20 justify-center items-center mx-auto"></div>
             </div>
         </div>
 
@@ -190,7 +191,7 @@
             <div>
                 <h2 class="text-2xl text-blue-950 font-bold p-4">Listings I've won</h2>
             </div>
-            <div id="user-wins-container" class="flex flex-wrap gap-4 p-4 lg:px-20"></div>
+            <div id="user-wins-container" class="flex flex-wrap gap-4 p-4 lg:px-20 justify-center items-center mx-auto"></div>
         </div>
 
 

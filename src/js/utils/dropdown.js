@@ -1,20 +1,29 @@
 export function initializeDropdown() {
-    const dropdownButton = document.getElementById('dropdownButton');
-    const dropdownMenu = document.getElementById('dropdownMenuBottom');
+    const dropdownButtons = document.querySelectorAll('.dropdownButton'); // Use querySelectorAll for multiple elements
+    const dropdownMenus = document.querySelectorAll('.dropdownMenuBottom'); // Use querySelectorAll for multiple menus
 
-    if (!dropdownButton || !dropdownMenu) {
-        console.error('Dropdown button or menu not found.');
+    if (!dropdownButtons.length || !dropdownMenus.length) {
+        console.error('Dropdown buttons or menus not found.');
         return;
     }
 
-    dropdownButton.addEventListener('click', () => {
-        dropdownMenu.classList.toggle('hidden');
+    // Attach event listeners to each dropdown button
+    dropdownButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+            const dropdownMenu = dropdownMenus[index]; // Match the menu to the button by index
+            if (dropdownMenu) {
+                dropdownMenu.classList.toggle('hidden');
+            }
+        });
     });
 
-    // Optional: Close dropdown when clicking outside
+    // Close dropdowns when clicking outside
     document.addEventListener('click', (event) => {
-        if (!dropdownMenu.contains(event.target) && !dropdownButton.contains(event.target)) {
-            dropdownMenu.classList.add('hidden');
-        }
+        dropdownMenus.forEach((menu, index) => {
+            const button = dropdownButtons[index];
+            if (!menu.contains(event.target) && !button.contains(event.target)) {
+                menu.classList.add('hidden');
+            }
+        });
     });
 }

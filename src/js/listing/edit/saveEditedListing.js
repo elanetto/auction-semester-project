@@ -1,5 +1,10 @@
 export async function saveEditedListing(event) {
-    event.preventDefault(); // Prevent default form submission
+
+     if (!document.body.classList.contains("edit-listing-page")) {
+        return;
+    }
+
+    event.preventDefault();
 
     const token = localStorage.getItem("token");
     if (!token) {
@@ -15,7 +20,6 @@ export async function saveEditedListing(event) {
     }
 
     const apiEndpoint = `https://v2.api.noroff.dev/auction/listings/${listingId}`;
-    console.log("Saving changes to:", apiEndpoint);
 
     // Collect data from input fields
     const updatedTitle = document.getElementById("edit-listing-title").value;
@@ -58,7 +62,6 @@ export async function saveEditedListing(event) {
             throw new Error(`Failed to save listing. Status: ${response.status}`);
         }
 
-        console.log("Listing successfully updated:", updatedListing);
         alert("Listing successfully updated!");
         window.location.href = `../../listing/view/index.html?id=${listingId}`; // Redirect to the view listing page
     } catch (error) {
@@ -73,6 +76,6 @@ export function initializeSaveButton() {
     if (saveButton) {
         saveButton.addEventListener("click", saveEditedListing);
     } else {
-        console.error("Save button not found.");
+
     }
 }

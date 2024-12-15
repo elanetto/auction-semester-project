@@ -24,8 +24,8 @@
         <div class="hidden w-full sm:flex sm:justify-between items-center">
             <!-- LOGO -->
             <div class="flex justify-start">
-                <a href="index.html" aria-label="The logo links to the homepage">
-                    <img src="assets/logo/liggende-logo-auction-house.svg" alt="Logo for Auction House" class="max-w-60 h-8">
+                <a href="../index.html" aria-label="The logo links to the homepage">
+                    <img src="/assets/logo/liggende-logo-auction-house.svg" alt="Logo for Auction House" class="max-w-60 h-8">
                 </a>
             </div>
 
@@ -38,21 +38,21 @@
             <div class="flex justify-center items-center pl-4">
                 <a href="/account/myaccount/" class="visible-if-logged-in">
                     <div class="w-[100px]">
-                        <img src="assets/placeholders/avatar-placeholder.png" alt="avatar" class="my-avatar w-[50px] h-[50px] object-cover rounded-full overflow-hidden">
+                        <img src="/assets/placeholders/avatar-placeholder.png" alt="avatar" class="my-avatar w-[50px] h-[50px] object-cover rounded-full overflow-hidden">
                     </div>
                  </a>
                  <nav class="flex justify-end">
                     <div class="relative inline-block text-left">
-                        <button id="dropdownButton" class="text-3xl text-white focus:outline-none">
+                        <button class="dropdownButton text-3xl text-white focus:outline-none">
                             <i class="fa-solid fa-bars"></i>
                         </button>
-                        <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white animate-fadeIn z-20" id="dropdownMenuBottom">
+                        <div class="dropdownMenuBottom hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white animate-fadeIn z-20">
                             <a href="/account/myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">My account</a>
                             <a href="/listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Create new listing</a>
                             <a href="/account/login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Login</a>
                             <a href="/account/register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Register</a>
                         </div>
-                    </div>
+                    </div>                    
                 </nav>
             </div>
         </div>
@@ -63,8 +63,8 @@
             <div class="flex justify-between items-center w-full max-w-80">
                 <!-- LOGO -->
                 <div class="flex justify-start">
-                    <a href="../../index.html" aria-label="The logo links back to the homepage">
-                        <img src="../../assets/logo/white_logo_auction_house.svg" alt="Logo for Auction House" class="max-w-20 h-8">
+                    <a href="/index.html" aria-label="The logo links back to the homepage">
+                        <img src="/assets/logo/white_logo_auction_house.svg" alt="Logo for Auction House" class="max-w-20 h-8">
                     </a>
                 </div>
                 
@@ -72,21 +72,22 @@
                 <div class="flex justify-center items-center pl-4">
                     <a href="/account/myaccount/" class="visible-if-logged-in">
                         <div class="w-[100px]">
-                            <img src="assets/placeholders/avatar-placeholder.png" alt="avatar" class="my-avatar w-[50px] h-[50px] object-cover rounded-full overflow-hidden">
+                            <img src="/assets/placeholders/avatar-placeholder.png" alt="avatar" class="my-avatar w-[50px] h-[50px] object-cover rounded-full overflow-hidden">
                         </div>
                      </a>
                     <nav class="flex justify-end mt-4">
                         <div class="relative inline-block text-left">
-                            <button id="dropdownButton" class="h-9 text-3xl text-white focus:outline-none">
+                            <button class="dropdownButton text-3xl text-white focus:outline-none">
                                 <i class="fa-solid fa-bars"></i>
                             </button>
-                            <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white animate-fadeIn z-20" id="dropdownMenuBottom">
+                            <div class="dropdownMenuBottom hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white animate-fadeIn z-20">
                                 <a href="/account/myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">My account</a>
                                 <a href="/listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Create new listing</a>
                                 <a href="/account/login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Login</a>
                                 <a href="/account/register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Register</a>
                             </div>
                         </div>
+                        
                     </nav>
                 </div>    
             </div>
@@ -116,8 +117,8 @@
                 <div id="carousel" class="flex transition-transform duration-500 ease-in-out">
                     <!-- Carousel items will be added dynamically here -->
                 </div>
-                <button id="prev-button" class="carousel-button absolute top-1/2 left-2 transform -translate-y-1/2 z-10 text-white bg-black bg-opacity-50 p-2 rounded-full">&#10094;</button>
-                <button id="next-button" class="carousel-button absolute top-1/2 right-2 transform -translate-y-1/2 z-10 text-white bg-black bg-opacity-50 p-2 rounded-full">&#10095;</button>
+                <button id="prev-button" class="carousel-button absolute top-1/2 left-2 transform -translate-y-1/2 z-10 text-white bg-orange-500 hover:bg-orange-600 p-2 rounded">&#10094;</button>
+                <button id="next-button" class="carousel-button absolute top-1/2 right-2 transform -translate-y-1/2 z-10 text-white bg-orange-500 hover:bg-orange-600 p-2 rounded">&#10095;</button>
                 <div id="dots-container" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
                     <!-- Dots will be added dynamically here -->
                 </div>
@@ -134,8 +135,8 @@
                 </select>
                 <input id="search-input" type="text" placeholder="Search listings" class="search-input rounded-lg text-sm px-5 py-2.5 border" aria-label="search for a listing">
             </div>
-            <div id="listings-container" class="flex flex-wrap gap-4 p-4"></div>
-            <div id="pagination-container" class="flex justify-center mt-4"></div>
+            <div id="listings-container" class="flex flex-wrap gap-4 p-4 items-center justify-center mx-auto"></div>
+            <div id="pagination-container" class="flex justify-center items-center mx-auto"></div>
         </div>
     </main>
 

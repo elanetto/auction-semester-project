@@ -1,14 +1,15 @@
 export function fetchUserWins() {
+
+    // Check if the current page is the My Account page
+    if (!document.body.classList.contains("my-account-page")) {
+        return;
+    }
+
     const token = localStorage.getItem('token');
     const apiKey = localStorage.getItem('api_key');
     const username = localStorage.getItem('username');
     const cleanedToken = token.replace(/['"]+/g, '');
     const cleanedUsername = username.replace(/['"]+/g, '');
-
-    // Check if the current page is the My Account page
-    if (!document.body.classList.contains("my-account-page")) {
-    return;
-    }
 
     // Fetch the user's won listings
     fetch(`https://v2.api.noroff.dev/auction/profiles/${cleanedUsername}?_wins=true`, {

@@ -64,7 +64,7 @@ export async function initializeSearchBar(apiUrl) {
         }
 
         const listingsContainer = document.createElement('div');
-        listingsContainer.classList.add('flex', 'flex-wrap', 'gap-4');
+        listingsContainer.classList.add('flex', 'flex-wrap', 'gap-4', 'justify-center', 'p-4', 'items-center', 'mx-auto', 'bg-gray-100');
 
         filteredResults.forEach(listing => {
             const listingCard = document.createElement('div');
