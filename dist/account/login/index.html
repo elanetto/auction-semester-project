@@ -12,44 +12,50 @@
     <script src="https://kit.fontawesome.com/cfcc846d5b.js" crossorigin="anonymous"></script>
     <!-- CSS & JS -->
     <title>Login</title>
-  <script type="module" crossorigin src="/assets/main-B5hVbBqe.js"></script>
-  <script type="module" crossorigin src="/assets/auth-DfNUhXv5.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-B_-SnRho.css">
+  <script type="module" crossorigin src="/assets/main-CDejt0IZ.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-B70gmiqc.css">
   <link rel="stylesheet" crossorigin href="/assets/show-password-t35GqPpV.css">
 </head>
 <body class="m-0 h-screen flex flex-col">
-    <!-- header -->
-    <header class="bg-orange-500 px-6 py-3 sm:px-8 sm:py-4 md:px-12 md:py-6 flex top-0">
-        <!-- Large Screen Header (visible on medium and larger screens) -->
+     <!-- header -->
+     <header class="bg-orange-500 px-6 py-3 sm:px-8 sm:py-4 md:px-12 md:py-6 flex top-0">
+        <!-- Large Screen Header -->
         <div class="hidden w-full sm:flex sm:justify-between items-center">
             <!-- LOGO -->
             <div class="flex justify-start">
-                <a href="../../index.html" aria-label="The logo links back to the homepage">
+                <a href="../../index.html" aria-label="The logo links to the homepage">
                     <img src="/assets/liggende-logo-auction-house--SJuZxw8.svg" alt="Logo for Auction House" class="max-w-60 h-8">
                 </a>
             </div>
 
             <!-- SEARCH -->
-            <div class="mt-4 w-full flex justify-center">
-                <input type="text" placeholder="Search" class="search-input rounded-lg text-sm px-5 py-2.5 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl" aria-label="search">
+            <div class="mt-4 w-full flex justify-center px-4">
+                <input id="search-input" type="text" placeholder="Search listings" class="search-input rounded-lg text-sm px-5 py-2.5 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl" aria-label="search">
             </div>
             
             <!-- NAV -->
-            <nav class="flex justify-end">
-                <div class="relative inline-block text-left">
-                    <button id="dropdownButton" class="text-3xl text-white focus:outline-none">
-                        <i class="fa-solid fa-bars"></i>
-                    </button>
-                    <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white animate-fadeIn" id="dropdownMenuBottom">
-                        <a href="../myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">My account</a>
-                        <a href="../../listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Create new listing</a>
-                        <a href="../login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Login</a>
-                        <a href="../register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Register</a>
+            <div class="flex justify-center items-center pl-4">
+                <a href="../myaccount/" class="visible-if-logged-in">
+                    <div class="w-[100px]">
+                        <img src="/assets/avatar-placeholder-5K-Giz0m.png" alt="avatar" class="my-avatar w-[50px] h-[50px] object-cover rounded-full overflow-hidden">
                     </div>
-                </div>
-            </nav>
+                 </a>
+                 <nav class="flex justify-end">
+                    <div class="relative inline-block text-left">
+                        <button class="dropdownButton text-3xl text-white focus:outline-none">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                        <div class="dropdownMenuBottom hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white animate-fadeIn z-20">
+                            <a href="../myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">My account</a>
+                            <a href="../../listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Create new listing</a>
+                            <a href="../login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Login</a>
+                            <a href="../register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Register</a>
+                        </div>
+                    </div>                    
+                </nav>
+            </div>
         </div>
-    
+
         <!-- Small Screen Header (visible on small screens) -->
         <div class="sm:hidden w-full flex flex-col items-center">
             <!-- Logo + nav on the same level -->
@@ -62,19 +68,27 @@
                 </div>
                 
                 <!-- NAV -->
-                <nav class="flex justify-end mt-4">
-                    <div class="relative inline-block text-left">
-                        <button id="dropdownButton" class="h-9 text-3xl text-white focus:outline-none">
-                            <i class="fa-solid fa-bars"></i>
-                        </button>
-                        <div class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white animate-fadeIn" id="dropdownMenuBottom">
-                            <a href="../myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">My account</a>
-                            <a href="../../listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Create new listing</a>
-                            <a href="../login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Login</a>
-                            <a href="../register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Register</a>
+                <div class="flex justify-center items-center pl-4">
+                    <a href="../myaccount/" class="visible-if-logged-in">
+                        <div class="w-[100px]">
+                            <img src="/assets/avatar-placeholder-5K-Giz0m.png" alt="avatar" class="my-avatar w-[50px] h-[50px] object-cover rounded-full overflow-hidden">
                         </div>
-                    </div>
-                </nav>
+                     </a>
+                    <nav class="flex justify-end mt-4">
+                        <div class="relative inline-block text-left">
+                            <button class="dropdownButton text-3xl text-white focus:outline-none">
+                                <i class="fa-solid fa-bars"></i>
+                            </button>
+                            <div class="dropdownMenuBottom hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white animate-fadeIn z-20">
+                                <a href="../myaccount/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">My account</a>
+                                <a href="../../listing/create/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Create new listing</a>
+                                <a href="../login/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Login</a>
+                                <a href="../register/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-600 hover:text-white">Register</a>
+                            </div>
+                        </div>
+                        
+                    </nav>
+                </div>    
             </div>
     
             <!-- SEARCH (Positioned under logo and nav on small screens) -->
@@ -82,12 +96,14 @@
                 <input type="text" placeholder="Search" class="search-input rounded-lg text-sm px-5 py-2.5 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl" aria-label="search">
             </div>
         </div>
+
     </header>
 
     <!-- currency -->
-    <!-- currency -->
-    <div class="bg-blue-950 text-white py-2 px-4 text-center top-0">
-        Hello, <span class="username-from-local-storage"></span>! Your currency is <span class="my-credits"></span> 🌕
+    <div class="bg-blue-950 text-white text-center py-2 px-4 top-0 h-12 flex justify-center">
+        <span class="text-blue-950">!</span><span class="visible-if-logged-in">
+            Hello, <span class="username-from-local-storage"></span>! Your currency is <span class="my-credits"></span> 🌕
+        </span>
     </div>
 
     <main class="grow w-full p-4 md:px-20 md:py-8 container mx-auto">

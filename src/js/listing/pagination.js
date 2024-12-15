@@ -177,7 +177,7 @@ export async function pagination(apiUrl, itemsPerPage = 9) {
             return matchesTag && matchesSearch;
         });
 
-        currentPage = 1; // Reset to the first page
+        currentPage = 1;
         renderPage(currentPage);
         setupPaginationControls();
     }
