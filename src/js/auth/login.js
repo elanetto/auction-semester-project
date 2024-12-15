@@ -66,30 +66,44 @@ export function login() {
             const data = await response.json();
 
             if (response.ok) {
+                // Save the login data
                 localStorage.setItem('username', data.data.name);
                 localStorage.setItem('email', data.data.email);
                 localStorage.setItem('avatar', data.data.avatar.url);
                 localStorage.setItem('banner', data.data.banner.url);
                 localStorage.setItem('token', data.data.accessToken);
                 localStorage.setItem('bio', data.data.bio);
-            
-                // Fetch and update profile data before redirecting
-                const profileData = await fetchProfileData();
-                if (!profileData) {
+
+                // Fetch profile data with retries
+                let retries = 3;
+                let profileLoaded = false;
+
+                while (retries > 0 && !profileLoaded) {
+                    const profileData = await fetchProfileData();
+                    if (profileData) {
+                        profileLoaded = true;
+                        break;
+                    }
+                    console.log(`Retrying fetchProfileData... (${3 - retries + 1})`);
+                    await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before retrying
+                    retries--;
+                }
+
+                if (!profileLoaded) {
                     errorMessage.textContent = 'Failed to load profile data. Please refresh the page.';
                     errorMessage.style.display = 'block';
                     return;
                 }
-            
+
                 // Redirect user to My Account page
                 window.location.href = '../../account/myaccount/';
-            
             } else {
                 const errorMessageText = data.errors?.[0]?.message || 'An error occurred during login.';
                 errorMessage.textContent = errorMessageText;
                 errorMessage.style.display = 'block';
             }
         } catch (error) {
+            console.error('Error during login:', error);
             errorMessage.textContent = 'An error occurred with your login request.';
             errorMessage.style.display = 'block';
         }
