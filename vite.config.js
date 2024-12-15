@@ -8,7 +8,6 @@ export default defineConfig({
       external: ['@material-tailwind/html'],
       input: {
         main: resolve(__dirname, 'index.html'),
-        test: resolve(__dirname, 'test.html'),
         login: resolve(__dirname, 'account/login/index.html'),
         register: resolve(__dirname, 'account/register/index.html'),
         myaccount: resolve(__dirname, 'account/myaccount/index.html'),
