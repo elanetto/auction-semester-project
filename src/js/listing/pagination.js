@@ -109,7 +109,7 @@ export async function pagination(apiUrl, itemsPerPage = 9) {
                     <span class="text-blue-950 font-bold">Seller:</span>
                     <span>${listing.seller?.name || 'Unknown'}</span>
                 </div>
-                <a href="/listing/view/index.html?id=${listing.id}" class="mt-4 bg-blue-950 text-white py-2 px-4 rounded text-center">View Listing</a>
+                <a href="/listing/view/index.html?id=${listing.id}" class="mt-4 bg-blue-950 hover:bg-orange-600 text-white py-2 px-4 rounded text-center">View Listing</a>
             `;
 
             listingsContainer.appendChild(listingCard);
@@ -120,13 +120,13 @@ export async function pagination(apiUrl, itemsPerPage = 9) {
         paginationContainer.innerHTML = '';
     
         const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-        const maxVisiblePages = 5; // Number of visible pages around the current page
+        const maxVisiblePages = 5;
     
         const createButton = (text, page, isActive = false) => {
             const button = document.createElement('button');
             button.textContent = text;
-            button.classList.add('px-3', 'py-1', 'border', 'rounded', 'mx-1', 'hover:bg-gray-200');
-            if (isActive) button.classList.add('bg-blue-500', 'text-white');
+            button.classList.add('px-3', 'py-1', 'border', 'rounded', 'mx-1', 'bg-orange-500', 'hover:bg-orange-700', 'text-white');
+            if (isActive) button.classList.add('bg-orange-600', 'text-white');
             button.addEventListener('click', () => {
                 currentPage = page;
                 renderPage(currentPage);
@@ -135,27 +135,23 @@ export async function pagination(apiUrl, itemsPerPage = 9) {
             return button;
         };
     
-        // Add "First" and "Previous" buttons
         if (currentPage > 1) {
             paginationContainer.appendChild(createButton('1', 1));
             paginationContainer.appendChild(createButton('Previous', currentPage - 1));
         }
     
-        // Determine start and end of visible pages
         const startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
         const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
     
-        // Adjust startPage if we're at the end of the range
         const adjustedStartPage = Math.max(1, endPage - maxVisiblePages + 1);
     
         for (let i = adjustedStartPage; i <= endPage; i++) {
             paginationContainer.appendChild(createButton(i, i, i === currentPage));
         }
     
-        // Add "Next" and "Last" buttons
         if (currentPage < totalPages) {
             paginationContainer.appendChild(createButton('Next', currentPage + 1));
-            paginationContainer.appendChild(createButton('28', totalPages));
+            paginationContainer.appendChild(createButton(totalPages, totalPages));
         }
     }
     
@@ -199,7 +195,7 @@ export async function pagination(apiUrl, itemsPerPage = 9) {
             }
         });
 
-        tagFilter.innerHTML = '<option value="">All Tags</option>'; // Default option
+        tagFilter.innerHTML = '<option value="">All Tags</option>';
         uniqueTags.forEach(tag => {
             const option = document.createElement('option');
             option.value = tag;

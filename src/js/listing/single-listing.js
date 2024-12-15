@@ -1,7 +1,12 @@
+import { requireAuthentication } from '../utils/requireAuthentication.js';
+
 export async function fetchSingleListing() {
     if (!document.body.classList.contains("view-single-listing-page")) {
         return;
     }
+
+    // Require user authentication
+    if (!requireAuthentication()) return;
 
     const params = new URLSearchParams(window.location.search);
     const listingId = params.get("id");

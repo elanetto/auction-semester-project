@@ -1,6 +1,10 @@
 import { deleteListing } from '../listing/delete/deleteListing.js';
+import { requireAuthentication } from '../utils/requireAuthentication.js';
 
 export function myListings() {
+    // Require user authentication
+    if (!requireAuthentication()) return;
+
     // Check if the current page is the My Account page
     if (!document.body.classList.contains("my-account-page")) {
         return;
@@ -51,8 +55,14 @@ export function myListings() {
             // Clear the container before appending new content
             listingsContainer.innerHTML = "";
 
-            // Loop through the listings and display them
-            listings.forEach((listing) => {
+            // Filter out expired listings
+            const activeListings = listings.filter((listing) => {
+                const endsAt = listing.endsAt ? new Date(listing.endsAt) : null;
+                return endsAt && endsAt > new Date(); // Include only listings with time left
+            });
+
+            // Loop through the active listings and display them
+            activeListings.forEach((listing) => {
                 const listingCard = document.createElement("div");
                 listingCard.classList.add("flex", "flex-col", "p-4", "bg-white", "w-[350px]", "rounded", "shadow-md");
 
@@ -67,7 +77,7 @@ export function myListings() {
                 // Handle tags
                 const tags = listing.tags?.length ? listing.tags.join(", ") : "N/A";
 
-                // Calculate remaining time
+                // Format the "Ends At" time
                 const endsAt = listing.endsAt;
                 let timeLeft = "N/A";
 
@@ -79,7 +89,7 @@ export function myListings() {
                     if (differenceInMs > 0) {
                         const daysLeft = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
                         const hoursLeft = Math.floor((differenceInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                        const minutesLeft = Math.floor((differenceInMs % (1000 * 60 * 60)) / (1000 * 60));
+                        const minutesLeft = Math.floor((differenceInMs % (1000 * 60)) / (1000 * 60));
 
                         if (daysLeft > 0) {
                             timeLeft = `${daysLeft} day${daysLeft > 1 ? "s" : ""}`;
@@ -115,9 +125,9 @@ export function myListings() {
                             <span>${timeLeft}</span>
                         </div>
                     </a>
-                    <div class="mt-3">
+                    <div class="mt-3 h-[50px]">
                         <a href="/listing/edit/index.html?id=${listing.id}" class="bg-blue-950 hover:bg-blue-800 text-white rounded px-6 py-2">Edit</a>
-                        <button data-listing-id="${listing.id}" class="delete-listing-button bg-blue-950 hover:bg-blue-800 text-white rounded px-6 py-2 mt-2">Delete</button>
+                        <button data-listing-id="${listing.id}" class="delete-listing-button bg-blue-950 hover:bg-blue-800 text-white rounded px-4 py-1.5 mt-2">Delete</button>
                     </div>
                 `;
 

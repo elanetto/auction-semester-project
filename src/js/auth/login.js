@@ -1,6 +1,7 @@
 import { showPassword } from '../utils/showPassword.js';
 import { API_AUTH_LOGIN } from '../constants.js';
 import { getLoginFormElements } from '../auth/formElements.js';
+import { fetchProfileData } from '../auth/myProfile.js';
 
 export function login() {
     const { email, password, showPasswordBtn, errorMessage, loginBtn } = getLoginFormElements();
@@ -30,7 +31,7 @@ export function login() {
     showPasswordBtn.removeEventListener("click", showPassword);
     showPasswordBtn.addEventListener("click", showPassword);
 
-    loginBtn.addEventListener('click', async function(event) {
+    loginBtn.addEventListener('click', async function (event) {
         event.preventDefault();
 
         const emailTrim = email.value.trim();
@@ -65,16 +66,24 @@ export function login() {
             const data = await response.json();
 
             if (response.ok) {
-
                 localStorage.setItem('username', data.data.name);
                 localStorage.setItem('email', data.data.email);
                 localStorage.setItem('avatar', data.data.avatar.url);
                 localStorage.setItem('banner', data.data.banner.url);
                 localStorage.setItem('token', data.data.accessToken);
                 localStorage.setItem('bio', data.data.bio);
-                
+            
+                // Fetch and update profile data before redirecting
+                const profileData = await fetchProfileData();
+                if (!profileData) {
+                    errorMessage.textContent = 'Failed to load profile data. Please refresh the page.';
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+            
+                // Redirect user to My Account page
                 window.location.href = '../../account/myaccount/';
-
+            
             } else {
                 const errorMessageText = data.errors?.[0]?.message || 'An error occurred during login.';
                 errorMessage.textContent = errorMessageText;

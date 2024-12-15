@@ -1,10 +1,8 @@
 import { logoutButtonFunction } from './auth/logout.js';
 import { createNewListing } from '../../src/js/listing/create-new-listing.js';
-// import { toggleDropdown } from '../js/utils/dropdown.js';
 import { initializeDropdown } from '../js/utils/dropdown.js';
 import { viewProfile } from '../js/profile/viewProfile.js';
 import { renderProfileData } from '../js/profile/renderProfileData.js';
-import { allListings } from '../js/listing/displayListing.js';
 import { initializeHighestBidCarousel } from '../js/listing/highestBidCarousel.js';
 import { pagination } from '../js/listing/pagination.js';
 import { initializeSearchBar } from '../js/listing/search.js';
@@ -13,15 +11,16 @@ import { copyLink } from '../js/listing/copy-link.js';
 import { placeBid } from '../js/listing/placeBid.js';
 import { fetchUserWins } from '../js/profile/fetchUserWins.js';
 import { createListingPreview } from '../js/listing/newListingPreview.js';
-import { editListing } from '../js/listing/edit/editListing.js';
-import { previewEditListing } from '../js/listing/edit/previewEditListing.js';
-import { editAndPreviewListing } from '../js/listing/edit/editAndPreviewListing.js';
 import { fetchAndEditListing } from '../js/listing/edit/fetchAndEditListing.js';
 import { fetchAndPopulateEditListing } from '../js/listing/edit/fetchAndPopulateEdit.js';
 import { saveEditedListing, initializeSaveButton } from '../js/listing/edit/saveEditedListing.js';
 import { deleteListing } from '../js/listing/delete/deleteListing.js';
+import { refresh } from '../js/utils/refresh.js';
 
 document.addEventListener('DOMContentLoaded', async function () { 
+
+    refresh();
+
     logoutButtonFunction();
     createNewListing();
     initializeHighestBidCarousel();
@@ -98,17 +97,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
 
-
-    
-    // DELETE function
-
-    console.log("DOMContentLoaded event fired.");
-
     // Find all delete buttons on the My Account page
     const deleteButtons = document.querySelectorAll(".delete-listing-button");
 
     if (deleteButtons.length === 0) {
-        console.warn("No delete buttons found on the page.");
     }
 
     deleteButtons.forEach((button) => {

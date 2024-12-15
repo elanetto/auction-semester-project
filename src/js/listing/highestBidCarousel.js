@@ -68,7 +68,7 @@ export function initializeHighestBidCarousel() {
                     <h3 class="text-3xl font-bold mb-4 break-words truncate">${truncateText(listing.title, 20)}</h3>
                     <p class="text-xl mb-2"><strong>Highest Bid:</strong> ${highestBid} 🌕</p>
                     <p class="text-xl mb-4"><strong>Ends in:</strong> ${calculateTimeLeft(listing.endsAt)}</p>
-                    <a href="/listing/view/index.html?id=${listing.id}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">View Listing</a>
+                    <a href="/listing/view/index.html?id=${listing.id}" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">View Listing</a>
                 </div>
             `;
 

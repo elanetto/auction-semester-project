@@ -1,16 +1,10 @@
 export async function fetchProfileData() {
-    
-    // Check if the current page is the My Account page
-    if (!document.body.classList.contains("my-account-page")) {
-        return;
-    }
-    
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
     const apiKey = localStorage.getItem('api_key');
 
-    if (!token) {
-        console.error('No token found. User may not be logged in.');
+    if (!token || !username || !apiKey) {
+        console.error("Missing authentication data.");
         return null;
     }
 
@@ -18,36 +12,32 @@ export async function fetchProfileData() {
     myHeaders.append("Authorization", `Bearer ${token}`);
     myHeaders.append("X-Noroff-API-Key", apiKey);
 
-    const requestOptions = {
-        method: "GET",
-        headers: myHeaders,
-        redirect: "follow"
-    };
-
     try {
-        const response = await fetch(`https://v2.api.noroff.dev/auction/profiles/${username}`, requestOptions);
+        const response = await fetch(`https://v2.api.noroff.dev/auction/profiles/${username}`, {
+            method: "GET",
+            headers: myHeaders,
+        });
+
         if (!response.ok) {
-            throw new Error(`Failed to fetch profile data: ${response.status} ${response.statusText}`);
+            throw new Error(`Failed to fetch profile data: ${response.status}`);
         }
+
         const result = await response.json();
 
-        // Extract the desired data
-        const profileData = {
-            name: result.data.name,
-            email: result.data.email,
-            credits: result.data.credits,
-            listingsCount: result.data._count.listings,
-            winsCount: result.data._count.wins
-        };
-
+        // Update localStorage with fetched data
         localStorage.setItem('credits', result.data.credits);
         localStorage.setItem('listingsCount', result.data._count.listings);
         localStorage.setItem('winsCount', result.data._count.wins);
 
-        return profileData; // Return the profile data
-        
+        // Update the DOM with fetched data
+        const creditsElement = document.querySelector('.my-credits');
+        if (creditsElement) {
+            creditsElement.textContent = result.data.credits;
+        }
+
+        return result.data; // Return full profile data for further use
     } catch (error) {
-        console.error('Error fetching profile data:', error);
+        console.error("Error fetching profile data:", error);
         return null;
     }
 }

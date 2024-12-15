@@ -1,26 +1,27 @@
+import { requireAuthentication } from '../../utils/requireAuthentication.js';
+
 export async function fetchAndPopulateEditListing() {
-    console.log("Checking if the page is the edit listing page...");
 
     if (!document.body.classList.contains("edit-listing-page")) {
-        console.warn("This is not the edit listing page. Exiting function.");
         return;
     }
 
+    // Require user authentication
+    if (!requireAuthentication()) return;
+
     const token = localStorage.getItem("token");
     if (!token) {
-        console.error("No token found. User may not be logged in.");
         return;
     }
 
     const params = new URLSearchParams(window.location.search);
     const listingId = params.get("id");
+
     if (!listingId) {
-        console.error("No listing ID found in the URL.");
         return;
     }
 
     const apiEndpoint = `https://v2.api.noroff.dev/auction/listings/${listingId}?_seller=true&_bids=true`;
-    console.log("Fetching listing from:", apiEndpoint);
 
     try {
         const response = await fetch(apiEndpoint, {
@@ -36,7 +37,6 @@ export async function fetchAndPopulateEditListing() {
         }
 
         const { data: listing } = await response.json(); // Ensure we access `data` directly
-        console.log("Fetched listing data:", listing);
 
         // Populate input fields
         populateInputFields(listing);
@@ -45,7 +45,6 @@ export async function fetchAndPopulateEditListing() {
         const highestBid = listing.bids?.length > 0
             ? Math.max(...listing.bids.map((bid) => bid.amount))
             : "0";
-        console.log("Highest bid:", highestBid);
 
         const highestBidElement = document.querySelector(".highest-bid-on-edit-listing");
         if (highestBidElement) {
@@ -63,7 +62,6 @@ export async function fetchAndPopulateEditListing() {
 }
 
 function populateInputFields(data) {
-    console.log("Populating input fields with:", data);
 
     document.getElementById("edit-listing-title").value = data.title || "";
     document.getElementById("edit-listing-description").value = data.description || "";
@@ -78,7 +76,6 @@ function populateInputFields(data) {
 }
 
 function updateEditListingPreview(media = []) {
-    console.log("Updating edit listing preview...");
 
     const title = document.getElementById("edit-listing-title").value || "No title available";
     const description = document.getElementById("edit-listing-description").value || "No description available";
@@ -150,11 +147,10 @@ function updateEditListingPreview(media = []) {
             <div class="view-edit-listing-image-alt-text text-center italic text-blue-950 text-xs">No image alt text available</div>
         `;
     }
-    console.log("Preview updated with:", { title, description, category });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOMContentLoaded event fired.");
+    
     fetchAndPopulateEditListing();
 
     ["edit-listing-title", "edit-listing-description", "edit-listing-category", "edit-listing-image-1", "edit-listing-image-alt-1"].forEach((id) => {
