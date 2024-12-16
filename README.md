@@ -56,8 +56,8 @@ To create a new user, you need to use an email that ends in *@stud.noroff.no*. P
 - *listing/create/ (create listing)*
 - *listing/edit/ (edit listing)*
 
-### SRC
-- #js / all javascript code#
+### src
+- *js / --> all javascript code*
 
 ---------
 
