@@ -113,6 +113,14 @@ npm run build
 
 ---------
 
+## Planning
+
+This project was planned using GitHub Projects.
+- [Kanban](https://github.com/users/elanetto/projects/10)
+- [Gantt](https://github.com/users/elanetto/projects/10/views/4)
+
+---------
+
 ## ✉️ Contact    ✉️
 You can reach me at my email: post@elanetto.no
 
