@@ -8,7 +8,6 @@ export function createListingPreview() {
     const descriptionInput = document.getElementById("new-listing-description");
     const categoryInput = document.getElementById("new-listing-category");
 
-    // Hardcoded image inputs
     const imageInputs = [
         document.getElementById("new-listing-image-1"),
         document.getElementById("new-listing-image-2"),
@@ -72,7 +71,6 @@ export function createListingPreview() {
         }
     });
 
-    // Attach input listeners to update the preview dynamically
     titleInput.addEventListener("input", updatePreview);
     descriptionInput.addEventListener("input", updatePreview);
     categoryInput.addEventListener("input", updatePreview);

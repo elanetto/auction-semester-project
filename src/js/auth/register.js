@@ -3,16 +3,14 @@ import { API_AUTH_REGISTER } from '../constants.js';
 import { getRegisterFormElements } from '../auth/formElements.js'; // Corrected import
 
 export function register() {
-    // Get form elements after the DOM is loaded
+    
     const { username, email, password, showPasswordBtn, errorMessage, successMessage, registerBtn } = getRegisterFormElements(); // Use the correct function
 
-    // Ensure required elements for show-password functionality are found
     if (!showPasswordBtn || !password) {
         console.error('Required elements for show-password functionality are missing.');
         return;
     }
 
-    // Show Password functionality from imported showPassword.js
     showPasswordBtn.addEventListener("click", showPassword);
 
     registerBtn.addEventListener('click', async function (event) {
@@ -85,7 +83,6 @@ export function register() {
             const data = await response.json();
             console.log(data);
 
-            // Handle errors returned by the API
             if (data.errors) {
                 console.log(data.errors);
                 errorMessage.style.display = 'block';
@@ -94,14 +91,12 @@ export function register() {
                 return;
             }
 
-            // Redirect to login page if registration is successful
             if (response.ok) {
                 successMessage.style.display = 'block';
                 console.log('User registered successfully.');
 
                 alert('User registered successfully. You will be redirected to the login page.');
 
-                // Redirect to login page after 3 seconds
                 setTimeout(() => {
                     window.location.href = '../login/';
                 }, 2000);

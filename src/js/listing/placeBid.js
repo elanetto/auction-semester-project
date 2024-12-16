@@ -1,6 +1,5 @@
 export function placeBid() {
 
-    // Check if the current page is the view single listing page
     if (!document.body.classList.contains("view-single-listing-page")) {
         return;
     }
@@ -13,7 +12,6 @@ export function placeBid() {
         return;
     }
 
-    // Add click event listener to the button
     bidButton.addEventListener('click', async (event) => {
         event.preventDefault();
 
@@ -23,7 +21,6 @@ export function placeBid() {
             return;
         }
 
-        // Extract the listing ID from the URL
         const urlParams = new URLSearchParams(window.location.search);
         const listingId = urlParams.get('id');
         if (!listingId) {
@@ -65,9 +62,8 @@ export function placeBid() {
             const result = await response.json();
             console.log('Bid placed successfully:', result);
 
-            // Show success message and refresh the bid history
             alert('Bid placed successfully!');
-            location.reload(); // Reload the page to fetch updated bid history
+            location.reload();
         } catch (error) {
             console.error('Error placing bid:', error);
             alert('An error occurred while placing your bid. Please try again later.');

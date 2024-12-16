@@ -4,7 +4,6 @@ import { fetchToken } from "../../js/auth/fetchToken.js";
 export function changeProfilePicture() {
     const tokenDetails = fetchToken();
 
-    // Check if tokenDetails is valid before destructuring
     if (!tokenDetails) {
         console.warn("Token details are not available. Skipping profile picture setup.");
         return;
@@ -12,11 +11,9 @@ export function changeProfilePicture() {
 
     const { cleanedToken, cleanedUsername } = tokenDetails;
 
-    // Get input and button elements
     const profilePictureInput = document.getElementById('avatar-input');
     const profilePictureButton = document.getElementById('change-avatar-button');
 
-    // Check if the required DOM elements are present
     if (!profilePictureInput || !profilePictureButton) {
         console.warn("Profile picture input or button not found. Skipping setup.");
         return;
@@ -68,10 +65,9 @@ export function changeProfilePicture() {
 
             const result = await response.json();
 
-            // Save the new avatar URL to localStorage
             localStorage.setItem('avatar', newAvatarUrl);
             alert('Your profile picture has been updated!');
-            location.reload(); // Reload the page
+            location.reload();
         } catch (error) {
             console.error('An error occurred while updating the profile picture:', error);
             alert('An error occurred while updating your profile picture.');
@@ -79,7 +75,6 @@ export function changeProfilePicture() {
     });
 }
 
-// Helper function to validate URL
 function isValidUrl(url) {
     try {
         new URL(url);

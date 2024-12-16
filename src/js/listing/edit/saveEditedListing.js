@@ -21,13 +21,12 @@ export async function saveEditedListing(event) {
 
     const apiEndpoint = `https://v2.api.noroff.dev/auction/listings/${listingId}`;
 
-    // Collect data from input fields
     const updatedTitle = document.getElementById("edit-listing-title").value;
     const updatedDescription = document.getElementById("edit-listing-description").value;
     const updatedTags = document.getElementById("edit-listing-category").value
         .split(",")
         .map((tag) => tag.trim())
-        .filter((tag) => tag); // Ensure no empty tags
+        .filter((tag) => tag); 
 
     const updatedMedia = [];
     for (let i = 1; i <= 3; i++) {
@@ -63,14 +62,13 @@ export async function saveEditedListing(event) {
         }
 
         alert("Listing successfully updated!");
-        window.location.href = `../../listing/view/index.html?id=${listingId}`; // Redirect to the view listing page
+        window.location.href = `../../listing/view/index.html?id=${listingId}`;
     } catch (error) {
         console.error("Error saving listing:", error);
         alert("Failed to save the listing. Please try again.");
     }
 }
 
-// Initialization function
 export function initializeSaveButton() {
     const saveButton = document.getElementById("edit-listing-button");
     if (saveButton) {

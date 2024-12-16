@@ -1,14 +1,12 @@
 export function fetchToken() {
 
-    // Retrieve the raw token and username from localStorage
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
 
-    // Validate and clean the token
     if (!token) {
         return null;
     }
-    const cleanedToken = token.replace(/['"]+/g, ''); // Remove any quotes
+    const cleanedToken = token.replace(/['"]+/g, '');
 
     if (!username) {
         return null;

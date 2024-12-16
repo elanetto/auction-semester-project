@@ -1,6 +1,5 @@
 export function initializeHighestBidCarousel() {
 
-    // Check if the current page is the homepage
     if (!document.body.classList.contains("homepage")) {
         return;
     }
@@ -42,10 +41,8 @@ export function initializeHighestBidCarousel() {
             return;
         }
 
-        // Set carousel container to flex
         carousel.classList.add('flex', 'transition-transform', 'duration-500', 'ease-in-out');
 
-        // Truncate description
         const truncateText = (text, maxLength) => {
             if (!text) return '';
             return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
@@ -75,7 +72,6 @@ export function initializeHighestBidCarousel() {
             carousel.appendChild(carouselItem);
         });
 
-        // Add dots for navigation
         listings.forEach((_, index) => {
             const dot = document.createElement('div');
             dot.classList.add('dot', 'w-3', 'h-3', 'bg-gray-400', 'rounded-full', 'cursor-pointer', 'mx-1');

@@ -1,22 +1,21 @@
 export function showPassword(event) {
-    const showPasswordBtn = event.currentTarget; // Get the button that was clicked
-    const passwordInput = showPasswordBtn.previousElementSibling; // Get the password input
+    const showPasswordBtn = event.currentTarget;
+    const passwordInput = showPasswordBtn.previousElementSibling;
 
-    console.log('Show Password Button Clicked:', showPasswordBtn);
-    console.log('Password Input Element:', passwordInput);
+    console.log("Show Password Button Clicked:", showPasswordBtn);
+    console.log("Password Input Element:", passwordInput);
 
-    // Toggle the input type between 'password' and 'text'
-    if (passwordInput) { // Ensure the passwordInput exists
+    if (passwordInput) {
         if (passwordInput.type === "password") {
-            passwordInput.type = "text"; // Show password
-            showPasswordBtn.querySelector('.fa-eye-slash').classList.remove('hide'); // Show eye-slash icon
-            showPasswordBtn.querySelector('.fa-eye').classList.add('hide'); // Hide eye icon
+            passwordInput.type = "text";
+            showPasswordBtn.querySelector(".fa-eye-slash").classList.add("hide");
+            showPasswordBtn.querySelector(".fa-eye").classList.remove("hide");
         } else {
-            passwordInput.type = "password"; // Hide password
-            showPasswordBtn.querySelector('.fa-eye-slash').classList.add('hide'); // Hide eye-slash icon
-            showPasswordBtn.querySelector('.fa-eye').classList.remove('hide'); // Show eye icon
+            passwordInput.type = "password";
+            showPasswordBtn.querySelector(".fa-eye-slash").classList.remove("hide");
+            showPasswordBtn.querySelector(".fa-eye").classList.add("hide");
         }
     } else {
-        console.error('Password input not found.');
+        console.error("Password input not found.");
     }
 }

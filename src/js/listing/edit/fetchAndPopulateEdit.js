@@ -1,8 +1,6 @@
 export async function fetchAndPopulateEditListing() {
-    console.log("Checking if the page is the edit listing page...");
 
     if (!document.body.classList.contains("edit-listing-page")) {
-        console.warn("This is not the edit listing page. Exiting function.");
         return;
     }
 
@@ -42,13 +40,10 @@ export async function fetchAndPopulateEditListing() {
             throw new Error("Invalid listing data received from the API.");
         }
 
-        // Populate input fields
         populateInputFields(listing.data);
 
-        // Update the preview
         updateEditListingPreview(listing.data.media);
 
-        // Update the highest bid
         const highestBid = listing.data.bids?.length 
             ? Math.max(...listing.data.bids.map((bid) => bid.amount)) 
             : "0";
@@ -114,7 +109,6 @@ function updateEditListingPreview(media = []) {
                 altTextElement.textContent = media[currentIndex]?.alt || "No description available";
             }
 
-            // Hide buttons if there's only one image
             const leftButton = document.getElementById("carousel-left-button");
             const rightButton = document.getElementById("carousel-right-button");
             if (media.length === 1) {
@@ -125,7 +119,6 @@ function updateEditListingPreview(media = []) {
                 rightButton.style.display = "inline-block";
             }
 
-            // Disable buttons if at the boundaries
             leftButton.disabled = currentIndex <= 0;
             rightButton.disabled = currentIndex >= media.length - 1;
         };
@@ -157,7 +150,6 @@ function updateEditListingPreview(media = []) {
 
         updateCarousel();
     } else {
-        // Default placeholder if no images
         carouselContainer.innerHTML = `
             <img src="../../assets/placeholders/placeholder-pen.png" alt="No image available" class="view-edit-listing-image w-full h-[500px] object-cover">
             <div class="view-edit-listing-image-alt-text text-center italic text-blue-950 text-xs">No image alt text available</div>
@@ -168,7 +160,6 @@ function updateEditListingPreview(media = []) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-    console.log("DOMContentLoaded event fired.");
 
     await fetchAndPopulateEditListing();
 

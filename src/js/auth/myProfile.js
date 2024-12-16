@@ -24,18 +24,16 @@ export async function fetchProfileData() {
 
         const result = await response.json();
 
-        // Update localStorage with fetched data
         localStorage.setItem('credits', result.data.credits);
         localStorage.setItem('listingsCount', result.data._count.listings);
         localStorage.setItem('winsCount', result.data._count.wins);
 
-        // Update the DOM with fetched data
         const creditsElement = document.querySelector('.my-credits');
         if (creditsElement) {
             creditsElement.textContent = result.data.credits;
         }
 
-        return result.data; // Return full profile data for further use
+        return result.data;
     } catch (error) {
         console.error("Error fetching profile data:", error);
         return null;

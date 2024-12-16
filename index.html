@@ -124,20 +124,34 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Listings Section -->
+
+        <!-- Listings -->
+
         <div class="bg-gray-100 mx-auto text-center p-8">
             <h2 class="text-2xl font-bold mb-4">Listings</h2>
-            <div class="flex flex-col sm:flex-row gap-5 justify-center items-center mb-4">
+
+            <!-- Filter & search in pagination -->
+            <div class="flex flex-col lg:flex-row gap-5 justify-center items-center mb-4">
                 <select id="tag-filter" class="rounded border p-2">
                     <option value="">All Tags</option>
-                    <!-- Tag options will be populated dynamically -->
                 </select>
                 <input id="search-input" type="text" placeholder="Search listings" class="search-input rounded-lg text-sm px-5 py-2.5 border" aria-label="search for a listing">
+                <select id="sort-filter" class="rounded border p-2">
+                    <option value="">Filter Listings</option>
+                    <option value="time-running-out">Time running out</option>
+                    <option value="newest-listings">Newest listings</option>
+                    <option value="lowest-bids">Lowest bids</option>
+                    <option value="highest-bids">Highest bids</option>
+                </select>
             </div>
+
+            
             <div id="listings-container" class="flex flex-wrap gap-4 p-4 items-center justify-center mx-auto"></div>
             <div id="pagination-container" class="flex justify-center items-center mx-auto"></div>
         </div>
+        
+        
+        
     </main>
 
     <!-- footer -->

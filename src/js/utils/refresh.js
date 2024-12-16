@@ -1,16 +1,31 @@
 export function refresh() {
-    const maxRefreshAttempts = 1;
+
+    if (!document.body.classList.contains("my-account-page")) {
+        return;
+    }
+
+    const maxRefreshAttempts = 3;
     const refreshCountKey = "pageRefreshCount";
+    const freshTokenKey = "fresh";
+    const refreshDelay = 1000;
+
+    if (localStorage.getItem(freshTokenKey)) {
+        return;
+    }
 
     let refreshCount = parseInt(localStorage.getItem(refreshCountKey)) || 0;
 
     if (refreshCount < maxRefreshAttempts) {
-        
-        localStorage.setItem(refreshCountKey, refreshCount + 1);
+        refreshCount++;
+        localStorage.setItem(refreshCountKey, refreshCount);
 
-        location.reload();
+        console.log(`Waiting ${refreshDelay / 1000} seconds before refreshing... (${refreshCount}/${maxRefreshAttempts})`);
+        setTimeout(() => {
+            location.reload();
+        }, refreshDelay);
     } else {
+        console.log('Maximum refresh attempts reached. Setting "fresh" in localStorage.');
+        localStorage.setItem(freshTokenKey, "true");
         localStorage.removeItem(refreshCountKey);
     }
 }
-

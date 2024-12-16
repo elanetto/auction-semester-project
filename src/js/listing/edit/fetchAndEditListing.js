@@ -4,7 +4,6 @@ export async function fetchAndEditListing() {
     const token = localStorage.getItem("token");
     const apiKey = localStorage.getItem("api_key");
 
-    // Get the listing ID from the URL
     const params = new URLSearchParams(window.location.search);
     const listingId = params.get("id");
 
@@ -15,7 +14,6 @@ export async function fetchAndEditListing() {
 
     const apiUrl = `https://v2.api.noroff.dev/auction/listings/${listingId}?_seller=true&_bids=true`;
 
-    // Select input and preview elements
     const titleInput = document.getElementById("edit-listing-title");
     const descriptionInput = document.getElementById("edit-listing-description");
     const categoryInput = document.getElementById("edit-listing-category");
@@ -36,7 +34,6 @@ export async function fetchAndEditListing() {
     const previewImage = document.querySelector(".view-edit-listing-image");
     const previewAltText = document.querySelector(".view-edit-listing-image-alt-text");
 
-    // Function to update the preview dynamically
     const updatePreview = () => {
         previewTitle.textContent = titleInput.value || "Listing title";
         previewDescription.textContent = descriptionInput.value || "Lorem ipsum description goes here...";
@@ -49,7 +46,6 @@ export async function fetchAndEditListing() {
         previewAltText.textContent = firstImageAlt;
     };
 
-    // Fetch the existing listing details
     try {
         const response = await fetch(apiUrl, {
             method: "GET",
@@ -65,12 +61,10 @@ export async function fetchAndEditListing() {
 
         const data = await response.json();
 
-        // Populate input fields with fetched data
         titleInput.value = data.title || "";
         descriptionInput.value = data.description || "";
         categoryInput.value = data.tags?.join(", ") || "";
 
-        // Populate image fields
         const media = data.media || [];
         media.forEach((item, index) => {
             if (imageInputs[index]) {
@@ -79,13 +73,11 @@ export async function fetchAndEditListing() {
             }
         });
 
-        // Update the preview
         updatePreview();
     } catch (error) {
         console.error("Error fetching listing details:", error);
     }
 
-    // Listen for changes in inputs to update the preview dynamically
     titleInput.addEventListener("input", updatePreview);
     descriptionInput.addEventListener("input", updatePreview);
     categoryInput.addEventListener("input", updatePreview);
