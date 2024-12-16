@@ -105,6 +105,8 @@ npm run build
 
 6. To deploy this project, I would reccomend to use [Netlify](https://www.netlify.com/), as it is a good tool to use for packaged vite projects.
 
+----------
+
 ## 👍  Usage    👍
 - View Listings: The homepage displays listings using pagination and a carousel gallery.
 - Search for listings: The header has a search bar to search for listings.
