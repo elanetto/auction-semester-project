@@ -39,9 +39,9 @@ The project was written and made on a MacBook, using [Visual Studio Code](https:
 
 ## Site map    🗺️
 
-This site is created for two different user experiences: A guest reader, and an account user.
-The guest reader should be able to search for, find, and read blogposts. As well as copying the link to a blogpost to be able to share it with others.
-The account user should be able to register, login, and then create, edit or delete blogposts.
+All users, logged in or not, can search for listings and see the listing cards.
+To be able to view a single listing, the user needs to be logged in. Only logged in users can bid on listings.
+To create a new user, you need to use an email that ends in *@stud.noroff.no*. Please note that this email does not need to be a real or valid email adress.
 
 ### Main site
 - *index.html*
