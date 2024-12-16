@@ -34,6 +34,9 @@ These webtools were used:
 - [Hey Meta](https://www.heymeta.com/)
 - [Font Awesome](https://fontawesome.com/search)
 
+### Hey Meta showcase:
+![image](https://raw.githubusercontent.com/elanetto/auction-semester-project/refs/heads/main/assets/readme/meta-data-showcase_img.png)
+
 The project was written and made on a MacBook, using [Visual Studio Code](https://code.visualstudio.com/)
 
 ---------
