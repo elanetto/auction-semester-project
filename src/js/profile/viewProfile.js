@@ -1,13 +1,12 @@
 export async function viewProfile() {
 
-    // Check if the current page is the homepage
     if (!document.body.classList.contains("view-profile-page")) {
         return;
     }
 
-    const username = getUsernameFromURL(); // Get the username from the URL
-    const token = localStorage.getItem('token'); // Get the token from local storage
-    const apiKey = localStorage.getItem('api_key'); // Get the API key from local storage
+    const username = getUsernameFromURL();
+    const token = localStorage.getItem('token');
+    const apiKey = localStorage.getItem('api_key');
 
     console.log('username: ', username);
     console.log('token: ', token);
@@ -35,7 +34,6 @@ export async function viewProfile() {
         }
         const result = await response.json();
 
-        // Extract the desired data
         const profileData = {
             name: result.data.name,
             email: result.data.email,
@@ -46,14 +44,13 @@ export async function viewProfile() {
             winsCount: result.data._count.wins
         };
 
-        // Optionally store the data in localStorage if needed
         localStorage.setItem('credits', result.data.credits);
         localStorage.setItem('listingsCount', result.data._count.listings);
         localStorage.setItem('winsCount', result.data._count.wins);
         localStorage.setItem('avatar', result.data.avatar.url);
         localStorage.setItem('banner', result.data.banner.url);
 
-        return profileData; // Return the profile data
+        return profileData;
     } catch (error) {
         console.error('Error fetching profile data:', error);
         return null;

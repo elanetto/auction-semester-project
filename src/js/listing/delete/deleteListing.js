@@ -16,7 +16,7 @@ export async function deleteListing(listingId, listingCard) {
     console.log(`Attempting to delete listing at: ${apiEndpoint}`);
 
     if (!confirm("Are you sure you want to delete this listing?")) {
-        return; // User cancelled the deletion
+        return; 
     }
 
     try {
@@ -32,7 +32,7 @@ export async function deleteListing(listingId, listingCard) {
         if (response.status === 204) {
             console.log("Listing deleted successfully.");
             alert("Listing deleted successfully.");
-            listingCard.remove(); // Remove the card from the DOM
+            listingCard.remove();
         } else {
             throw new Error(`Failed to delete the listing. Status: ${response.status}`);
         }

@@ -1,116 +1,101 @@
-import { showPassword } from '../utils/showPassword.js';
-import { API_AUTH_LOGIN } from '../constants.js';
-import { getLoginFormElements } from '../auth/formElements.js';
-import { fetchProfileData } from '../auth/myProfile.js';
+import { showPassword } from "../utils/showPassword.js";
+import { fetchProfileData } from "../auth/myProfile.js";
 
-export function login() {
-    const { email, password, showPasswordBtn, errorMessage, loginBtn } = getLoginFormElements();
+export function initializeLogin() {
 
-    if (!email || !loginBtn || !errorMessage || !password || !showPasswordBtn) {
+    if (!document.body.classList.contains("login-page")) {
         return;
     }
 
-    const eyeSlashIcon = showPasswordBtn.querySelector('.fa-eye-slash');
-    const eyeIcon = showPasswordBtn.querySelector('.fa-eye');
+    const loginForm = document.querySelector("#login-form");
+    const loginError = document.querySelector("#login-error");
+    const showPasswordButton = document.querySelector(".eye-container.show-password");
 
-    if (!eyeSlashIcon || !eyeIcon) {
-        return;
+    if (showPasswordButton) {
+        showPasswordButton.addEventListener("click", showPassword);
+    } else {
+        console.error("Show password button not found.");
     }
 
-    function setInitialIconState() {
-        if (password.type === "password") {
-            eyeSlashIcon.classList.add('hide');
-            eyeIcon.classList.remove('hide');
-        } else {
-            eyeSlashIcon.classList.remove('hide');
-            eyeIcon.classList.add('hide');
-        }
+    if (loginForm) {
+        loginForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            await handleLogin(loginError);
+        });
+    } else {
+        console.error("Login form not found.");
     }
-    setInitialIconState();
-
-    showPasswordBtn.removeEventListener("click", showPassword);
-    showPasswordBtn.addEventListener("click", showPassword);
-
-    loginBtn.addEventListener('click', async function (event) {
-        event.preventDefault();
-
-        const emailTrim = email.value.trim();
-        const passwordTrim = password.value.trim();
-
-        if (!validateEmail(emailTrim)) {
-            errorMessage.textContent = 'Email not valid';
-            errorMessage.style.display = 'block';
-            return;
-        }
-
-        if (passwordTrim.length === 0) {
-            errorMessage.textContent = 'Please enter a password';
-            errorMessage.style.display = 'block';
-            return;
-        }
-
-        const user = {
-            email: emailTrim,
-            password: passwordTrim
-        };
-
-        try {
-            const response = await fetch(API_AUTH_LOGIN, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(user)
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                // Save the login data
-                localStorage.setItem('username', data.data.name);
-                localStorage.setItem('email', data.data.email);
-                localStorage.setItem('avatar', data.data.avatar.url);
-                localStorage.setItem('banner', data.data.banner.url);
-                localStorage.setItem('token', data.data.accessToken);
-                localStorage.setItem('bio', data.data.bio);
-
-                // Fetch profile data with retries
-                let retries = 3;
-                let profileLoaded = false;
-
-                while (retries > 0 && !profileLoaded) {
-                    const profileData = await fetchProfileData();
-                    if (profileData) {
-                        profileLoaded = true;
-                        break;
-                    }
-                    console.log(`Retrying fetchProfileData... (${3 - retries + 1})`);
-                    await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before retrying
-                    retries--;
-                }
-
-                if (!profileLoaded) {
-                    errorMessage.textContent = 'Failed to load profile data. Please refresh the page.';
-                    errorMessage.style.display = 'block';
-                    return;
-                }
-
-                // Redirect user to My Account page
-                window.location.href = '../../account/myaccount/';
-            } else {
-                const errorMessageText = data.errors?.[0]?.message || 'An error occurred during login.';
-                errorMessage.textContent = errorMessageText;
-                errorMessage.style.display = 'block';
-            }
-        } catch (error) {
-            console.error('Error during login:', error);
-            errorMessage.textContent = 'An error occurred with your login request.';
-            errorMessage.style.display = 'block';
-        }
-    });
 }
 
-// Function to validate email format
+async function handleLogin(loginError) {
+    const emailInput = document.querySelector("#login-email");
+    const passwordInput = document.querySelector("#login-password");
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    if (!validateEmail(email)) {
+        loginError.textContent = "Invalid email format.";
+        loginError.style.display = "block";
+        return;
+    }
+
+    if (!password) {
+        loginError.textContent = "Password cannot be empty.";
+        loginError.style.display = "block";
+        return;
+    }
+
+    loginError.textContent = "Logging in...";
+    loginError.style.color = "blue";
+    loginError.style.display = "block";
+
+    try {
+        const response = await fetch("https://v2.api.noroff.dev/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            const { name, email, avatar, banner, accessToken } = data.data;
+
+            localStorage.setItem("username", name);
+            localStorage.setItem("email", email);
+            localStorage.setItem("token", accessToken);
+            localStorage.setItem("avatar", avatar?.url || "");
+            localStorage.setItem("banner", banner?.url || "");
+            localStorage.setItem("bio", data.data.bio || "");
+
+            const profileData = await fetchProfileData();
+            if (profileData) {
+                console.log("Profile data fetched successfully.");
+            } else {
+                console.error("Failed to fetch profile data.");
+            }
+
+            sessionStorage.setItem("refreshCounter", "0");
+
+            loginError.textContent = "Login successful!";
+            loginError.style.color = "green";
+
+            window.location.href = '../../account/myaccount/';
+        } else {
+            const error = data.errors?.[0]?.message || "Login failed. Please try again.";
+            loginError.textContent = error;
+            loginError.style.color = "red";
+        }
+    } catch (error) {
+        console.error("Login error:", error);
+        loginError.textContent = "An error occurred. Please try again.";
+        loginError.style.color = "red";
+    }
+}
+
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);

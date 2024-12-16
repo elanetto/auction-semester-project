@@ -1,5 +1,5 @@
 import { register } from './auth/register.js';
-import { login } from './auth/login.js';
+import { initializeLogin } from './auth/login.js';
 import { getLoginFormElements, getRegisterFormElements } from './auth/formElements.js'; 
 import { fetchLocalData } from './utils/fetchLocalData.js';
 import { myAccountPage } from './auth/myaccount.js';
@@ -7,11 +7,16 @@ import { fetchToken } from './auth/fetchToken.js';
 import { fetchApiKey } from './auth/fetchApiKey.js';
 import { myListings } from './listing/view-my-listings.js';
 import { fetchProfileData } from './auth/myProfile.js';
+import { initializeMyAccount } from './auth/initMyAccount.js';
 
 document.addEventListener('DOMContentLoaded', async function () {
-    // Fetch form elements for login
+
     const loginElements = getLoginFormElements();
-    login(loginElements);
+
+    initializeLogin();
+
+    initializeMyAccount();
+
     fetchLocalData();
 
     fetchProfileData();

@@ -24,7 +24,7 @@ export function fetchApiKey() {
             if (!response.ok) {
                 throw new Error(`API key request failed: ${response.status} ${response.statusText}`);
             }
-            return response.json(); // Assuming the response is JSON
+            return response.json();
         })
         .then((result) => {
 
@@ -33,7 +33,6 @@ export function fetchApiKey() {
                 throw new Error('API key not found in response');
             }
 
-            // Save the API key to localStorage
             localStorage.setItem('api_key', apiKey);
             return apiKey;
         })

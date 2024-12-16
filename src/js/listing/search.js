@@ -22,7 +22,7 @@ export async function initializeSearchBar(apiUrl) {
                 allListings = allListings.concat(data.data || []);
                 hasMore = (data.data || []).length === limit;
                 page++;
-                if (allListings.length >= 1000) break; // Cap at 1000 items
+                if (allListings.length >= 1000) break;
             } catch (error) {
                 console.error('Error fetching listings:', error);
                 hasMore = false;
@@ -51,7 +51,7 @@ export async function initializeSearchBar(apiUrl) {
 
         console.log('Filtered Results:', filteredResults);
 
-        mainElement.innerHTML = ''; // Clear existing content
+        mainElement.innerHTML = '';
 
         if (filteredResults.length === 0) {
             mainElement.innerHTML = `

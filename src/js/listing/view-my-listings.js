@@ -2,15 +2,12 @@ import { deleteListing } from '../listing/delete/deleteListing.js';
 import { requireAuthentication } from '../utils/requireAuthentication.js';
 
 export function myListings() {
-    // Require user authentication
     if (!requireAuthentication()) return;
 
-    // Check if the current page is the My Account page
     if (!document.body.classList.contains("my-account-page")) {
         return;
     }
 
-    // Fetch token
     const token = localStorage.getItem("token");
     const apiKey = localStorage.getItem("api_key");
     const username = localStorage.getItem("username");
@@ -23,7 +20,6 @@ export function myListings() {
     const cleanedToken = token.replace(/['"]+/g, "");
     const cleanedUsername = username.replace(/['"]+/g, "");
 
-    // Fetch user's listings
     fetch(`https://v2.api.noroff.dev/auction/profiles/${cleanedUsername}/listings?_bids=true`, {
         method: "GET",
         headers: {
@@ -39,7 +35,6 @@ export function myListings() {
             return response.json();
         })
         .then((data) => {
-            // Ensure data.data exists and is an array
             const listings = Array.isArray(data.data) ? data.data : [];
             if (listings.length === 0) {
                 console.warn("No listings found for this user.");
@@ -52,32 +47,25 @@ export function myListings() {
                 return;
             }
 
-            // Clear the container before appending new content
             listingsContainer.innerHTML = "";
 
-            // Filter out expired listings
             const activeListings = listings.filter((listing) => {
                 const endsAt = listing.endsAt ? new Date(listing.endsAt) : null;
-                return endsAt && endsAt > new Date(); // Include only listings with time left
+                return endsAt && endsAt > new Date();
             });
 
-            // Loop through the active listings and display them
             activeListings.forEach((listing) => {
                 const listingCard = document.createElement("div");
                 listingCard.classList.add("flex", "flex-col", "p-4", "bg-white", "w-[350px]", "rounded", "shadow-md");
 
-                // Handle media
-                const mediaUrl = listing.media?.[0]?.url || "default-image.jpg"; // Fallback image if none exists
+                const mediaUrl = listing.media?.[0]?.url || "../../assets/placeholders/placeholder-pen-02.png";
 
-                // Calculate highest bid
                 const highestBidAmount = listing.bids?.length
                     ? Math.max(...listing.bids.map((bid) => bid.amount))
                     : "0";
 
-                // Handle tags
                 const tags = listing.tags?.length ? listing.tags.join(", ") : "N/A";
 
-                // Format the "Ends At" time
                 const endsAt = listing.endsAt;
                 let timeLeft = "N/A";
 
@@ -103,7 +91,6 @@ export function myListings() {
                     }
                 }
 
-                // Create the listing card
                 listingCard.innerHTML = `
                     <a href="/listing/view/index.html?id=${listing.id}">
                         <img src="${mediaUrl}" alt="${listing.title}" class="mb-4 rounded object-cover w-full h-[220px]">
@@ -131,13 +118,11 @@ export function myListings() {
                     </div>
                 `;
 
-                // Attach the delete functionality
                 const deleteButton = listingCard.querySelector(".delete-listing-button");
                 if (deleteButton) {
                     deleteButton.addEventListener("click", () => deleteListing(listing.id, listingCard));
                 }
 
-                // Append the created listing card to the container
                 listingsContainer.appendChild(listingCard);
             });
         })

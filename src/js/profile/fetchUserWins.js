@@ -1,6 +1,5 @@
 export function fetchUserWins() {
 
-    // Check if the current page is the My Account page
     if (!document.body.classList.contains("my-account-page")) {
         return;
     }
@@ -11,7 +10,6 @@ export function fetchUserWins() {
     const cleanedToken = token.replace(/['"]+/g, '');
     const cleanedUsername = username.replace(/['"]+/g, '');
 
-    // Fetch the user's won listings
     fetch(`https://v2.api.noroff.dev/auction/profiles/${cleanedUsername}?_wins=true`, {
         method: 'GET',
         headers: {
@@ -40,7 +38,7 @@ export function fetchUserWins() {
                 return;
             }
 
-            winsContainer.innerHTML = ''; // Clear existing content
+            winsContainer.innerHTML = '';
 
             wins.forEach((win) => {
                 const winCard = document.createElement('div');

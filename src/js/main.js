@@ -35,9 +35,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     createListingPreview(); 
 
-    // editListing()
-    // previewEditListing()
-    // editAndPreviewListing()
     fetchAndEditListing();
     fetchAndPopulateEditListing();
     saveEditedListing();
@@ -45,7 +42,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 
     try {
-        // Fetch listings
         const response = await fetch(`https://v2.api.noroff.dev/auction/listings?_bids=true`, {
             method: 'GET',
             headers: {
@@ -60,12 +56,11 @@ document.addEventListener('DOMContentLoaded', async function () {
         const data = await response.json();
         const listings = data.data || [];
 
-        // Initialize pagination and search bar with listings
         pagination(listings);
         pagination("https://v2.api.noroff.dev/auction/listings");
 
         initializeSearchBar(listings);
-        initializeSearchBar("https://v2.api.noroff.dev/auction/listings"); // Pass fetched listings to the search bar function
+        initializeSearchBar("https://v2.api.noroff.dev/auction/listings");
     } catch (error) {
         console.error('Error fetching listings:', error);
     }
@@ -90,14 +85,11 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
 
-    // Attach the saveEditedListing function to the "Save Changes" button
     const saveButton = document.getElementById("edit-listing-button");
     if (saveButton) {
         saveButton.addEventListener("click", saveEditedListing);
     }
 
-
-    // Find all delete buttons on the My Account page
     const deleteButtons = document.querySelectorAll(".delete-listing-button");
 
     if (deleteButtons.length === 0) {
@@ -105,7 +97,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     deleteButtons.forEach((button) => {
         const listingId = button.getAttribute("data-listing-id");
-        const listingCard = button.closest(".listing-card"); // Update the class if necessary
+        const listingCard = button.closest(".listing-card");
 
         if (!listingId || !listingCard) {
             console.error("Missing listing ID or listing card for delete button.");

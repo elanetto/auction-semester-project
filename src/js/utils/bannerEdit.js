@@ -16,7 +16,6 @@ export function changeBanner() {
         return;
     }
 
-    // Get input and button elements
     const bannerInput = document.getElementById('banner-input');
     const bannerButton = document.getElementById('change-banner-button');
 
@@ -73,10 +72,9 @@ export function changeBanner() {
 
             const result = await response.json();
 
-            // Save the new banner URL to localStorage
             localStorage.setItem('banner', newBannerUrl);
             alert('Your profile banner has been updated!');
-            location.reload(); // Reload the page
+            location.reload();
         } catch (error) {
             console.error('Error updating profile banner:', error);
             alert('An error occurred while updating your banner.');
@@ -84,7 +82,6 @@ export function changeBanner() {
     });
 }
 
-// Helper function to validate URL
 function isValidUrl(url) {
     try {
         new URL(url);
