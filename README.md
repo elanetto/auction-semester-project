@@ -17,7 +17,7 @@ Have a look at the design prototype of the website in Figma here: [FIGMA](https:
 
 Have a look at the style guide in Figma here: [Style Guide](https://www.figma.com/design/KVwMw9u5euJjupZPGMsz8Z/Auction-Site?node-id=56-264&t=Yu8v1HckmdcNBq9f-1)
 
-✏️ The logo was made in Adobe Illustrator by me, Anette T Lindberg.
+✏️ *The logo was made in Adobe Illustrator by me, Anette T Lindberg.*
 
 ---------
 
