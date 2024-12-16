@@ -114,6 +114,6 @@ npm run build
 ---------
 
 ## Contact    ✉️
-You can reach me at my email: hei@anettetherese.no
+You can reach me at my email: post@elanetto.no
 
 Or, simply find me at [LinkedIn](https://www.linkedin.com/in/anettetherese/)
