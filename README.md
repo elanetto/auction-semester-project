@@ -1,18 +1,9 @@
-# Auction site
-The Semester Project is about creating an auction site using a given API from Noroff. The site is to be built using JavaScript and a CSS Framework.
-
-# Link to Deployed Project
-[Link](https://regal-travesseiro-0cbb67.netlify.app/)
-
-
-Things from a different task:
-
 ![image](https://raw.githubusercontent.com/elanetto/auction-semester-project/refs/heads/main/assets/readme/auction_house_printscreen.png)
 Visit deployed project: [Auction House](https://regal-travesseiro-0cbb67.netlify.app/)
 
 # Front End Development - Year 2 - Project Exam: Auction Site
 
-**Task:** Create an auction site using JavaScript, HTML and Tailwind.
+**Task:** Create an auction site using JavaScript, HTML and a CSS Framework. I choose to use Tailwind.
 
 ---------
 
@@ -31,13 +22,16 @@ Have a look at the style guide in Figma here: [Style Guide](https://www.figma.co
 
 ## Tools & Languages    👩‍💻
 These languages, and Figma, were used:
-![image](https://github.com/elanetto/FED1-PE1-elanetto/blob/main/assets/images/all_badges_for_github_readme.png?raw=true)
+- HTML
+- JavaScript
+- CSS
+- Tailwind
+- Vite
 
 These webtools were used:
 - [Favicon.io](https://favicon.io/)
 - [Hey Meta](https://www.heymeta.com/)
 - [Font Awesome](https://fontawesome.com/search)
-- [Google Fonts](https://fonts.google.com/)
 
 The project was written and made on a MacBook, using [Visual Studio Code](https://code.visualstudio.com/)
 
@@ -53,21 +47,21 @@ The account user should be able to register, login, and then create, edit or del
 - *index.html*
 
 ### Account
-- *account/register.html*
-- *account/login.html*
-- *account/myaccount.html*
+- *account/register/*
+- *account/login/*
+- *account/myaccount/*
 
-### Post
-- *post/index.html (write blogpost)*
-- *post/blogpost.html (read blogpost)*
-- *post/edit.html*
+### Listing
+- *listing/view/ (view listing)*
+- *listing/create/ (create listing)*
+- *listing/edit/ (edit listing)*
 
 ---------
 
 ## API    ☁️
 The API used for this project was given from Noroff.
 
-The point of the project iis to use vanilla JavaScript to code and use an API to create a functional blog.
+The point of the project is to use JavaScript, HTML and a CSS-framework - to use and apply the given API - and create a functional auction site.
 
 ---------
 
@@ -80,20 +74,39 @@ Make sure you have the following installed:
 ## Installation    🛠️
 1. Clone the repository:
 ```<language>
-https://github.com/elanetto/FED1-PE1-elanetto.git
+git clone  https://github.com/elanetto/auction-semester-project.git
 ```
 
-3. Navigate to the project directory:
+2. Navigate to the project directory:
 ```<language>
-cd FED1-PE1-elanetto
+cd auction-semester-project
 ```
 
-5. Open the index.html file in your web browser to view the application.
+3. Install dependencies:
+```<language>
+npm install
+```
+
+4. Start the development server:
+```<language>
+npm run dev
+```
+
+5. Before you commit, remember to package your vite dist folder:
+```<language>
+npm run build
+```
+
+6. To deploy this project, I would reccomend to use [Netlify](https://www.netlify.com/), as it is a good tool to use for packaged vite projects.
 
 ## Usage    👍
-- Viewing Blog Posts: The homepage displays all blog posts.
+- View Listings: The homepage displays listings using pagination and a carousel gallery.
+- Search for listings: The header has a search bar to search for listings.
 - Register/Login: Users can register a new account or login with existing credentials.
-- Creating, Editing and Deleting Blog Posts: Admin users can create new blog posts from the My Profile page.
+- Creating, Editing and Deleting Listings: Admin users can create new listings from dropdown menu.
+- Bid on listings: The highest bidder wins!
+- All registered users starts automatically with 1000 credits to use.
+- A user can earn more credits by selling listings.
 
 ---------
 
