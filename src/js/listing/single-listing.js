@@ -1,4 +1,5 @@
 import { requireAuthentication } from '../utils/requireAuthentication.js';
+import placeholderPen from '../../../assets/placeholders/placeholder-pen.png';
 
 export async function fetchSingleListing() {
     if (!document.body.classList.contains("view-single-listing-page")) {
@@ -75,7 +76,7 @@ export async function fetchSingleListing() {
             const updateCarousel = () => {
                 const imageElement = document.querySelector(".view-single-listing-image");
                 const altTextElement = document.querySelector(".view-single-listing-image-alt-text");
-                imageElement.src = images[currentIndex]?.url || "../../assets/placeholders/placeholder-pen.png";
+                imageElement.src = images[currentIndex]?.url || placeholderPen;
                 altTextElement.textContent = images[currentIndex]?.alt || "No image description available";
 
                 const leftButton = document.getElementById("carousel-left-button");

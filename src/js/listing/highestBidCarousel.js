@@ -1,3 +1,5 @@
+import placeholderPen from '../../../assets/placeholders/placeholder-pen.png';
+
 export function initializeHighestBidCarousel() {
 
     if (!document.body.classList.contains("homepage")) {
@@ -52,7 +54,7 @@ export function initializeHighestBidCarousel() {
             const highestBid = Math.max(...listing.bids.map(bid => bid.amount));
             const mediaUrl = listing.media && listing.media[0] && listing.media[0].url
                 ? listing.media[0].url
-                : 'default-image.jpg';
+                : placeholderPen;
 
             const carouselItem = document.createElement('div');
             carouselItem.classList.add('carousel-slide', 'relative', 'w-full', 'h-[500px]', 'shrink-0', 'flex', 'items-center', 'justify-center');
