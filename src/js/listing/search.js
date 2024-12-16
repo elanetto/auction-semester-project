@@ -1,9 +1,9 @@
 export async function initializeSearchBar(apiUrl) {
-    const searchInput = document.getElementById('search-input');
+    const searchInputs = document.querySelectorAll('.search-input');
     const mainElement = document.querySelector('main');
 
-    if (!searchInput || !mainElement) {
-        console.error('Search input or main element not found.');
+    if (!searchInputs.length || !mainElement) {
+        console.error('Search inputs or main element not found.');
         return;
     }
 
@@ -130,8 +130,10 @@ export async function initializeSearchBar(apiUrl) {
         mainElement.appendChild(listingsContainer);
     }
 
-    searchInput.addEventListener('input', () => {
-        const query = searchInput.value.toLowerCase();
-        renderSearchResults(query);
+    searchInputs.forEach(searchInput => {
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+            renderSearchResults(query);
+        });
     });
 }
