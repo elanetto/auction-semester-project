@@ -113,7 +113,7 @@ npm run build
 
 ---------
 
-## Planning
+## 🖇️ Planning 🖇️
 
 This project was planned using GitHub Projects.
 - [Kanban](https://github.com/users/elanetto/projects/10)
