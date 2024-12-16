@@ -25,7 +25,6 @@ Have a look at the style guide in Figma here: [Style Guide](https://www.figma.co
 These languages, and Figma, were used:
 - HTML
 - JavaScript
-- CSS
 - Tailwind
 - Vite
 
