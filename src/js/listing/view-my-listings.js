@@ -1,5 +1,6 @@
 import { deleteListing } from '../listing/delete/deleteListing.js';
 import { requireAuthentication } from '../utils/requireAuthentication.js';
+import placeholderPen from '../../../assets/placeholders/placeholder-pen.png';
 
 export function myListings() {
     if (!requireAuthentication()) return;
@@ -58,7 +59,7 @@ export function myListings() {
                 const listingCard = document.createElement("div");
                 listingCard.classList.add("flex", "flex-col", "p-4", "bg-white", "w-[350px]", "rounded", "shadow-md");
 
-                const mediaUrl = listing.media?.[0]?.url || "../../assets/placeholders/placeholder-pen.png";
+                const mediaUrl = listing.media?.[0]?.url || placeholderPen;
 
                 const highestBidAmount = listing.bids?.length
                     ? Math.max(...listing.bids.map((bid) => bid.amount))

@@ -1,3 +1,5 @@
+import placeholderPen from '../../../assets/placeholders/placeholder-pen.png';
+
 export async function pagination(apiUrl, itemsPerPage = 9) {
     if (!document.body.classList.contains("homepage")) {
         return;
@@ -55,7 +57,7 @@ export async function pagination(apiUrl, itemsPerPage = 9) {
             const listingCard = document.createElement("div");
             listingCard.classList.add("flex", "flex-col", "p-4", "bg-white", "w-[320px]", "rounded", "shadow-md", "h-auto");
 
-            const mediaUrl = listing.media?.[0]?.url || "../../assets/placeholders/placeholder-pen.png";
+            const mediaUrl = listing.media?.[0]?.url || placeholderPen;
             const highestBid = listing.bids?.length ? Math.max(...listing.bids.map((bid) => bid.amount)) : "0";
             const endsAt = listing.endsAt;
 
