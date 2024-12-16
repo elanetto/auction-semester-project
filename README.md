@@ -7,7 +7,7 @@ Visit deployed project: [Auction House](https://regal-travesseiro-0cbb67.netlify
 
 ---------
 
-## Figma    🎨
+## 🎨  Figma    🎨
 ![image](https://raw.githubusercontent.com/elanetto/auction-semester-project/refs/heads/main/assets/readme/Figma-prototype.png)
 
 Have a look at the design prototype of the website in Figma here: [FIGMA](https://www.figma.com/design/KVwMw9u5euJjupZPGMsz8Z/Auction-Site?node-id=6-2&t=Yu8v1HckmdcNBq9f-1)
@@ -20,7 +20,7 @@ Have a look at the style guide in Figma here: [Style Guide](https://www.figma.co
 
 ---------
 
-## Tools & Languages    👩‍💻
+## 👩‍💻 Tools & Languages    👩‍💻
 These languages, and Figma, were used:
 - HTML
 - JavaScript
@@ -37,7 +37,7 @@ The project was written and made on a MacBook, using [Visual Studio Code](https:
 
 ---------
 
-## Site map    🗺️
+## 🗺️ Site map    🗺️
 
 All users, logged in or not, can search for listings and see the listing cards.
 To be able to view a single listing, the user needs to be logged in. Only logged in users can bid on listings.
@@ -61,20 +61,20 @@ To create a new user, you need to use an email that ends in *@stud.noroff.no*. P
 
 ---------
 
-## API    ☁️
+## ☁️ API    ☁️
 The API used for this project was given from Noroff.
 
 The point of the project is to use JavaScript, HTML and a CSS-framework - to use and apply the given API - and create a functional auction site.
 
 ---------
 
-# Getting Started    🌟
+# 🌟 Getting Started    🌟
 Make sure you have the following installed:
 
 - A web browser (Example: Chrome)
 - A code editor (Example: Visual Studio Code)
 
-## Installation    🛠️
+##  🛠️ Installation    🛠️
 1. Clone the repository:
 ```<language>
 git clone https://github.com/elanetto/auction-semester-project.git
@@ -102,7 +102,7 @@ npm run build
 
 6. To deploy this project, I would reccomend to use [Netlify](https://www.netlify.com/), as it is a good tool to use for packaged vite projects.
 
-## Usage    👍
+## 👍  Usage    👍
 - View Listings: The homepage displays listings using pagination and a carousel gallery.
 - Search for listings: The header has a search bar to search for listings.
 - Register/Login: Users can register a new account or login with existing credentials.
@@ -113,7 +113,7 @@ npm run build
 
 ---------
 
-## Contact    ✉️
+## ✉️ Contact    ✉️
 You can reach me at my email: post@elanetto.no
 
 Or, simply find me at [LinkedIn](https://www.linkedin.com/in/anettetherese/)
