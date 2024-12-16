@@ -1,3 +1,5 @@
+import placeholderPen from '../../../assets/placeholders/placeholder-pen.png';
+
 export function fetchUserWins() {
 
     if (!document.body.classList.contains("my-account-page")) {
@@ -44,7 +46,7 @@ export function fetchUserWins() {
                 const winCard = document.createElement('div');
                 winCard.classList.add('flex', 'flex-col', 'p-4', 'bg-white', 'w-[320px]', 'rounded', 'shadow-md', 'h-auto');
 
-                const mediaUrl = win.media?.[0]?.url || '../../assets/placeholders/placeholder-pen.png';
+                const mediaUrl = win.media?.[0]?.url || placeholderPen;
 
                 winCard.innerHTML = `
                     <a href="/listing/view/index.html?id=${win.id}" class="block">
