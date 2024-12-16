@@ -16,10 +16,13 @@ import { fetchAndPopulateEditListing } from '../js/listing/edit/fetchAndPopulate
 import { saveEditedListing, initializeSaveButton } from '../js/listing/edit/saveEditedListing.js';
 import { deleteListing } from '../js/listing/delete/deleteListing.js';
 import { refresh } from '../js/utils/refresh.js';
+import { truncateTags } from '../js/utils/shortenTags.js';
 
 document.addEventListener('DOMContentLoaded', async function () { 
 
     refresh();
+
+    truncateTags();
 
     logoutButtonFunction();
     createNewListing();
