@@ -74,7 +74,7 @@ Make sure you have the following installed:
 ## Installation    🛠️
 1. Clone the repository:
 ```<language>
-git clone  https://github.com/elanetto/auction-semester-project.git
+git clone https://github.com/elanetto/auction-semester-project.git
 ```
 
 2. Navigate to the project directory:
