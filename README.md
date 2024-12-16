@@ -7,21 +7,25 @@ The Semester Project is about creating an auction site using a given API from No
 
 Things from a different task:
 
-![image](https://github.com/elanetto/FED1-PE1-elanetto/blob/main/assets/ReadMe/readme-image-header.png?raw=true)
-Visit deployed project: [Nøklevann Blogg](https://elanetto.github.io/FED1-PE1-elanetto/)
+![image](https://raw.githubusercontent.com/elanetto/auction-semester-project/refs/heads/main/assets/readme/auction_house_printscreen.png)
+Visit deployed project: [Auction House](https://regal-travesseiro-0cbb67.netlify.app/)
 
-# Front End Development - Year 1 - Project Exam: Blog
+# Front End Development - Year 2 - Project Exam: Auction Site
 
-**Task:** Create a blog using JavaScript, HTML and CSS.
-
-All pictures used in this project was taken by the programmer: *Anette T. Lindberg* 📷
+**Task:** Create an auction site using JavaScript, HTML and Tailwind.
 
 ---------
 
 ## Figma    🎨
-![image](https://github.com/elanetto/FED1-PE1-elanetto/blob/main/assets/images/figma-img.png?raw=true)
+![image](https://raw.githubusercontent.com/elanetto/auction-semester-project/refs/heads/main/assets/readme/Figma-prototype.png)
 
-Have a look at the design mockup of the website in Figma here: [FIGMA](https://www.figma.com/design/ve11MSMzeL6hoqNumDNg5X/N%C3%B8klevann-Blog---JavaScript-Exam-Project.-API.?node-id=0-1&t=MrB3ximvPKAShgnO-1)
+Have a look at the design prototype of the website in Figma here: [FIGMA](https://www.figma.com/design/KVwMw9u5euJjupZPGMsz8Z/Auction-Site?node-id=6-2&t=Yu8v1HckmdcNBq9f-1)
+
+## Style Guide
+![image](https://raw.githubusercontent.com/elanetto/auction-semester-project/refs/heads/main/assets/readme/styleguide-figma.png)
+
+Have a look at the style guide in Figma here: [Style Guide](https://www.figma.com/design/KVwMw9u5euJjupZPGMsz8Z/Auction-Site?node-id=56-264&t=Yu8v1HckmdcNBq9f-1)
+
 
 ---------
 
