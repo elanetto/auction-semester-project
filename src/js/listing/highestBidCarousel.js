@@ -1,67 +1,75 @@
-import placeholderPen from '../../../assets/placeholders/placeholder-pen.png';
+import placeholderPen from "../../../assets/placeholders/placeholder-pen.png";
 
 export function initializeHighestBidCarousel() {
+    if (!document.body.classList.contains("homepage")) return;
 
-    if (!document.body.classList.contains("homepage")) {
-        return;
-    }
+    const carousel = document.getElementById("carousel");
+    const prevButton = document.getElementById("prev-button");
+    const nextButton = document.getElementById("next-button");
+    const dotsContainer = document.getElementById("dots-container");
 
-    const carousel = document.getElementById('carousel');
-    const prevButton = document.getElementById('prev-button');
-    const nextButton = document.getElementById('next-button');
-    const dotsContainer = document.getElementById('dots-container');
+    async function fetchAllBiddedListings(apiUrl, limit = 100) {
+        let allListings = [];
+        let page = 1;
+        let isLastPage = false;
 
-    async function fetchHighestBidListings() {
-        try {
-            const response = await fetch('https://v2.api.noroff.dev/auction/listings?_bids=true', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to fetch listings');
+        while (!isLastPage) {
+            try {
+                const response = await fetch(`${apiUrl}?_bids=true&limit=${limit}&page=${page}`);
+                if (!response.ok) throw new Error(`Fetch failed: ${response.status}`);
+                const data = await response.json();
+                allListings = allListings.concat(data.data || []);
+                isLastPage = data.meta?.isLastPage || false;
+                page++;
+            } catch (error) {
+                console.error("Error fetching listings:", error);
+                break;
             }
-
-            const data = await response.json();
-            return data.data
-                .filter(listing => listing.bids && listing.bids.length > 0 && new Date(listing.endsAt) > new Date())
-                .sort((a, b) => Math.max(...b.bids.map(bid => bid.amount)) - Math.max(...a.bids.map(bid => bid.amount)))
-                .slice(0, 3);
-        } catch (error) {
-            console.error('Error fetching highest bid listings:', error);
-            return [];
         }
+
+        return allListings
+            .filter(listing => listing.bids?.length > 0 && new Date(listing.endsAt) > new Date())
+            .sort((a, b) => {
+                const maxBidA = Math.max(...a.bids.map(bid => bid.amount));
+                const maxBidB = Math.max(...b.bids.map(bid => bid.amount));
+                return maxBidB - maxBidA;
+            })
+            .slice(0, 3); // Top 3
     }
 
     async function initializeCarousel() {
-        const listings = await fetchHighestBidListings();
+        const apiUrl = "https://v2.api.noroff.dev/auction/listings";
+        const listings = await fetchAllBiddedListings(apiUrl);
 
         if (listings.length === 0) {
-            console.error('No active listings with bids available.');
+            console.error("No active listings with bids.");
             return;
         }
 
-        carousel.classList.add('flex', 'transition-transform', 'duration-500', 'ease-in-out');
+        carousel.classList.add("flex", "transition-transform", "duration-500", "ease-in-out");
 
-        const truncateText = (text, maxLength) => {
-            if (!text) return '';
-            return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
-        };
+        const truncateText = (text, maxLength) =>
+            text && text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
 
-        listings.forEach(listing => {
+        listings.forEach((listing) => {
             const highestBid = Math.max(...listing.bids.map(bid => bid.amount));
-            const mediaUrl = listing.media && listing.media[0] && listing.media[0].url
-                ? listing.media[0].url
-                : placeholderPen;
+            const mediaUrl = listing.media?.[0]?.url || placeholderPen;
 
-            const carouselItem = document.createElement('div');
-            carouselItem.classList.add('carousel-slide', 'relative', 'w-full', 'h-[500px]', 'shrink-0', 'flex', 'items-center', 'justify-center');
+            const carouselItem = document.createElement("div");
+            carouselItem.classList.add(
+                "carousel-slide",
+                "relative",
+                "w-full",
+                "h-[500px]",
+                "shrink-0",
+                "flex",
+                "items-center",
+                "justify-center"
+            );
 
             carouselItem.innerHTML = `
                 <div class="absolute inset-0">
-                    <img src="${mediaUrl}" alt="${listing.title}" class="w-full h-full object-cover break-words truncate">
+                    <img src="${mediaUrl}" alt="${listing.title}" class="w-full h-full object-cover break-words truncate" onerror="this.onerror=null;this.src='${placeholderPen}'">
                 </div>
                 <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white p-4">
                     <h3 class="text-3xl font-bold mb-4 break-words truncate">${truncateText(listing.title, 20)}</h3>
@@ -75,9 +83,9 @@ export function initializeHighestBidCarousel() {
         });
 
         listings.forEach((_, index) => {
-            const dot = document.createElement('div');
-            dot.classList.add('dot', 'w-3', 'h-3', 'bg-gray-400', 'rounded-full', 'cursor-pointer', 'mx-1');
-            dot.addEventListener('click', () => {
+            const dot = document.createElement("div");
+            dot.classList.add("dot", "w-3", "h-3", "bg-gray-400", "rounded-full", "cursor-pointer", "mx-1");
+            dot.addEventListener("click", () => {
                 currentIndex = index;
                 updateCarousel();
             });
@@ -91,15 +99,11 @@ export function initializeHighestBidCarousel() {
             const offset = -currentIndex * 100;
             carousel.style.transform = `translateX(${offset}%)`;
 
-            const dots = document.querySelectorAll('.dot');
+            const dots = document.querySelectorAll(".dot");
             dots.forEach((dot, index) => {
-                if (index === currentIndex) {
-                    dot.classList.add('bg-white', 'scale-125');
-                    dot.classList.remove('bg-gray-400', 'scale-100');
-                } else {
-                    dot.classList.add('bg-gray-400', 'scale-100');
-                    dot.classList.remove('bg-white', 'scale-125');
-                }
+                dot.classList.toggle("bg-white", index === currentIndex);
+                dot.classList.toggle("scale-125", index === currentIndex);
+                dot.classList.toggle("bg-gray-400", index !== currentIndex);
             });
         }
 
@@ -113,8 +117,8 @@ export function initializeHighestBidCarousel() {
             updateCarousel();
         }
 
-        nextButton.addEventListener('click', showNext);
-        prevButton.addEventListener('click', showPrev);
+        nextButton.addEventListener("click", showNext);
+        prevButton.addEventListener("click", showPrev);
 
         updateCarousel();
     }
@@ -124,22 +128,17 @@ export function initializeHighestBidCarousel() {
 
 function calculateTimeLeft(endsAt) {
     const targetDate = new Date(endsAt);
-    const currentDate = new Date();
-    const differenceInMs = targetDate - currentDate;
+    const now = new Date();
+    const diff = targetDate - now;
 
-    if (differenceInMs > 0) {
-        const daysLeft = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
-        const hoursLeft = Math.floor((differenceInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutesLeft = Math.floor((differenceInMs % (1000 * 60 * 60)) / (1000 * 60));
-
-        if (daysLeft > 0) {
-            return `${daysLeft} day${daysLeft > 1 ? 's' : ''}`;
-        } else if (hoursLeft > 0) {
-            return `${hoursLeft} hour${hoursLeft > 1 ? 's' : ''}`;
-        } else {
-            return `${minutesLeft} minute${minutesLeft > 1 ? 's' : ''}`;
-        }
-    } else {
-        return 'Ended';
+    if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        if (days > 0) return `${days} day${days !== 1 ? "s" : ""}`;
+        if (hours > 0) return `${hours} hour${hours !== 1 ? "s" : ""}`;
+        return `${mins} minute${mins !== 1 ? "s" : ""}`;
     }
+
+    return "Ended";
 }
