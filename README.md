@@ -114,7 +114,7 @@ npm run build
 - Creating, Editing and Deleting Listings: Admin users can create new listings from dropdown menu.
 - Bid on listings: The highest bidder wins!
 - All registered users starts automatically with 1000 credits to use.
-- A user can earn more credits by selling listings.
+- A user can earn more credits by selling listings. wow.
 
 ---------
 
